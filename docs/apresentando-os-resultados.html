@@ -209,12 +209,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="co">#Gerando alguns números de uma normal</span>
 y &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="co">#y é uma função de x com algum erro adicionado</span>
 <span class="kw">plot</span>(y)</code></pre></div>
-<p><img src="04-Apresentando_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x,y)</code></pre></div>
-<p><img src="04-Apresentando_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>O comando <strong>plot</strong> tem uma opção especial chamada <strong>type</strong>. Aqui você pode escolher como os dados são <em>plotados</em>: em pontos, em linhas ou diversas outras opções descritas no help. O padrão é pontos. Em geral, se passa a primeira letra de cada tipo. Assim, para fazer o gráfico de linha da variável y, basta usar <code>plot(y, type=''l'')</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
-<p><img src="04-Apresentando_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Existem vários comandos para colocar novos objetos sobre o gráfico, mas vou me limitar a dois: <code>points</code> e <code>lines</code>, que adicionam respectivamente… pontos e linhas. Em geral, <code>plot,lines</code> e <code>points</code> recebem argumentos parecidos:</p>
 <ul>
 <li><strong>col</strong> específica a cor. Em geral, se usa números: 1 é preto, 2 é vermelho…</li>

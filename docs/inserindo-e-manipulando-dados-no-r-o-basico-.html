@@ -214,7 +214,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="lendo-arquivos-muito-grandes" class="section level2">
 <h2><span class="header-section-number">3.3</span> Lendo arquivos muito grandes</h2>
 <p>Algumas bases de dados podem ser muito grandes, e o R pode sofrer para abrir - mesmo em computadores com muita memória e muito processamento. Para driblar o problema, o pacote <em>data.table</em> ajuda a carregar arquivos grandes para o R. O pacote trás várias opções para trabalhar com os dados carregados, que não serão tratadas aqui.</p>
-<p>Outra opção é o pacote <em>readr</em>, que funciona de forma parecida com o comando padrão do R. Para ler um csv que usa vírgulas para separar decimais, o comando é <code>read\_csv2</code> - basicamente idêntico ao comando padrão do R, mas com uma linha no lugar do ponto. Ao carregar o arquivo, tudo funciona como o usual. Uma pequena diferença é que o nome das variáveis é preservado: assim, uma variável chamada “Nome da variável” continuará se chamando “Nome da variável”, ao invés do padrão do <code>read.csv2</code> de transformar em “Nome.da.variável”. Apesar de isso parecer bom a primeira vista, dificulta acessar as variáveis mais tarde, já que o R não entende nomes com espaço para objetos. %falta explicar como carregar os arquivos</p>
+<p>Outra opção é o pacote <em>readr</em>, que funciona de forma parecida com o comando padrão do R. Para ler um csv que usa vírgulas para separar decimais, o comando é <code>read\_csv2</code> - basicamente idêntico ao comando padrão do R, mas com uma linha no lugar do ponto. Ao carregar o arquivo, tudo funciona como o usual. Uma pequena diferença é que o nome das variáveis é preservado: assim, uma variável chamada “Nome da variável” continuará se chamando “Nome da variável”, ao invés do padrão do <code>read.csv2</code> de transformar em “Nome.da.variável”. Apesar de isso parecer bom a primeira vista, dificulta acessar as variáveis mais tarde, já que o R não entende nomes com espaço para objetos.</p>
 </div>
 <div id="trabalhando-com-os-dados" class="section level2">
 <h2><span class="header-section-number">3.4</span> Trabalhando com os dados</h2>
@@ -241,8 +241,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>Nada haver com carro: é uma sigla para Companion to Applied Reggresion<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#fnref3">↩</a></p></li>
+<li id="fn2"><p>Dois iguais seguidos<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>Em geral. O autor já encontrou situações em que esse tipo de solução era estritamente necessária. A seção tópicos avançados discute este problema e como resolver.<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#fnref3">↩</a></p></li>
 </ol>
 </div>
             </section>
