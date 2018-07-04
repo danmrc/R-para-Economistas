@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R: Uma Introdução para economistas</title>
+  <meta name="description" content="R: Uma Introdução para economistas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho">
+
+
+<meta name="date" content="2018-04-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="otimizacao.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+<li class="chapter" data-level="2.1.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.1.4</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.2</b> Ajuda</a></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.3</b> Comentando</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.4</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.4</b> Trabalhando com os dados</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.4.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>5</b> Apresentando os resultados</a><ul>
+<li class="chapter" data-level="5.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>5.1</b> Tabelas</a></li>
+<li class="chapter" data-level="5.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>5.2</b> Markdown</a></li>
+<li class="chapter" data-level="5.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>5.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>6</b> Ifs, Fors, Whiles</a><ul>
+<li class="chapter" data-level="6.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>6.1</b> If</a></li>
+<li class="chapter" data-level="6.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>6.2</b> For e While</a></li>
+<li class="chapter" data-level="6.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>6.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>7</b> Funções</a><ul>
+<li class="chapter" data-level="7.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>7.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="7.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>7.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="7.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>7.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="7.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>7.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>8</b> Paralelizando</a><ul>
+<li class="chapter" data-level="8.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>8.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="8.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>8.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>9</b> Otimização</a><ul>
+<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>10</b> Referências</a><ul>
+<li class="chapter" data-level="10.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>10.1</b> R</a></li>
+<li class="chapter" data-level="10.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>10.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="10.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>10.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="referencias" class="section level1">
+<h1><span class="header-section-number">Capítulo 10</span> Referências</h1>
+<p>Todas as referências a seguir são em inglês. Isso reflete justamente a limitação da literatura em português sobre R e economia - o exato motivo da confecção deste manual.</p>
+<div id="r" class="section level2">
+<h2><span class="header-section-number">10.1</span> R</h2>
+<p>Dois livros foram essenciais para este autor aprender a usar o R: o <em>R Book</em>, de Michael J. Crawley e o <em>Applied Econometrics with R</em>, de Christian Kleiber e Achim Zeileis. O primeiro é extremamente geral e cobre de tudo, explicando muito dos tópicos tratados aqui superficialmente com muito mais detalhes. O segundo tem um título auto explicativo.</p>
+</div>
+<div id="tidyverse" class="section level2">
+<h2><span class="header-section-number">10.2</span> Tidyverse</h2>
+<p>Uma omissão notável desse manual são os pacotes do <em>Tidyverse</em>, especialmente o Dplyr e o ggplot, que são muito usados para limpar dados e fazer gráficos, respectivamente. O autor desses pacotes, Hadley Wickham, tem um excelente livro sobre como fazer ciência de dados no R, chamado <em>R for Data Science</em>, e que o próprio disponibiliza <a href="http://r4ds.had.co.nz/">aqui</a>. O <a href="https://www.tidyverse.org/">site do Tidyverse</a> também traz excelentes recursos de como usar esses pacotes.</p>
+</div>
+<div id="latex" class="section level2">
+<h2><span class="header-section-number">10.3</span> LaTeX</h2>
+<p>Um dos melhores recursos para aprender LaTeX é o livro da wikipedia sobre a linguagem, disponível <a href="https://en.wikibooks.org/wiki/LaTeX">aqui</a>. Felizmente, não é sequer necessário instalar o LaTeX no computador, já que existem serviços online que fornecem armazenamento e um editor de LaTeX online. Os dois mais famosos são o <a href="https://www.overleaf.com/">overleaf</a> e o <a href="https://pt.sharelatex.com/">sharelatex</a>.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="otimizacao.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

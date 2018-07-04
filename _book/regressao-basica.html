@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R: Uma Introdução para economistas</title>
+  <meta name="description" content="R: Uma Introdução para economistas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho">
+
+
+<meta name="date" content="2018-04-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="inserindo-e-manipulando-dados-no-r-o-basico-.html">
+<link rel="next" href="apresentando-os-resultados.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+<li class="chapter" data-level="2.1.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.1.4</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.2</b> Ajuda</a></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.3</b> Comentando</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.4</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.4</b> Trabalhando com os dados</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.4.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>5</b> Apresentando os resultados</a><ul>
+<li class="chapter" data-level="5.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>5.1</b> Tabelas</a></li>
+<li class="chapter" data-level="5.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>5.2</b> Markdown</a></li>
+<li class="chapter" data-level="5.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>5.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>6</b> Ifs, Fors, Whiles</a><ul>
+<li class="chapter" data-level="6.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>6.1</b> If</a></li>
+<li class="chapter" data-level="6.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>6.2</b> For e While</a></li>
+<li class="chapter" data-level="6.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>6.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>7</b> Funções</a><ul>
+<li class="chapter" data-level="7.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>7.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="7.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>7.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="7.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>7.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="7.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>7.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>8</b> Paralelizando</a><ul>
+<li class="chapter" data-level="8.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>8.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="8.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>8.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>9</b> Otimização</a><ul>
+<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>10</b> Referências</a><ul>
+<li class="chapter" data-level="10.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>10.1</b> R</a></li>
+<li class="chapter" data-level="10.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>10.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="10.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>10.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regressao-basica" class="section level1">
+<h1><span class="header-section-number">Capítulo 4</span> Regressão Básica</h1>
+<p>O coração de econometria é o modelo de regressão linear, estimado por Mínimos Quadrados Ordinários. Mas muitos outros métodos são úteis, como modelos logit, probit, variáveis instrumentais e modelos para painel. Este capítulo trata - finalmente! - de modelos de regressão no R.</p>
+<div id="minimos-quadrados-ordinarios" class="section level2">
+<h2><span class="header-section-number">4.1</span> Mínimos quadrados ordinários</h2>
+<p>Suponha que carregamos uma base de dados (chamada dados), e que esta base tem as variáveis <span class="math inline">\(y, x.1,x.2,x.13\)</span> e que nosso objetivo é estimar um modelo da forma: <span class="math inline">\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \epsilon\)</span>. O comando que faz estimativa por mínimos quadrados é o <code>lm</code> e para estimarmos a regressão proposta basta fazer:</p>
+<pre><code>reg &lt;- lm(y ~ x.1 + x.2 + x.3 + x.4, data = dados)</code></pre>
+<p>Usamos o ~ para separar a variável explicada (à esquerda do til) das explicativas (à direita do til), e para separar as explicativas usamos o +. A opção <em>data</em> diz ao R onde buscar as variáveis.</p>
+<p>Agora, o objeto reg<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> tem o modelo estimado. Para obter uma tabela usual de regressão, com valor do coeficiente, erro padrão, estatística t e p-valor, <span class="math inline">\(R^2\)</span> ajustado, e o teste F para os coeficientes basta usar <code>summary(reg)</code>. No contexto de regressão linear, podemos querer fazer uma série de coisas, que são explicadas a seguir.</p>
+<p><strong>Atenção: Séries Temporais e o lm</strong> Objetos de série temporal são armazenados pelo R de uma maneira especial - uma vez que você transforma ele em um objeto de série temporal (algo que esse manual ainda não trata). Entretanto, você <em>não</em> deve passar um objeto de série temporal para o <code>lm()</code>, já que o <code>lm</code> vai ignorar o formato de série temporal. Assim, estimar um modelo AR(1) usando <code>lm(y ~ lag(y))</code> vai gerar uma regressão com coeficiente 1 para lag(y) e <span class="math inline">\(R^2 = 1\)</span>. De fato, a regressão feita foi y em y - o que não é uma regressão muito emocionante.</p>
+<div id="testes-de-hipotese" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Testes de hipótese</h3>
+<p>Suponha que queremos testar a significância conjunta de x.2 e x.3. Precisamos fazer um teste F. Uma maneira é estimar um novo modelo, que chamaremos de reg.2, só com o x.1: <code>reg.2 &lt;- lm(y ~ x.1)</code></p>
+<p>Agora, para testar a significância conjunta de x.2 e x.3 basta fazer <code>anova(reg,reg.2)</code> e o R reportará os valores do teste (incluindo o p valor)</p>
+<p>Testes mais gerais também estão disponíveis, pelo pacote car<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. O comando é <code>linearHypotesis</code> com o primeiro argumento sendo o objeto com o modelo. O segundo comando é a hipótese que estamos testando, entre aspas, e entramos ele de maneira extremamente intuitiva: suponha que no exemplo acima queremos testar se o coeficiente de x.2 é igual ao coeficiente de x.4. Nesse caso, o comando se resumiria a <code>linearHypotesis(reg,&quot;x.2 = x.4&quot;)</code>. Várias opções podem ser usadas, como usar estimadores de erro padrão robustos a heterocedasticidade. Recomendamos que o leitor olhe o help do comando no R.</p>
+</div>
+<div id="erros-padroes-robustos" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Erros padrões robustos</h3>
+<p>Na presença de heterocedasticidade ou autocorrelação, os erros padrões usuais não são confiáveis. Infelizmente, o comando <code>summary</code> não exibe erros robustos por default e nem permite alterar os erros padrões exibidos. Felizmente, o pacote lmtest traz uma opção para o sumário padrão do R. A primeira coisa a fazer é carregar o pacote sandwich (<code>library(sandwich)</code>). O comando é coeftest e a sintaxe é curiosa. No caso do nosso exemplo, se quisermos obter erros robustos a heterocedasticidade:</p>
+<pre><code>coeftest(reg, vcov. = vcovHC(reg))</code></pre>
+<p>Uma explicação: O comando coeftest chama o comando vcovHC do pacote sandwich. Por sua vez, o comando vcovHC precisa saber qual o modelo que vai ter erros robustos. Por isso uma função que recebe uma função. Veja que se quisermos erros robustos a heterocedasticidade e autocorrelação, o comando vira vcovHAC.</p>
+</div>
+<div id="logs" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Logs</h3>
+<p>Muitas vezes queremos fazer as regressões não com as variáveis em nível, mas com as variáveis em log. Nesse caso, suponha que queremos a variável dependente - y - em log. Para isso, basta fazer <code>log.y &lt;- log(y)</code> e a variável log.y vai ser a versão em log da variável y. Você pode reescrever a regressão como <code>lm(log.y ~ x.1 + x.2 + x.3)</code>.</p>
+<p>Agora, pode ocorrer de em alguns casos o vetor y ter algum elemento zero. Mas <span class="math inline">\(\log(0) = -\infty\)</span>. O R tem um elemento Inf (e - Inf) para esses casos, mas o comando lm vai acusar um erro ao receber um vetor com algum elemento Inf. A solução é trocar esse valor para alguma coisa, como um NA, que o R vai ignorar<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>. Para fazer isso, suponha que o vetor com os Inf seja o log.y do paragrafo anterior. Precisamos explicar para o R quais casos nós queremos substituir, e isso é incrivelmente fácil: assim como podemos usar <code>log.y[1]</code> para escolher o primeiro elemento do vetor <code>log.y</code>, podemos colocar entre colchetes uma condição, por exemplo os elementos do vetor log.y que são iguais a infinito. Já tratamos disso: <code>log.y == -Inf</code> faz esse trabalho. Assim, se quisermos substituir os elementos de log.y que são iguais a -Inf por NA, basta usar o seguinte trecho de código:</p>
+<pre><code> log.y[log.y == -Inf] &lt;- NA</code></pre>
+</div>
+</div>
+<div id="probits-e-logits" class="section level2">
+<h2><span class="header-section-number">4.2</span> Probits e Logits</h2>
+<p>Probits e logits também são úteis quando nossa variável dependente é uma dummy. Sempre podemos usar um modelo de probabilidade linear, e nesse caso o comando a ser utilizado é o <code>lm</code>. Mas em casos que queremos usar um probit ou logit, precisamos recorrer ao <code>glm</code>, que tem sintaxe muito parecida com o <code>lm</code>. Mas além de especificar as variáveis dependentes e independentes, também precisamos especificar o tipo de regressão, basicamente a distribuição da variável dependente. No caso de probits e logits, a variável dependente tem distribuição binomial. Depois, temos que especificar se a função de probabilidade da variável dependente é probit ou logit. Os comandos para estimar probits e logits são ilustrados abaixo:</p>
+<pre><code>mod.1 &lt;- glm(y ~x.1 + x.2 + x.3, family = binomial(link = &#39;probit&#39;))
+mod.2 &lt;- glm(y ~x.1 + x.2 + x.3, family = binomial(link = &#39;logit&#39;))</code></pre>
+<p>E como de praxe, podemos usar o comando <code>summary</code> para obter os coeficientes, desvios padrões e estatísticas t.</p>
+</div>
+<div id="variavel-instrumental" class="section level2">
+<h2><span class="header-section-number">4.3</span> Variável instrumental</h2>
+<p>Métodos de variável instrumental são muito úteis e populares, especialmente em casos de endogenidade. Existem várias implementações, mas para o mínimos quadrados de dois estágios usual, o pacote <em>AER</em> oferece um comando <code>ivreg</code>. A sintaxe é similar ao <code>lm</code>, mas com uma alteração na formula para inserir os instrumentos, que são separados dos regressores por |.</p>
+<p>Por exemplo, suponha que temos a variável dependente y, as variáveis endogenas x.1 e x.2, a variável exogena x.3, e os instrumentos z.1 e z.2. Nesse caso, o ivreg seria usado:</p>
+<pre><code>modelo &lt;- ivreg(y ~x.1 + x.2 + x.3|z.1+z.2+x.3)</code></pre>
+<p>E podemos usar o <code>summary</code> para ver o valor dos coeficientes, erros padrão e estatísticas t. Observe que o pacote não mostra o valor do teste F para o primeiro estágio nem de teste de sobre identificação.</p>
+</div>
+<div id="dados-em-painel" class="section level2">
+<h2><span class="header-section-number">4.4</span> Dados em painel</h2>
+<p>Em muitas aplicações usamos dados em painel - i.e., com dimensão temporal e cross section. Em geral, esse tipo de aplicação acaba envolvendo o uso de efeitos fixos. Existem duas maneiras de fazer: usando o pacote <em>plm</em> ou “na mão”, usando o lm. Não há nenhuma vantagem de usar o lm “na mão”, em geral, exceto em casos que temos mais de duas dimensões ou por algum motivo o <em>plm</em> não funciona. Exploraremos primeiro o uso do plm, que deve satisfazer a maioria dos usuários. A solução na mão vem depois e pode ser ignorada sem perda de continuidade.</p>
+<p>Supondo que o pacote já foi instalado e carregado, precisamos (i) explicar para o pacote quais colunas são as colunas com efeitos fixos de tempo e unidade e (ii) rodar a regressão propriamente dita. Suponha, como de praxe, que temos um dataframe carregado no R com nome “dados”. Suponha que as colunas com as datas e um índice para unidades se chamam datas e unidades, respectivamente. Veja que essas colunas podem estar em formato de carácter, e que isso não deve nos preocupar no momento: poderia ser o caso de a unidade ser estados do país e o código da unidade ser o código do estado (DF,RJ,SP,…). O pacote <em>plm</em> disponibiliza o comando <em>plm.data</em>, que converte um data frame de forma que quando rodarmos a regressão, o R saiba quem são os efeitos fixos. Assim, vamos criar um dataframe chamado <strong>dd</strong>:</p>
+<pre><code>dd &lt;- plm.data(dados,c(&#39;unidades&#39;,&#39;datas&#39;))</code></pre>
+<p>O primeiro argumento da função é o data.frame a ser convertido, que contém as colunas para as quais criaremos efeitos fixos. O segundo argumento da função são as colunas com os efeitos fixos. Veja que a ordem é unidade e depois a variável temporal. Agora, a estimação do modelo pode ser feita usando o comando plm, que tem sintaxe muito similar ao lm: passamos uma formula com a variável dependente e as independentes, informamos a base de dados - que nesse caso é o objeto <strong>dd</strong>, não o objeto dados. Mas temos algumas novas opções: o método de estimação (em geral estamos interessados em within, o padrão), mas mais relevante é que efeitos fixos queremos colocar: só para indivíduo, só para tempo ou ambos. Abaixo, mostramos a sintaxe para cada um dos casos, respectivamente:</p>
+<pre><code>mod.1 &lt;- plm(y ~x.1 + x.2,data = dd, effect = &#39;individual&#39;)
+mod.2 &lt;- plm(y ~x.1 + x.2,data = dd, effect = &#39;time&#39;)
+mod.3 &lt;- plm(y ~x.1 + x.2,data = dd, effect = &#39;twoways&#39;)</code></pre>
+<p>Como de praxe, podemos usar o comando <code>summary</code> para obter um sumário da regressão.</p>
+<div id="painel-usando-lm" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Painel usando lm*</h3>
+<p>Suponha que não conseguimos usar o <em>plm</em> por alguma razão. Por exemplo, podemos querer três efeitos fixos: se tivermos microdados de escola, podemos querer ter efeito fixo de aluno, escola e tempo. Podemos implementar isso no braço usando o <code>lm</code>. Lembre-se que, no fundo, efeitos fixos são mera <em>dummies</em>, então se fizermos um modelo linear com dummies, devemos obter resultados parecidos.</p>
+<p>Para ficarmos em terreno conhecido, suponha que só temos dois efeitos fixos que nos interessam: unidade e tempo. Cada um desses vem codificado em duas colunas: uma com a data e outra com algum código para a unidade. Lembrem-se da discussão no capítulo anterior que o <code>lm</code> é capaz de usar isso e entender como dummies, sem a necessidade de criar várias variáveis com 0 e 1. Logo, se queremos explicar y usando x como variável explicativa e efeitos fixos de unidade e tempo, a seguinte regressão deve bastar:</p>
+<pre><code>modelo &lt;- lm(y ~x +tempo + unidade, data = dados)</code></pre>
+<p>E y,x,tempo e unidade estão no dataframe chamado dados, como de praxe. Algumas diferenças devem ser notadas para o comando plm:</p>
+<ol class="example" style="list-style-type: decimal">
+<li>O sumário vai ser mais confuso no caso do <code>lm</code>: o <code>plm</code> esconde os efeitos fixos, o que não ocorre no caso do <code>lm</code></li>
+</ol>
+<p>Mas mais importante:</p>
+<ol start="2" class="example" style="list-style-type: decimal">
+<li>Devido a maneira como o <code>plm</code> estima o modelo (por <em>within</em>, em geral), o <code>plm</code> usa menos graus de liberdade e pode fazer estimações mais precisas. Isso deve impactar mais nos desvios padrões que no valor dos coeficientes, especialmente quando o número de variáveis for muito grande.</li>
+</ol>
+<table>
+<tr>
+<th bgcolor="#adadeb">
+Hands on!
+</th>
+</tr>
+<tr>
+<td bgcolor="#adadeb">
+É uma boa hora de checar se os resultados do plm e do lm são de fato similares. O pacote <em>AER</em> traz a base de dados do exemplo de dados em painel sobre cigarros tirado do livro do Stock e Watson. Para carregar, basta digitar <code>data(&quot;CigarettesSW&quot;)</code>. Os efeitos fixos são para estado e ano, e vem em colunas com nomes state e year, respectivamente. As variável packs nos traz o número de pacotes consumido naquele ano e estado, e income a renda do estado naquele ano. Uma regressão packs em income com efeitos fixos para estado e ano pode ser feita usando os dois métodos da seção anterior: o <code>plm</code> e o <code>lm</code>. Ambos devem dar, aproximadamente, o mesmo valor para o coeficiente do efeito da renda sobre pacotes <span class="math inline">\((-9.070e-08)\)</span>.
+</td>
+</tr>
+</table>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.<a href="regressao-basica.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Nada haver com carro: é uma sigla para Companion to Applied Reggresion<a href="regressao-basica.html#fnref5">↩</a></p></li>
+<li id="fn6"><p>Nem sempre o R vai ignorar um NA. Isso depende do pacote e das configurações do R<a href="regressao-basica.html#fnref6">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="apresentando-os-resultados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

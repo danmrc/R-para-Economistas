@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R: Uma Introdução para economistas</title>
+  <meta name="description" content="R: Uma Introdução para economistas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho">
+
+
+<meta name="date" content="2018-04-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="inserindo-e-manipulando-dados-no-r-o-basico-.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+<li class="chapter" data-level="2.1.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.1.4</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.2</b> Ajuda</a></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.3</b> Comentando</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.4</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.4</b> Trabalhando com os dados</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.4.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>5</b> Apresentando os resultados</a><ul>
+<li class="chapter" data-level="5.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>5.1</b> Tabelas</a></li>
+<li class="chapter" data-level="5.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>5.2</b> Markdown</a></li>
+<li class="chapter" data-level="5.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>5.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>6</b> Ifs, Fors, Whiles</a><ul>
+<li class="chapter" data-level="6.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>6.1</b> If</a></li>
+<li class="chapter" data-level="6.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>6.2</b> For e While</a></li>
+<li class="chapter" data-level="6.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>6.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>7</b> Funções</a><ul>
+<li class="chapter" data-level="7.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>7.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="7.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>7.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="7.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>7.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="7.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>7.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>8</b> Paralelizando</a><ul>
+<li class="chapter" data-level="8.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>8.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="8.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>8.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>9</b> Otimização</a><ul>
+<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>10</b> Referências</a><ul>
+<li class="chapter" data-level="10.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>10.1</b> R</a></li>
+<li class="chapter" data-level="10.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>10.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="10.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>10.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="primeiros-passos" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> Primeiros Passos</h1>
+<div id="instalacao" class="section level2">
+<h2><span class="header-section-number">2.1</span> Instalação</h2>
+<div id="instalando-o-r-e-o-rstudio" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Instalando o R e o RStudio</h3>
+<p>Instalar o R é trivial: basta ir no <a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a> e baixar a versão para o seu computador. Exceto se você usar alguma distribuição de Linux (Ubuntu, por exemplo): ai é mais difícil, mas o próprio CRAN dá instruções de como fazer. Depois, recomenda-se baixar o R Studio, disponível em <a href="https://www.rstudio.org/" class="uri">https://www.rstudio.org/</a>. O R Studio é uma IDE (Integrated Development Enviroment), que facilita muito a vida na hora de programar - especialmente dando sugestões de comandos e mostrando quais variáveis estão salvas no ambiente do R. Assim, sugiro instalar o R Studio, que é bem tranquilo. Para usar o R Studio, você precisa ter o R.</p>
+</div>
+<div id="uma-alternativa" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Uma alternativa</h3>
+<p>Se o seu computador tem um processador multi-core, pode ser interessante instalar o Microsoft R, disponível em <a href="http://mran.microsoft.com/" class="uri">http://mran.microsoft.com/</a>. Ele é idêntico ao R, mas vem com uma biblioteca que tira vantagem dos vários núcleos do processador, o que o R padrão não faz. A principal desvantagem é que ele é atualizado com menos frequência, e a biblioteca que usa mais de um núcleo não está disponível para o Mac. Ele funciona com o R Studio.</p>
+</div>
+<div id="interface" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Interface</h3>
+<p>A interface do R Studio mostra 4 espaços diferentes: no canto esquerdo superior, existe uma tela chamada source (se ela não estiver lá, tente usar ctrl + shift + n para abrir); a direita dela, o ambiente; no canto inferior esquerdo, está o console; e no canto inferior direito está uma tela multiuso, que deve vir com as abas plot, files. Cada uma dessas será explicada, por alto, nesta seção</p>
+<p>A que mais nos interessa, em um primeiro momento, é o console. Nele, você pode passar comandos direto para o R. Digitando 2 + 2 nele e clicando em enter, o resultado deve aparecer na tela. Em geral, é nele que você vai trabalhar. Entretanto, escrever código muito longos no console é muito ruim. O console é desorganizado, não permite salvar o código passado para ele para ser usado mais tarde e não permite com que você corrija erros com facilidade. O source serve justamente para escrever um código longo - uma função ou uma simulação, por exemplo - que pode ser executado no console. Para isso, basta selecionar o conteúdo e dar ctrl + enter ou chegar no fim da linha e usar ctrl + enter.</p>
+<p>A tela do canto direito inferior é uma “geleia geral”: a aba plots é onde os gráficos que faremos vão aparecer; a aba files permite você ver arquivos em diferentes pastas do computador. Estas são as abas mais importantes e que mais serão usadas. Em cima desta tela, há a tela <em>environment</em>, que mostra as variáveis que foram criadas e estão disponíveis para o R usar</p>
+</div>
+<div id="pacotes" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Pacotes</h3>
+<p>O grande atrativo do R são os pacotes. Para instalar um pacote, basta digitar no console:</p>
+<pre><code>install.packages(&quot;nome-do-pacote&quot;)</code></pre>
+<p>É necessário colocar as aspas para o pacote instalar. Uma vez instalado, o pacote não é carregado automaticamente. Para carregar o pacote, basta digitar no console:</p>
+<pre><code>library(nome-do-pacote)</code></pre>
+<p>Agora as aspas não são necessárias.</p>
+<p>Instalar pacote por pacote pode ser uma tarefa chata. Além do mais, isto exige que você saiba quais são os pacotes que fazem cada coisa. Felizmente, o CRAN mantém coleções de pacotes de determinados temas, chamados de Task Views. Existe um de econometria, e para instalar ele é necessário instalar o pacote ctv , e depois o task view de econometria:</p>
+<pre><code>install.packages(&quot;ctv&quot;)
+library(ctv)
+install.views(&quot;Econometrics&quot;)</code></pre>
+<p>Como são muitos pacotes, esta operação pode tomar algum tempo. Em geral, muitos dos pacotes nos task view não são tão úteis, então pode ser interessante ir no cran, e visitar os task views para selecionar quais pacotes de lá fazem o que você precisa fazer. Existem vários pacotes, para diferentes áreas. Para os economistas, além do pacote de econometria, os pacotes de Time Series, Bayesian, Finance, Machine Learning podem ser de interesse. De fato, com a expansão das áreas de pesquisas, muitos outros task views podem ser de interesse! Recomenda-se visitar o cran para ter uma visão do que está disponível.</p>
+<table>
+<tr>
+<th bgcolor="#adadeb">
+Hands on!
+</th>
+</tr>
+<tr>
+<td bgcolor="#adadeb">
+Vamos instalar um primeiro pacote que adiciona vários comandos importantes para econometria e alguns datasets de livros de econometria (como o Stock Watson). O nome do pacote é AER. Ele vai instalar vários outros pacotes que ele necessita para funcionar, então a instalação pode demorar um pouco. Ele será usado de agora por diante, então tenham certeza que ele está carregado, ou seja, que vocês sempre estão usando o <code>library(AER)</code> quando abrem o R.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="ajuda" class="section level2">
+<h2><span class="header-section-number">2.2</span> Ajuda</h2>
+<p>Em 90% do tempo você vai precisar de olhar o help: seja para lembrar que opções estão disponíveis em um comando, ou lembrar exatamente o que o comando faz, ou descobrir qual o comando para fazer alguma coisa específica que você só tem uma palavra chave: ``Como gera números saídos de uma distribuição normal mesmo?’’<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>Se você sabe o comando e quer ler o help deste comando, basta fazer <code>?comando</code>. Por exemplo, se você quiser saber o que o comando rnorm faz e quais as opções ele oferece, basta digitar no console <code>?rnorm</code>. Se você não sabe o nome do comando, mas quer saber todos os comandos que estão relacionados a uma determinada palavra chave, use <code>??palavra</code>. Por exemplo, se você quiser saber todos os comandos que envolvem a distribuição normal, basta usar <code>??normal</code>. Observe que, se você tiver muitos pacotes, isto pode demorar um pouco, já que exige que o R procure cada pacote que se referencie àquela palavra.</p>
+<p>Você também pode estar interessado em todos os comandos de um pacote. Neste caso, a melhor solução é é usar <code>help(package=``nome-do-pacote'')</code>.</p>
+</div>
+<div id="comentando" class="section level2">
+<h2><span class="header-section-number">2.3</span> Comentando</h2>
+<p>Em geral, quando se escreve um código, é importante explicar o que algumas partes do código fazem. Isso não é exclusivo para o caso em que o código vai ser distribuído: pelo contrário, o você do futuro vai agradecer muito o você do passado se você comentar o seu código. Para comentar o código no R, usa-se o #. Tudo depois do # vira um comentário é ignorado pelo R. Assim, suponha que queremos explicar o que o parâmetro a abaixo é: suponha que ele vem de um outro estudo, de Cleese et. al. (1975). Então:</p>
+<pre><code>    a &lt;- 1 #Retirado de Cleese et. al. (1975)</code></pre>
+<p>A regra geral para comentários é: eles não devem ser óbvios (ex.: <code>1 + 1 # somando dois números</code>) mas devem ajudar o leitor - que eventualmente será você mesmo - a entender o que está sendo feito - especialmente em momentos mais obscuros.</p>
+</div>
+<div id="objetos" class="section level2">
+<h2><span class="header-section-number">2.4</span> Objetos*</h2>
+<p>Como qualquer linguagem de programação, existem vários tipos de objetos no R. Objetos são maneiras diferentes de guardar os dados. Os mais usados e mais comuns são:</p>
+<ul>
+<li>Vetor</li>
+<li>Matriz</li>
+<li>Dataframe</li>
+<li>Lista</li>
+</ul>
+<p>Em geral, para dar um nome a um objeto, usamos uma setinha, <code>&lt;-</code>, que é o sinal de menor e o menos. Podemos usar o igual também, mas é preferível a seta. Então, se fizermos <code>a &lt;- 1</code> e digitarmos a, o R vai mostrar 1. Veja que por padrão o R não mostra o valor de objetos que você acabou de criar, e vai mostrar apenas se você pedir.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">1</span>
+a</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Vetores são só coleções unidimensionais de “coisas”. Para criar um vetor, basta usar <code>c()</code> e separar os elementos por vírgula. Suponha que queremos listar os 4 primeiros números primos, então poderíamos fazer:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">primos &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>)</code></pre></div>
+<p>Assim, ao digitar no console <code>primos</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">primos</code></pre></div>
+<pre><code>## [1] 2 3 5 7</code></pre>
+<p>Podemos fazer operações com vetores, como somar, subtrair, multiplicar e dividir. Observe que multiplicar um vetor não é multiplicar uma matriz: o R vai multiplicar elemento a elemento. Então <code>c(1,2,3)*c(1,2,3)</code> gera como resultado:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)<span class="op">*</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
+<pre><code>## [1] 1 4 9</code></pre>
+<p>Para multiplicar dois vetores como multiplicariamos usualmente, usamos <code>%*%</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
+<pre><code>##      [,1]
+## [1,]   14</code></pre>
+<p>Podemos agrupar vetores em matrizes, usando os comandos cbind e rbind, que transforma cada vetor em uma coluna ou em uma linha, respectivamente. Assim, se fizermos <code>cbind(c(1,2),c(3,4))</code>, teríamos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>))</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<p>Se usarmos o <code>rbind(c(1,2),c(3,4))</code>, teríamos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>))</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4</code></pre>
+<p>Existe outra maneira de fazer matrizes, com o comando <code>matrix</code>. Veja que as operações <code>*</code>e <code>%*%</code> funcionam assim como elas funcionam com vetores: <code>*</code>multiplica elemento a elemento a matriz e <code>%*%</code>multiplica a matriz da maneira usual:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dt">ncol =</span> <span class="dv">2</span>)
+B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">ncol =</span> <span class="dv">2</span>)
+A<span class="op">*</span>B</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A<span class="op">%*%</span>B</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    4    4
+## [2,]    6    6</code></pre>
+<p>Observe que matrizes forçam todos os elementos a serem do mesmo tipo. Suponha que você quer fazer uma matriz com nomes e notas de alunos, e quer tirar a média das notas. O R vai acusar um erro, porque as notas não serão do tipo numérico, e sim do tipo <em>character</em>, que é o tipo do nome dos alunos. Para contornar este problema e poder agregar vetores com diferentes tipos - como é o caso do exemplo de notas de alunos e notas é que existe o objeto do tipo dataframe. O comando data.frame funciona como um cbind, que permite diferente juntar vetores de diferentes tipos em uma “matriz”.</p>
+<p>Observe que, para formar matrizes e dataframes, os vetores tem que ter o mesmo tamanho, o que nem sempre é possível ou desejável. Neste contexto, existem as listas, que são um <em>anything goes</em>. Você pode ter uma lista de vetores, uma lista de variáveis, uma lista de listas etc. Além disto, você pode dar nomes as coisas dentro dela e chamar pelo nome. Por exemplo, se fizermos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">um.teste &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Ola =</span> <span class="st">&quot;Olá&quot;</span>, <span class="dt">Dia =</span> <span class="kw">date</span>())</code></pre></div>
+<p>E depois digitarmos <code>um.teste$Dia</code>, ele deve exibir qual a data atual. Digite <code>um.teste$Ola</code> e ele deve exibir um Olá na sua tela:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">um.teste<span class="op">$</span>Dia</code></pre></div>
+<pre><code>## [1] &quot;Wed Jul 04 15:08:42 2018&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">um.teste<span class="op">$</span>Ola</code></pre></div>
+<pre><code>## [1] &quot;Olá&quot;</code></pre>
+<p>Observem que eu usei um “Olá”, entre aspas na lista. Aspas são bastante importante. Por exemplo, faça: <code>c(&quot;Bom&quot;,&quot;Dia&quot;)</code>. O R vai mostrar na tela as duas palavras. Agora, suponha que você esquecesse as aspas no Dia. Agora, o R dará um erro: ele afirma que o objeto Dia não foi encontrado.</p>
+<p>Assim, se quisermos digitar palavras, frases, letras, devemos colocar eles entre aspas. Caso contrário, o R vai buscar o objeto com aquele nome. De maneira bastante grosseira, expressões desse tipo são chamadas de string.</p>
+<p>Familiarizados com como instalar, pedir ajuda, e os principais objetos do R, podemos proceder para a primeira etapa de qualquer análise de dados: como inserir os dados no R.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.<a href="primeiros-passos.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inserindo-e-manipulando-dados-no-r-o-basico-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

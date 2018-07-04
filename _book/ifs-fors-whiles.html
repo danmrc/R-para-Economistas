@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R: Uma Introdução para economistas</title>
+  <meta name="description" content="R: Uma Introdução para economistas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho">
+
+
+<meta name="date" content="2018-04-07">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="apresentando-os-resultados.html">
+<link rel="next" href="funcoes.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+<li class="chapter" data-level="2.1.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.1.4</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.2</b> Ajuda</a></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.3</b> Comentando</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.4</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.4</b> Trabalhando com os dados</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.4.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>5</b> Apresentando os resultados</a><ul>
+<li class="chapter" data-level="5.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>5.1</b> Tabelas</a></li>
+<li class="chapter" data-level="5.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>5.2</b> Markdown</a></li>
+<li class="chapter" data-level="5.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>5.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>6</b> Ifs, Fors, Whiles</a><ul>
+<li class="chapter" data-level="6.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>6.1</b> If</a></li>
+<li class="chapter" data-level="6.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>6.2</b> For e While</a></li>
+<li class="chapter" data-level="6.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>6.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>7</b> Funções</a><ul>
+<li class="chapter" data-level="7.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>7.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="7.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>7.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="7.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>7.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="7.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>7.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>8</b> Paralelizando</a><ul>
+<li class="chapter" data-level="8.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>8.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="8.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>8.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>9</b> Otimização</a><ul>
+<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>10</b> Referências</a><ul>
+<li class="chapter" data-level="10.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>10.1</b> R</a></li>
+<li class="chapter" data-level="10.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>10.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="10.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>10.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ifs-fors-whiles" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Ifs, Fors, Whiles</h1>
+<p>Todas as linguagens de programação usam <em>ifs, fors</em> e <em>whiles</em>, que sempre fazem a mesma coisa em linhas gerais. Este capítulo trata deles. Cada seção vai tratar de cada um deles, e todas serão estruturadas da seguinte maneira: primeiramente, só apresentamos a sintaxe dos comandos no R. A seguir, temos uma discussão sobre o que cada estrutura faz. Desta maneira, aqueles que já conhecem essas estruturas de outras linguagens podem simplesmente ler a sintaxe e pular toda a discussão subsequente.</p>
+<p>Em geral, os exemplos podem não parecer ter utilidade prática, mas servem para entender as ideias. Aplicações práticas são encontradas nos capítulos subsequentes.</p>
+<div id="if" class="section level2">
+<h2><span class="header-section-number">6.1</span> If</h2>
+<p><em>Ifs</em> são estruturas condicionais: se essa condição é atendida, faça isso. Senão, faça aquilo outro. A sintaxe é:</p>
+<pre><code>if(condição){
+    ação se a condição for atendida} else {
+    ação se a condição não for atendida}</code></pre>
+<p>Por exemplo, podemos escrever um código que testa se <span class="math inline">\(x\)</span> - que deve ser um número - é igual a 18, e se sim ele nos mostra um “Sim”. Caso contrário, “Não”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">18</span>
+<span class="cf">if</span>(x<span class="op">==</span><span class="dv">18</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Sim&quot;</span>)} <span class="cf">else</span> {
+    <span class="kw">print</span>(<span class="st">&quot;Não&quot;</span>)}</code></pre></div>
+<pre><code>## [1] &quot;Sim&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">21</span>
+<span class="cf">if</span>(x<span class="op">==</span><span class="dv">18</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Sim&quot;</span>)} <span class="cf">else</span> {
+    <span class="kw">print</span>(<span class="st">&quot;Não&quot;</span>)}</code></pre></div>
+<pre><code>## [1] &quot;Não&quot;</code></pre>
+<p>Podemos concatenar vários else e ifs e testar várias condições. Podemos querer saber se x é menor que 5 ou maior que 7:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>
+<span class="cf">if</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Menor que 5&quot;</span>)} <span class="cf">else</span> <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Maior que 7&quot;</span>)} <span class="cf">else</span> {
+    <span class="kw">print</span>(<span class="st">&quot;Nenhum dos dois&quot;</span>)}</code></pre></div>
+<pre><code>## [1] &quot;Nenhum dos dois&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">8</span>
+<span class="cf">if</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Menor que 5&quot;</span>)} <span class="cf">else</span> <span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>){
+    <span class="kw">print</span>(<span class="st">&quot;Maior que 7&quot;</span>)} <span class="cf">else</span> {
+    <span class="kw">print</span>(<span class="st">&quot;Nenhum dos dois&quot;</span>)}</code></pre></div>
+<pre><code>## [1] &quot;Maior que 7&quot;</code></pre>
+<p>Essa estrutura pode ser chata e requerer muitas linhas quando queremos algo simples. Pense no caso que queremos definir a variável h como 1 se x é maior que 1, e 0 caso contrário. Felizmente, o comando <code>ifelse</code> resolve isso. A sintaxe dele é simples: a condição, o valor se a condição for atendida e o valor se a condição não for atendida. Assim, no exemplo acima:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">ifelse</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> ,<span class="dv">1</span>,<span class="dv">0</span>)
+h</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Entretanto, em muitas situações, usar a estrutura do if ao invés da função <code>ifelse()</code> é útil.</p>
+</div>
+<div id="for-e-while" class="section level2">
+<h2><span class="header-section-number">6.2</span> For e While</h2>
+<p><em>For</em> (e <em>whiles</em>) são <em>loops</em>: eles permitem repetir a mesma operação várias vezes. Para eles serem interessantes, eles tem que permitir alguma alteração no input e no output. A sintaxe do for é:</p>
+<pre><code>for(i in 1:n){
+ações...
+}</code></pre>
+<p>Veja que podemos indexar o for por qualquer letra (e não apenas i), e que podemos usar um vetor para indexar o for, o que vai fazer o for repetir a operação pelo comprimento daquele vetor - e definir o valor de i como o valor dos elementos do vetor. Por exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)
+b &lt;-<span class="st"> </span><span class="dv">0</span>
+
+<span class="cf">for</span>(i <span class="cf">in</span> a){
+b &lt;-<span class="st"> </span>b <span class="op">+</span><span class="st"> </span>i
+<span class="kw">print</span>(b)
+}</code></pre></div>
+<pre><code>## [1] 1
+## [1] 3
+## [1] 6
+## [1] 10
+## [1] 15</code></pre>
+<table>
+<tr>
+<th bgcolor="#adadeb">
+Hands on!
+</th>
+</tr>
+<tr>
+<td bgcolor="#adadeb">
+<p>Podemos usar o <em>for</em> para ilustrar uma ideia bastante importante de estatística: a lei dos grandes números. Para refrescar a memória: a lei dos grandes números diz que se a variável aleatória tem média <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\bar{X}\)</span> é a média amostral e <span class="math inline">\(n\)</span> é o tamanho da amostra, então <span class="math inline">\(\text{plim}_{n \rightarrow \infty}(\bar{X}) = \mu\)</span>. O código para ilustrar isso é simples:</p>
+<ul>
+<li>Gere um vetor de variáveis aleatórias retirados de alguma distribuição (por exemplo, <code>rnorm(200)</code>). Vamos chamar esse vetor de <code>amostra</code>.</li>
+<li>Crie um vetor de zeros (você pode fazer isso usando <code>rep(0,200)</code>) Chame ele de alguma coisa. No caso, chamarei ele de <code>media</code></li>
+<li>Crie um loop que faz com que cada posição do vetor <code>media</code> seja a média dos números em <code>amostra</code> até aquela posição. Assim, se tivermos na 4ª posição de <code>media</code>, teremos a média dos números da <code>amostra</code> de 1 a 4.</li>
+</ul>
+Plot o vetor <code>media</code>: ele deve se aproximar da media verdadeira do processo conforme n cresce. Você pode testar <span class="math inline">\(n\)</span> diferente de 200 para ver o quão bom fica a aproximação, bem como diferentes distribuições e parâmetros.
+</td>
+</tr>
+</table>
+<p>O <em>while</em> funciona de maneira parecida, mas ao invés de ir até o fim do contador, o while depende de alguma condição. O exemplo mais usual é um while que acaba quando uma variável alcança um certo valor. Por exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="dv">0</span>
+j &lt;-<span class="st"> </span><span class="dv">1</span>
+
+<span class="cf">while</span>(j <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span>){
+b &lt;-<span class="st"> </span>b <span class="op">+</span><span class="st"> </span>j
+j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}</code></pre></div>
+<p>Esse exemplo faz exatamente a mesma coisa que o <em>for</em> anterior. Observe que <strong>temos que adicionar a linha</strong> <code>j &lt;- j +1</code>, senão j nunca irá alcançar 6, e o R nunca vai sair do while: ele vai ver <span class="math inline">\(j = 1\)</span> e continuar no while infinitamente. Também observe que temos que criar o <code>j &lt;- 1</code>, enquanto no <em>for</em> não havia a necessidade de criar a variável i de antemão.</p>
+</div>
+<div id="diferencas-e-semelhancas-entre-for-e-while" class="section level2">
+<h2><span class="header-section-number">6.3</span> Diferenças e Semelhanças entre for e while</h2>
+<p>O exemplo anterior de <em>while</em> deixa claro que ele é muito semelhante ao <em>for</em>: ambos permitem repetir um conjunto de operações um certo número de vezes. A inclusão do <em>while</em> parece até um desperdício: uma função quase idêntica ao for que exige duas linhas de código a mais. Mas enquanto muitas vezes o <em>for</em> é mais usado que o <em>while</em>, o <em>while</em> tem suas vantagens, como o seguinte exemplo ilustra.</p>
+<p>Suponha que queremos gerar 100 matrizes de 100 observações com 10 variáveis independentes de uma normal e queremos garantir que a matriz seja invertível<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>. Poderíamos escrever:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matrizes &lt;-<span class="st"> </span><span class="kw">list</span>()
+
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){
+matrizes[[i]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">100</span>),<span class="dt">ncol =</span> <span class="dv">100</span>, <span class="dt">nrow =</span> <span class="dv">100</span>)
+}</code></pre></div>
+<p>Veja o que o exemplo acima faz:</p>
+<ul>
+<li>Cria uma lista vazia chamada matrizes</li>
+<li>Para cada posição da lista, ele vai criar uma matriz com 10 colunas e 100 linhas</li>
+<li>o conteúdo dessa matriz são 1000 números saídos de uma normal de média zero e variância 1.</li>
+</ul>
+<p>Não foi especificado que a matriz tem que ser invertível: em nenhum ponto nós testamos isso. Nós poderíamos construir um teste usando <em>if</em>, de forma que se a matriz não for invertível (por exemplo, tem determinante zero), a matriz é ignorada. Mas observe que isso gera um problema: se a matriz for ignorada, o for continua e vai gerar uma matriz a menos do que queríamos. É ai que o <em>while</em> entra: podemos escrever o código com while de maneira que, quando a matriz tiver determinante 0, o contador não cresce. O código seria algo como:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> matrizes &lt;-<span class="st"> </span><span class="kw">list</span>()
+ 
+ i &lt;-<span class="st"> </span><span class="dv">1</span>
+ <span class="cf">while</span>(i <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>){
+ candidato &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">100</span><span class="op">*</span><span class="dv">100</span>),<span class="dt">ncol =</span> <span class="dv">100</span>, <span class="dt">nrow =</span> <span class="dv">100</span>)
+ teste &lt;-<span class="st"> </span><span class="kw">det</span>(candidato)
+ <span class="cf">if</span>(teste <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){} <span class="cf">else</span>{
+ matrizes[[i]] &lt;-<span class="st"> </span>candidato
+ i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>}
+ }</code></pre></div>
+<p>Veja que só aumentamos o contador quando o determinante é diferente de zero , ou seja, quando aceitamos a matriz.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.<a href="ifs-fors-whiles.html#fnref8">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="apresentando-os-resultados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="funcoes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
