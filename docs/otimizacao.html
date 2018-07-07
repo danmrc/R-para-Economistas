@@ -25,7 +25,6 @@
 <meta name="author" content="Daniel Coutinho">
 
 
-<meta name="date" content="2018-04-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +32,7 @@
   
   
 <link rel="prev" href="paralelizando.html">
-<link rel="next" href="referencias.html">
+<link rel="next" href="projetinhos.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -157,12 +156,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>9</b> Otimização</a><ul>
-<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a></li>
+<li class="chapter" data-level="9.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="otimizacao.html"><a href="otimizacao.html#mais-sobre-otimizacao-numerica"><i class="fa fa-check"></i><b>9.1.1</b> Mais sobre Otimização Numérica</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>10</b> Referências</a><ul>
-<li class="chapter" data-level="10.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>10.1</b> R</a></li>
-<li class="chapter" data-level="10.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>10.2</b> Tidyverse</a></li>
-<li class="chapter" data-level="10.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>10.3</b> LaTeX</a></li>
+<li class="chapter" data-level="9.2" data-path="otimizacao.html"><a href="otimizacao.html#otimizando-com-restricao"><i class="fa fa-check"></i><b>9.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>10</b> Projetinhos</a><ul>
+<li class="chapter" data-level="10.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-numeros"><i class="fa fa-check"></i><b>10.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="10.2" data-path="projetinhos.html"><a href="projetinhos.html#minimos-quadrados-ordinarios-1"><i class="fa fa-check"></i><b>10.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="10.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>10.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referências</a><ul>
+<li class="chapter" data-level="11.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>11.1</b> R</a></li>
+<li class="chapter" data-level="11.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>11.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="11.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>11.3</b> LaTeX</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -219,6 +226,8 @@ g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {x[<span cla
 ## $message
 ## NULL</code></pre>
 <p>Veja que a resposta nos trás os valores que minimizam( <code>$par</code>), o valor da função nesse ponto( <code>$value</code>) e algumas outras informações: a mais importante é o <code>$convergence</code>, que nos diz se o algoritmo convergiu ou não - isso é, se encontramos um ótimo ou não. Em geral, se temos um 0 é que tudo ocorreu bem. Outros valores indicam erro e cada algoritmo dá um significado para cada valor.</p>
+<div id="mais-sobre-otimizacao-numerica" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Mais sobre Otimização Numérica</h3>
 <p>Infelizmente, o chute inicial pode ser muito importante em alguns casos. Pegue a função <span class="math inline">\(h(x,y)=x^3+y^2+x*y\)</span>. Vamos testar dois chutes inciais: <span class="math inline">\((0,0)\)</span> e <span class="math inline">\((-10,0)\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="cf">function</span>(x){x[<span class="dv">1</span>]<span class="op">^</span><span class="dv">3</span><span class="op">+</span>x[<span class="dv">2</span>]<span class="op">^</span><span class="dv">2</span><span class="op">+</span>x[<span class="dv">1</span>]<span class="op">*</span>x[<span class="dv">2</span>]}
 
@@ -256,6 +265,31 @@ g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {x[<span cla
 ## NULL</code></pre>
 <p>Veja que, no primeiro caso, temos convergência; no segundo, a coisa dá totalmente errada e não há convergência (por isso o código 1 ali no <code>$convergence</code>).</p>
 <p>Veja que pode ser o caso de que queremos encontrar o máximo de uma função. O optimize tem uma opção <code>maximum</code>, e basta alterar para <code>TRUE</code>. Entretanto, o <code>optim</code> não tem essa opção. A solução é simples: multiplique a função por <span class="math inline">\(-1\)</span>. Por exemplo, o máximo de <span class="math inline">\(j(x)=- x^2\)</span> é o mesmo ponto que o mínimo de <span class="math inline">\(f(x)=x^2\)</span>. A única coisa que vai mudar é o valor da função no ponto.</p>
+<table>
+<tr>
+<th bgcolor="#adadeb">
+Hands on!
+</th>
+</tr>
+<tr>
+<td bgcolor="#adadeb">
+O estimador de Mínimos Quadrados Ordinário pode ser escrito como um problema de minimização (quem poderia imaginar?!). O objetivo é minimizar a soma do quadrado do erro. Veja que podemos então gerar duas amostras (<span class="math inline">\(x\)</span> e <span class="math inline">\(e\)</span>) e definir $ y = x + e$. Para estimar o modelo, bastaria criar uma função que calcula a soma do erro do quadrado dado os parametros, ou seja, para valores <code>b[1] e b[2]</code>, a função faz <code>y - b[1] + b[2]*x</code> e soma o quadrado desses valores. Jogue essa função no <code>optim</code>e provavelmente você obterá bons resultados.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="otimizando-com-restricao" class="section level2">
+<h2><span class="header-section-number">9.2</span> Otimizando com restrição</h2>
+<p>Por enquanto só tratamos de otimização irrestrita. Mas podemos querer otimizar também com restrição. A melhor opção nesse caso é o pacote <em>CVXR</em>. A sintaxe é bastante diferente da sintaxe usual. O problema é constrúido em blocos, e o tratamento dessa seção se deve a <a href="https://cran.r-project.org/web/packages/CVXR/vignettes/cvxr_intro.html">este documento</a> do pacote:</p>
+<ul>
+<li>A variável de escolha é criada com o <code>Variable</code></li>
+<li>A função objetivo não é escrita usando o <code>function</code>, mas sim criado uma variável com <code>Minimize(&quot;expressão&quot;)</code> ou <code>Maximize(&quot;expressão&quot;)</code>. O uso de cada um deve ser auto-explicativo.</li>
+<li>Crie variáveis com as restrições sobre a variável criada com o variable</li>
+<li>Crie mais uma variável usando <code>Problem</code>, que recebe a função objetivo e as restrições em uma lista(mesmo se for apenas uma restrição</li>
+<li>Passe a variável acima para a função <code>solve</code></li>
+</ul>
+<p>O link acima conta com um exemplo de como fazer MQO usando o CVXR. No capítulo Projetinhos, eu explico como fazer o LASSO (Least Abssolute Shrinkage and Selection Operator) usando o CVXR.</p>
 
 </div>
 </div>
@@ -265,7 +299,7 @@ g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {x[<span cla
         </div>
       </div>
 <a href="paralelizando.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="projetinhos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
