@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{04/07/2018}
+    \date{Última Atualização: 17/10/2018}
 
 
 \begin{document}
@@ -176,12 +176,13 @@ coisa específica. Assim, a ideia aqui é entender as ideias gerais do R,
 os comandos básicos e o mínimo do vocabulário para saber consultar/ler o
 help.
 
-Definitivamente, esse manual deve ser lido com o R aberto e tentando
+Definitivamente esse manual deve ser lido com o R aberto e tentando
 entender cada um dos comandos que são ditos aqui. Uma leitura
 comparativa entre o help e o que eu coloco no manual sobre cada comando
 é provavelmente a melhor maneira de proceder. Tentar replicar tudo que
-eu faço é certamente uma maneira garantida de aprender.As seções Hands
-on propõe exercícios específicos para serem feitos no R.
+eu faço é uma maneira garantida de aprender. As seções Hands on propõe
+exercícios específicos para serem feitos no R. O capítulo projetinhos
+tem o mesmo objetivo, mas com exercícios que são mais extensos.
 
 O manual é dividido em três partes: a primeira trata de como fazer
 econometria no R: é o coração do manual e é de principal interesse dos
@@ -246,6 +247,61 @@ importantes e que mais serão usadas. Em cima desta tela, há a tela
 \emph{environment}, que mostra as variáveis que foram criadas e estão
 disponíveis para o R usar
 
+\section{Erros, Warnings e letras
+vermelhas}\label{erros-warnings-e-letras-vermelhas}
+
+Tão importante quanto saber fazer a coisa certa é saber quando temos um
+problema. Existem dois tipos de erro:
+
+\begin{itemize}
+\tightlist
+\item
+  Error: esses são de fato erros, e o R não consegue proceder. O que
+  você escreveu tem algum problema grave e não pode ser executado.
+\item
+  Warning: o R conseguiu fazer o que você pediu, mas alguma coisa
+  esquisita aconteceu, e o R está te avisando.
+\end{itemize}
+
+Veja que em ambos os casos a mensagem vai aparecer em vermelho no
+console. \emph{Error} e \emph{warnings} vem das mais diferentes formas
+(afinal, é possível errar de diferentes formas). Alguns são claros, como
+tentar somar um número e uma letra:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \OperatorTok{+}\StringTok{ "a"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in 2 + "a": argumento não-numérico para operador binário
+\end{verbatim}
+
+(Apesar de operador binário não ser exatamente óbvio)
+
+Outros são mais misteriosos, e quando encontramos um erro impossível de
+entender, coloque o \emph{output} do console no google. Typos geram
+muitos erros (ex.: esquecer o parêntese, errar o nome de um objeto). Em
+um código longo, descobrir o erro pode ser difícil. Existem ferramentas
+para isso, e o próprio \emph{source} do RStudio indica linhas com algum
+erro com um x vermelho do lado do número da linha. Em geral, em um
+código muito longo, não é uma estratégia ruim escrever uma parte do
+código, testar e debugar (retirar os erros) ela. Funções ajudam a fazer
+isso: trataremos delas mais a frente.
+
+É importante notar que, apesar de uma linha de código que devolva um
+\emph{warning} não está errada, ela pode muito bem fazer uma coisa que
+você não quer. Assim, um warning surpresa deve ser visto com bastante
+cuidado e normalmente você não deve ignorar um warning.
+
+Veja que essas mensagens não são as únicas que aparecem em vermelho no
+R: quando o R instala ou carrega um pacote ele exibe algumas coisas em
+vermelho\footnote{Letras em vermelho ocorrem em algumas outras
+  situações.}. Não se preocupe: isso não quer dizer que o R encontrou
+algum erro ou warning ao instalar o pacote, é apenas o comportamento
+padrão do R.
+
 \subsection{Pacotes}\label{pacotes}
 
 O grande atrativo do R são os pacotes. Para instalar um pacote, basta
@@ -303,9 +359,7 @@ Em 90\% do tempo você vai precisar de olhar o help: seja para lembrar
 que opções estão disponíveis em um comando, ou lembrar exatamente o que
 o comando faz, ou descobrir qual o comando para fazer alguma coisa
 específica que você só tem uma palavra chave: ``Como gera números saídos
-de uma distribuição normal mesmo?''\footnote{Alguém poderia argumentar
-  que isso sempre será possível, pois é necessário muito azar para gerar
-  uma matriz desse jeito que é singular. Mas é só um exemplo.}
+de uma distribuição normal mesmo?''\footnote{Dois iguais seguidos}
 
 Se você sabe o comando e quer ler o help deste comando, basta fazer
 \texttt{?comando}. Por exemplo, se você quiser saber o que o comando
@@ -344,7 +398,7 @@ A regra geral para comentários é: eles não devem ser óbvios (ex.:
 
 \section{Objetos*}\label{objetos}
 
-Como qualquer linguagem de programação, existem vários tipos de objetos
+Como muitas linguagens de programação, existem vários tipos de objetos
 no R. Objetos são maneiras diferentes de guardar os dados. Os mais
 usados e mais comuns são:
 
@@ -526,7 +580,7 @@ tela:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Wed Jul 04 15:09:18 2018"
+## [1] "Wed Oct 17 11:37:49 2018"
 \end{verbatim}
 
 \begin{Shaded}
@@ -672,7 +726,66 @@ que o nome das variáveis é preservado: assim, uma variável chamada
 invés do padrão do \texttt{read.csv2} de transformar em
 ``Nome.da.variável''. Apesar de isso parecer bom a primeira vista,
 dificulta acessar as variáveis mais tarde, já que o R não entende nomes
-com espaço para objetos. \%falta explicar como carregar os arquivos
+com espaço para objetos.
+
+\section{O pacote BETS (e muitos
+outros)}\label{o-pacote-bets-e-muitos-outros}
+
+Para dados do Brasil, especialmente dados macroeconômicos, o pacote
+\textbf{BETS} é uma excelente alternativa para puxar os dados via
+BCB/IBGE. O \textbf{BETS} permite com que, direto do R, você busque e
+salve séries disponíveis em diversas bases de dados - entre elas o BCB e
+o IBGE. O cerne do BETS são os comandos \texttt{BETSsearch()} e
+\texttt{BETSget()}. O \texttt{BETSsearch()} permite buscarmos por uma
+palavra chave e retorna informações da série - frequência, fonte, início
+e fim e um código. O \texttt{BETSget()} permite com que você recupere a
+série a partir do código. Para recuperarmos o IPCA, fariamos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(BETS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'BETS'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     predict
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{busca <-}\StringTok{ }\KeywordTok{BETSsearch}\NormalTok{(}\StringTok{"IPCA"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## BETS-package: Found 51 out of 18706 time series.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#View(busca)}
+\NormalTok{IPCA <-}\StringTok{ }\KeywordTok{BETSget}\NormalTok{(}\DecValTok{433}\NormalTok{, }\DataTypeTok{from =} \StringTok{"2002-01-01"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(IPCA)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+Veja que colocamos o \texttt{View(busca)} comentado apenas para este
+post: ao rodar essa linha, uma aba no RStudio abrirá e mostrará todas as
+séries que se encaixam neste critério.
+
+Veja que este não é o único pacote disponível para baixar dados! Existem
+muitos outros, e a melhor maneira é fuçar o CRAN. (Mas em breve devo
+adicionar mais um aqui, o \textbf{Quandl})
 
 \section{Trabalhando com os dados}\label{trabalhando-com-os-dados}
 
@@ -750,9 +863,7 @@ regressão.
 O que estamos fazendo é apenas uma operação de compara cada número do
 vetor ao número 678. Testamos se ele é menor (\textless{}), mas
 poderíamos ver que números são maiores (\textgreater{}), iguais
-(==)\footnote{Alguém poderia argumentar que isso sempre será possível,
-  pois é necessário muito azar para gerar uma matriz desse jeito que é
-  singular. Mas é só um exemplo.}, menor ou igual (\textless{}=) ou
+(==)\footnote{Dois iguais seguidos}, menor ou igual (\textless{}=) ou
 maior ou igual (\textgreater{}=). Estes operadores não são apenas úteis
 para criar \emph{dummies}, mas também pode servir para escrever funções,
 que será tratado mais a frente.
@@ -774,8 +885,8 @@ estados), ler cada posição do vetor das siglas usando um loop e colocar
 um 1 na coluna correspondente, criando um vetor índice para o R buscar
 qual coluna é relacionada com cada estado\ldots{} Se a explicação
 anterior bagunçou o seu cérebro, não se preocupe: ela é complicada, e o
-R não exige nada tão complicado\footnote{Nada haver com carro: é uma
-  sigla para Companion to Applied Reggresion}
+R não exige nada tão complicado\footnote{Em geral. O autor já encontrou
+  situações em que esse tipo de solução era estritamente necessária.}
 
 Uma solução muito mais simples é usar o comando factors, que gera
 automaticamente dummies para cada categoria. Assim, RJ vira uma dummy,
@@ -811,24 +922,23 @@ do til) das explicativas (à direita do til), e para separar as
 explicativas usamos o +. A opção \emph{data} diz ao R onde buscar as
 variáveis.
 
-Agora, o objeto reg\footnote{Alguém poderia argumentar que isso sempre
-  será possível, pois é necessário muito azar para gerar uma matriz
-  desse jeito que é singular. Mas é só um exemplo.} tem o modelo
-estimado. Para obter uma tabela usual de regressão, com valor do
-coeficiente, erro padrão, estatística t e p-valor, \(R^2\) ajustado, e o
-teste F para os coeficientes basta usar \texttt{summary(reg)}. No
-contexto de regressão linear, podemos querer fazer uma série de coisas,
-que são explicadas a seguir.
+Agora, o objeto reg\footnote{Se você leu a discussão anterior de tipos
+  de objetos, vale observar que reg é uma lista} tem o modelo estimado.
+Para obter uma tabela usual de regressão, com valor do coeficiente, erro
+padrão, estatística t e p-valor, \(R^2\) ajustado, e o teste F para os
+coeficientes basta usar \texttt{summary(reg)}. No contexto de regressão
+linear, podemos querer fazer uma série de coisas, que são explicadas a
+seguir.
 
 \textbf{Atenção: Séries Temporais e o lm} Objetos de série temporal são
 armazenados pelo R de uma maneira especial - uma vez que você transforma
-ele em um objeto de série temporal (algo que esse manual ainda não
-trata). Entretanto, você \emph{não} deve passar um objeto de série
-temporal para o \texttt{lm()}, já que o \texttt{lm} vai ignorar o
-formato de série temporal. Assim, estimar um modelo AR(1) usando
-\texttt{lm(y\ \textasciitilde{}\ lag(y))} vai gerar uma regressão com
-coeficiente 1 para lag(y) e \(R^2 = 1\). De fato, a regressão feita foi
-y em y - o que não é uma regressão muito emocionante.
+ele em um objeto de série temporal. Entretanto, você \emph{não} deve
+passar um objeto de série temporal para o \texttt{lm()}, já que o
+\texttt{lm} vai ignorar o formato de série temporal. Assim, estimar um
+modelo AR(1) usando \texttt{lm(y\ \textasciitilde{}\ lag(y))} vai gerar
+uma regressão com coeficiente 1 para lag(y) e \(R^2 = 1\). De fato, a
+regressão feita foi y em y - o que não é uma regressão muito
+emocionante.
 
 \subsection{Testes de hipótese}\label{testes-de-hipotese}
 
@@ -1058,6 +1168,443 @@ ser feita usando os dois métodos da seção anterior: o \texttt{plm} e o
 \texttt{lm}. Ambos devem dar, aproximadamente, o mesmo valor para o
 coeficiente do efeito da renda sobre pacotes \((-9.070e-08)\).
 
+\chapter{Séries Temporais}\label{series-temporais}
+
+Métodos de séries temporais são suficientemente extensos e únicos para
+terem seu próprio capítulo. Este capítulo trata dos principais métodos
+de séries temporais de interesse dos economistas: ARIMAs, VARs, testes
+de raiz unitária e cointegração. Séries temporais são únicas o
+suficiente a ponto de terem um classe própria - sem nenhuma surpresa,
+ela se chama \emph{time series}.
+
+\section{O básico}\label{o-basico}
+
+Suponha que você, usando os métodos do capítulo 2, inseriu uma série
+temporal no R. O R não sabe, \emph{a priori}, que os dados são uma série
+temporal. Você precisa contar isso a ele, e o comando que faz isso é o
+\texttt{ts()}. O \texttt{ts} recebe a série, a data de ínicio e a
+frequência. A frequência é como você dividiu o ano: 4 se o dado for
+trimestral, 12 se for mensal\ldots{}
+
+Por exemplo, podemos gerar uma série de variáveis aleatórias da normal
+(um ruído branco) e transformar em série temporal mensal começando em
+janeiro de 2000:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{serie <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{serie <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(serie,}\DataTypeTok{start =}\KeywordTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{,}\DecValTok{01}\NormalTok{), }\DataTypeTok{freq =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Veja que o comando ts() é excessivamente engessado: os dados tem que ter
+uma frequência fixa, expressa como uma fração do ano. O pacote
+\textbf{zoo} extende bastante as capacidades do R em lidar com séries
+temporais, inclusive com séries irregulares.
+
+\textbf{Atenção: Séries Temporais e o lm} Você \emph{não} deve passar um
+objeto de série temporal para o \texttt{lm()}, já que o \texttt{lm} vai
+ignorar o formato de série temporal. Assim, estimar um modelo AR(1)
+usando \texttt{lm(y\ \textasciitilde{}\ lag(y))} vai gerar uma regressão
+com coeficiente 1 para lag(y) e \(R^2 = 1\). De fato, a regressão feita
+foi y em y - o que não é uma regressão muito emocionante.
+
+\section{ARIMAs}\label{arimas}
+
+Com uma série devidamente construída para ser um objeto ts - como nós
+fizemos acima- podemos tentar estimar algum modelo. O modelo base de
+séries temporais é o ARIMA. O R base já vem com muitas funções para
+lidar com isso, mas o pacote \textbf{forecast} extende bastante as
+capacidades do R em lidar com esse tipo de série. O primeiro passo para
+estimar um modelo Arima é obter a função de autocorrelação (FAC) e a
+função de autocorrelação parcial (FACP): elas são \texttt{Acf} e
+\texttt{Pacf}. Veja que existem versões na base do R que se chamam
+\texttt{acf} e \texttt{pacf} (notem que lá é com maiúscula e aqui com
+minúscula). A diferença \emph{fundamental} entre os dois é que a
+\texttt{Acf} e a \texttt{acf} (e também a \texttt{Pacf} e a
+\texttt{pacf}) é que a primeira exclui a autocorrelação no momento 0 -
+que é trivialmente 1.
+
+Uma vez conhecendo o formato da FAC e da FACP, podemos estimar o ARIMA.
+O comando para estimar um modelo ARIMA é \texttt{Arima} - e novamente,
+existe um \texttt{arima} com minúscula que é da base do R. O
+\texttt{Arima} basicamente recebe duas coisas, a série e a ordem do
+modelo(isso é, se o modelo é um ARMA(1,1), AR(1), MA(1) etc). Vamos
+gerar um exemplo de um AR(1) com dados simulados e obter a FAC e FACP e
+estimar o modelo Arma sugerido:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(forecast)}
+
+\NormalTok{u <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{500}\NormalTok{) }\CommentTok{#nossa futura série}
+
+\NormalTok{y[}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{u[}\DecValTok{1}\NormalTok{]}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\DecValTok{500}\NormalTok{)\{}
+\NormalTok{  y[i] <-}\StringTok{ }\FloatTok{0.6}\OperatorTok{*}\NormalTok{y[i}\OperatorTok{-}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{u[i] }\CommentTok{#um AR(1) com coeficiente 0.6}
+\NormalTok{\}}
+
+\KeywordTok{Acf}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Pacf}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo <-}\StringTok{ }\KeywordTok{Arima}\NormalTok{(serie,}\DataTypeTok{order=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Series: serie 
+## ARIMA(1,0,0) with non-zero mean 
+## 
+## Coefficients:
+##          ar1   mean
+##       0.0083  0.000
+## s.e.  0.0317  0.031
+## 
+## sigma^2 estimated as 0.9467:  log likelihood=-1390.57
+## AIC=2787.15   AICc=2787.17   BIC=2801.87
+## 
+## Training set error measures:
+##                         ME      RMSE       MAE      MPE     MAPE      MASE
+## Training set -1.697063e-05 0.9720336 0.7874101 99.24187 100.6228 0.6946617
+##                      ACF1
+## Training set 9.048762e-06
+\end{verbatim}
+
+Veja que o objeto \texttt{modelo} trás os coeficientes estimados, o erro
+padrão e alguns diagnósticos úteis como critérios de informação.
+
+Em algumas situações pode ser muito difícil inferir o modelo certo a
+partir da FAC e da FACP. O comando \texttt{auto.arima}, do pacote
+\textbf{forecast}, seleciona um modelo a partir de algum critério de
+informação. Vamos ilustrar o ponto gerando uma série \texttt{x} que é um
+ARMA(1,2):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{e <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{x <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{998}\NormalTok{)\{}
+\NormalTok{  x[j}\OperatorTok{+}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\FloatTok{0.5}\OperatorTok{*}\NormalTok{x[j}\OperatorTok{+}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{e[j}\OperatorTok{+}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\FloatTok{0.3}\OperatorTok{*}\NormalTok{e[j}\OperatorTok{+}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\FloatTok{0.4}\OperatorTok{*}\NormalTok{e[j]}
+\NormalTok{\}}
+
+\NormalTok{x <-}\StringTok{ }\NormalTok{x[}\DecValTok{500}\OperatorTok{:}\DecValTok{1000}\NormalTok{]}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(x, }\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DecValTok{1999}\NormalTok{,}\DecValTok{05}\NormalTok{), }\DataTypeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\KeywordTok{Acf}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Pacf}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-15-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{auto.arima}\NormalTok{(x,}\DataTypeTok{ic =} \StringTok{"bic"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Series: x 
+## ARIMA(1,0,2) with zero mean 
+## 
+## Coefficients:
+##          ar1      ma1     ma2
+##       0.4271  -0.2745  0.5143
+## s.e.  0.0671   0.0609  0.0393
+## 
+## sigma^2 estimated as 1.036:  log likelihood=-718.54
+## AIC=1445.07   AICc=1445.15   BIC=1461.94
+\end{verbatim}
+
+Nesse caso o \texttt{auto.arima} acertou, mas nem sempre isso ocorre.
+
+\section{VARs}\label{vars}
+
+Um VAR, teoricamente, é apenas uma generalização do AR. Ainda assim, do
+ponto de vista computacional, eles são distintos, e o VAR tem seu
+próprio conjunto de pacotes no R. O mais importante deles é o
+\texttt{vars}.
+
+Começamos juntando todas as séries que queremos estimar o VAR em uma
+matriz (use o cbind() para isso). O passo seguinte é escolher a ordem do
+VAR - geralmente usando algum critério de informação. O comando
+\texttt{VARselect} faz isso e apresenta alguns critérios de informação e
+a quantidade de lags que minimizam cada um.
+
+O comando que faz a estimativa per se é o \texttt{VAR}. Ele recebe a
+matriz com as séries e quantos lags você quer que sejam usados - ou o
+critério de informação a ser usado na hora de fazer a estimativa.
+
+Por último, queremos recuperar a resposta dinâmica de cada uma das
+variáveis a um choque (não só um choque na própria variável, como o
+efeito cruzado de um choque em outra variável).
+
+Vamos gerar um VAR(1) com duas variáveis apenas para ilustrar o uso do
+pacote:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(vars)}
+
+\NormalTok{T <-}\StringTok{ }\DecValTok{500} \CommentTok{#número de períodos}
+\NormalTok{N <-}\StringTok{ }\DecValTok{2} \CommentTok{#número de variáveis}
+
+\NormalTok{u <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(T}\OperatorTok{*}\NormalTok{N),}\DataTypeTok{nrow =}\NormalTok{ N,}\DataTypeTok{ncol =}\NormalTok{ T)}
+
+\NormalTok{x <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{nrow =}\NormalTok{ N, }\DataTypeTok{ncol =}\NormalTok{ T)}
+
+\NormalTok{A <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{,}\OperatorTok{-}\FloatTok{0.2}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{,}\FloatTok{0.2}\NormalTok{))}
+
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{T)\{}
+\NormalTok{  x[,j] <-}\StringTok{ }\NormalTok{A}\OperatorTok{%*%}\NormalTok{x[,j}\OperatorTok{-}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{u[,j]}
+\NormalTok{\}}
+
+\NormalTok{x <-}\StringTok{ }\NormalTok{x[,}\DecValTok{400}\OperatorTok{:}\DecValTok{500}\NormalTok{]}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{t}\NormalTok{(x)}
+\KeywordTok{colnames}\NormalTok{(x) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{,}\StringTok{"y"}\NormalTok{)}
+
+\KeywordTok{VARselect}\NormalTok{(x) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      2      2      1      2 
+## 
+## $criteria
+##                 1          2          3         4          5          6
+## AIC(n) 0.09458332 0.03240114 0.06427672 0.1119467 0.03823184 0.04664907
+## HQ(n)  0.16137291 0.14371712 0.22011909 0.3123155 0.28312700 0.33607062
+## SC(n)  0.26013449 0.30831977 0.45056280 0.6086003 0.64525282 0.76403750
+## FPE(n) 1.09925329 1.03316067 1.06703713 1.1199054 1.04144348 1.05188589
+##                7         8          9        10
+## AIC(n) 0.1262929 0.1857583 0.09210459 0.1504392
+## HQ(n)  0.4602409 0.5642326 0.51510532 0.6179663
+## SC(n)  0.9540488 1.1238816 1.14059538 1.3092974
+## FPE(n) 1.1415235 1.2148709 1.11023117 1.1821910
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo <-}\StringTok{ }\KeywordTok{VAR}\NormalTok{(x,}\DataTypeTok{p =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{irf}\NormalTok{(modelo, }\DataTypeTok{impulse =} \StringTok{"x"}\NormalTok{, }\DataTypeTok{response =} \KeywordTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{,}\StringTok{"y"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+Eu só pedi o plot do choque da primeira variável sobre as duas variáveis
+por que isso é uma ilustração. Fazer \texttt{plot(irf(modelo))} em uma
+seção do R, ele vai plotar os choques de todas as variáveis sobre todas
+as variáveis.
+
+\section{Raiz unitária}\label{raiz-unitaria}
+
+O pacote \textbf{urca} nos trás testes de raiz unitária. O teste
+Dickey-Fuller, um dos mais populares, é chamado pelo \texttt{ur.df()}.
+Vamos gerar um passeio aleatório para mostrar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ x <-}\StringTok{ }\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{ur.df}\NormalTok{(x))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.1685 -0.7405 -0.0154  0.6057  3.3920 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## z.lag.1     0.0002941  0.0024743   0.119    0.905
+## z.diff.lag -0.0176797  0.0317600  -0.557    0.578
+## 
+## Residual standard error: 0.9862 on 996 degrees of freedom
+## Multiple R-squared:  0.0003166,  Adjusted R-squared:  -0.001691 
+## F-statistic: 0.1577 on 2 and 996 DF,  p-value: 0.8541
+## 
+## 
+## Value of test-statistic is: 0.1189 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+Veja que o valor crítico para o teste Dick Fuller não é o valor usual da
+estatística t, mas sim o valor exibido na parte debaixo da tabela do
+sumário do teste. Nesse caso, a qualquer nível de significância, nós não
+rejeitamos a hipótese de raiz unitária. Vamos testar para um caso
+estacionário:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{u <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{2000}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2000}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\DecValTok{2000}\NormalTok{)\{}
+\NormalTok{  y[i] <-}\StringTok{ }\FloatTok{0.5}\OperatorTok{*}\NormalTok{y[i}\OperatorTok{-}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{u[i]}
+\NormalTok{\}}
+
+\NormalTok{y <-}\StringTok{ }\NormalTok{y[}\DecValTok{1000}\OperatorTok{:}\DecValTok{2000}\NormalTok{]}
+
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{ur.df}\NormalTok{(y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.2628 -0.7098  0.0215  0.7612  3.1409 
+## 
+## Coefficients:
+##            Estimate Std. Error t value Pr(>|t|)    
+## z.lag.1    -0.48838    0.03093 -15.792   <2e-16 ***
+## z.diff.lag  0.02522    0.03170   0.796    0.426    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.081 on 997 degrees of freedom
+## Multiple R-squared:  0.2387, Adjusted R-squared:  0.2372 
+## F-statistic: 156.3 on 2 and 997 DF,  p-value: < 2.2e-16
+## 
+## 
+## Value of test-statistic is: -15.7924 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+\section{Desassonalizando}\label{desassonalizando}
+
+Dados de séries temporais, não raramente, apresentam sazonalidade. Por
+exemplo, gasto de energia elétrica tende a ser maior nos meses de
+dezembro a fevereiro, devido ao verão. Retirar sazonalidade é importante
+em muitas análises.
+
+Um método padrão é colocar \emph{dummies} para as unidades de tempo (uma
+para cada mês se o dado for mensal, uma para cada trimestre se for
+trimestral etc) e usar o \emph{resíduo} dessa regressão somado a média
+da série (já que o resíduo tem média zero, por construção). Criar as
+\emph{dummies} ``no braço'' pode ser tedioso, mas felizmente o pacote
+\textbf{forecast} trás o comando \texttt{seasonaldummy()} que cria as
+\emph{dummies} automaticamente para a série.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{energia <-}\StringTok{ }\KeywordTok{BETSget}\NormalTok{(}\DecValTok{1406}\NormalTok{, }\DataTypeTok{from =} \StringTok{"2002-01-01"}\NormalTok{)}
+\NormalTok{dum <-}\StringTok{ }\KeywordTok{seasonaldummy}\NormalTok{(energia)}
+\NormalTok{mod <-}\StringTok{ }\KeywordTok{Arima}\NormalTok{(energia, }\DataTypeTok{xreg =}\NormalTok{ dum)}
+\NormalTok{des <-}\StringTok{ }\KeywordTok{resid}\NormalTok{(mod) }\OperatorTok{+}\StringTok{ }\KeywordTok{mean}\NormalTok{(energia)}
+\KeywordTok{plot}\NormalTok{(energia)}
+\KeywordTok{lines}\NormalTok{(des, }\DataTypeTok{col =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"C/Sazonalidade"}\NormalTok{, }\StringTok{"Sem Sazonalidade"}\NormalTok{), }\DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/desazonalizando-1.pdf}
+
+Outra maneira comum de dessazonalizar é usando o X13, um programa do
+governo americano. O X13 pode ser acessado direto do R usando o pacote
+\textbf{seasonal}. O comando que acessa o X13 é o \texttt{seas}. O X13
+são, na verdade, \emph{dois} programas: um que é o X13 e o outro que é o
+SEATS. Ambos tem a mesma função: dessazonalizar. O X13 vem com todo tipo
+de método automático para detectar outliers, fazer transformações nas
+séries e uma infinidade de outras coisas. Nesse caso, nós vamos desligar
+todas essa opções:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(seasonal)}
+\NormalTok{modelo2 <-}\StringTok{ }\KeywordTok{seas}\NormalTok{(energia, }\DataTypeTok{transform.function =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{regression.aictest =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{outlier =} \OtherTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+O comando \texttt{final} obtém a série dessazonalizada:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(energia)}
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{final}\NormalTok{(modelo2), }\DataTypeTok{col =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"C/Sazonalidade"}\NormalTok{, }\StringTok{"Sem Sazonalidade"}\NormalTok{), }\DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\section{Filtro Hodrick-Prescott}\label{filtro-hodrick-prescott}
+
+O filtro Hodrick-Prescott (HP) é utilizado em séries não estacionárias
+quando queremos separar a tendência do componente ciclíco. Ele é
+polêmico, mas ainda é amplamente usado. No R, o pacote \textbf{mFilter}
+implementa ele e alguns outros. Vamos aplicar na série de energia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mFilter)}
+\NormalTok{filtrado <-}\StringTok{ }\KeywordTok{mFilter}\NormalTok{(energia, }\StringTok{"HP"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(filtrado)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+Eu posso acessar a tendência e o componente cíclico usando o
+\texttt{filtrado\$trend} e \texttt{filtrado\$cycle}, no exemplo acima -
+que seria particularmente útil se eu quisesse utilizar os dados de cíclo
+para alguma estimação.
+
 \chapter{Apresentando os resultados}\label{apresentando-os-resultados}
 
 Os milhares de modelos que você rodou são tão úteis quanto a sua
@@ -1131,16 +1678,14 @@ console. Há várias opções na barra abaixo do nome do arquivo e a mais
 importante é o Knit: ele vai gerar o documento que você quer ver. Na
 primeira vez que você clicar nele, você vai ter que salvar o arquivo: dê
 um nome e não esqueça de colocar a extensão .Rmd. Assim, se o arquivo se
-chama relatório, você deve salvar como relatorio.Rmd\footnote{Alguém
-  poderia argumentar que isso sempre será possível, pois é necessário
-  muito azar para gerar uma matriz desse jeito que é singular. Mas é só
-  um exemplo.}. Se tudo der certo, o R vai abrir o novo arquivo,
-devidamente formatado. Ele terá o mesmo nome que o arquivo que você
-salvou. Assim, você terá dois arquivos: o .Rmd e o .html - assim como,
-quando geramos um pdf a partir do word, temos um arquivo .docx e um
-.pdf. A ideia é a mesma: é possível editar o .Rmd e gerar o html a
-partir dele. Veja que é possível que ele dê algum erro - exatamente como
-quando rodamos um programa no R.
+chama relatório, você deve salvar como relatorio.Rmd\footnote{Espaços,
+  cedilhas e acentos são normalmente uma má ideia em nomes de arquivos.}.
+Se tudo der certo, o R vai abrir o novo arquivo, devidamente formatado.
+Ele terá o mesmo nome que o arquivo que você salvou. Assim, você terá
+dois arquivos: o .Rmd e o .html - assim como, quando geramos um pdf a
+partir do word, temos um arquivo .docx e um .pdf. A ideia é a mesma: é
+possível editar o .Rmd e gerar o html a partir dele. Veja que é possível
+que ele dê algum erro - exatamente como quando rodamos um programa no R.
 
 A parte mais interessante do Markdown é que é possível colocar pedaços
 de código do R (e até mesmo de outras linguagens) no meio do texto, e o
@@ -1177,7 +1722,7 @@ os pontos com coordenadas (x,y). Cada um dos casos, respectivamente:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-22-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1185,7 +1730,7 @@ os pontos com coordenadas (x,y). Cada um dos casos, respectivamente:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-11-2.pdf}
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-22-2.pdf}
 
 O comando \textbf{plot} tem uma opção especial chamada \textbf{type}.
 Aqui você pode escolher como os dados são \emph{plotados}: em pontos, em
@@ -1200,7 +1745,7 @@ gráfico de linha da variável y, basta usar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-23-1.pdf}
 
 Existem vários comandos para colocar novos objetos sobre o gráfico, mas
 vou me limitar a dois: \texttt{points} e \texttt{lines}, que adicionam
@@ -1639,106 +2184,106 @@ uma normal padrão (com média zero e variância 1). Podemos escrever:
 
 \begin{verbatim}
 ##           amostra.x   amostra.y
-##   [1,]  0.004362420 -0.36115273
-##   [2,] -0.452394535 -0.19703634
-##   [3,]  0.338550786  0.59409427
-##   [4,] -0.482847866 -0.28060955
-##   [5,]  0.295002327  0.60418822
-##   [6,]  0.590729777  0.40265923
-##   [7,]  0.838563672  0.37491583
-##   [8,]  1.340239937 -0.13030010
-##   [9,] -0.263029050  0.30669493
-##  [10,] -0.005132052 -1.91659419
-##  [11,] -0.290412174 -0.51240451
-##  [12,]  0.424388575 -0.37826108
-##  [13,]  1.162054078  0.36909022
-##  [14,] -1.859899944 -2.51206431
-##  [15,] -0.514046352 -0.60229469
-##  [16,]  0.389677756 -1.04592529
-##  [17,]  1.381436185 -0.78425800
-##  [18,] -0.961134741  0.71739601
-##  [19,]  0.175740407  1.32845475
-##  [20,] -2.105074562 -0.41449106
-##  [21,] -0.417936699 -1.98325007
-##  [22,] -0.924357309 -1.56692262
-##  [23,]  0.280068234 -0.29347440
-##  [24,]  0.410945140  0.36792158
-##  [25,]  0.033512133  1.63934232
-##  [26,]  0.620747553  0.69331843
-##  [27,] -1.530506184 -0.03883972
-##  [28,] -1.691909993  1.39302328
-##  [29,]  0.167641192 -0.06673899
-##  [30,] -0.310967515 -0.29237215
-##  [31,]  1.643942186  0.02714184
-##  [32,]  1.335739333  0.45229566
-##  [33,]  0.040720859  0.10516924
-##  [34,]  1.287569410 -0.85653037
-##  [35,]  0.212076778  0.25014295
-##  [36,]  0.501869038  0.01993730
-##  [37,] -0.308200657 -3.52148430
-##  [38,] -1.820412274  2.80871973
-##  [39,]  0.057368365  1.36386686
-##  [40,] -0.293546356  1.05052466
-##  [41,]  1.133441234 -0.83414856
-##  [42,] -1.306403921 -1.15858928
-##  [43,] -0.507368974 -1.59978665
-##  [44,] -2.568973617 -0.50730097
-##  [45,] -1.002608165 -0.97734171
-##  [46,] -0.539343786 -1.35098108
-##  [47,]  0.220868575 -1.00242221
-##  [48,]  0.491776838  0.94059151
-##  [49,] -0.666247218 -0.76657161
-##  [50,]  1.255203317 -0.17002884
-##  [51,] -1.011119030  1.29608705
-##  [52,] -0.120304478 -0.73118332
-##  [53,]  1.996635043  1.21062490
-##  [54,] -0.695063620 -0.57089173
-##  [55,]  0.703353405  1.46386593
-##  [56,]  0.875934352 -0.08129693
-##  [57,] -1.612933607  1.02740261
-##  [58,] -1.330783275 -0.62779690
-##  [59,] -0.506724840 -0.76561285
-##  [60,] -0.699754499  0.50057796
-##  [61,]  0.800437243  0.60607603
-##  [62,] -1.190416146 -0.15170846
-##  [63,]  0.204383003  1.67240009
-##  [64,] -1.165449182 -0.15086991
-##  [65,]  0.864419253  1.92668828
-##  [66,]  3.274447257 -0.75244786
-##  [67,]  1.837337415  0.18532531
-##  [68,] -0.387686042 -1.24594973
-##  [69,] -0.621592475 -0.37169832
-##  [70,]  1.515626601 -0.12699004
-##  [71,] -1.649612746  1.61047785
-##  [72,]  0.240853793  0.04789575
-##  [73,]  0.188224710  0.71580822
-##  [74,]  0.344743589  0.87203751
-##  [75,] -0.784082330 -0.30581066
-##  [76,]  1.330208501  1.18715644
-##  [77,]  0.908214498  0.23003595
-##  [78,] -0.713779163 -0.48680245
-##  [79,] -0.935729414 -2.28489824
-##  [80,]  0.573184758  0.73872133
-##  [81,] -2.057150379 -1.22535582
-##  [82,]  1.180271912 -1.26026593
-##  [83,] -0.375959529 -1.12397626
-##  [84,]  0.717974495 -0.29443190
-##  [85,] -0.822327980 -1.17256245
-##  [86,] -1.791302967  0.04852088
-##  [87,] -2.345168976  2.01748698
-##  [88,] -1.052093359  0.41424964
-##  [89,]  1.721789454  0.03933316
-##  [90,] -1.021292442 -0.47344861
-##  [91,]  0.646438989  0.45027092
-##  [92,] -2.017122963 -0.71279330
-##  [93,] -0.384711339 -0.65106917
-##  [94,] -0.281277019 -0.89709135
-##  [95,] -1.021229283  0.18278093
-##  [96,] -0.089263512  1.34445874
-##  [97,]  1.180649225 -0.60561937
-##  [98,]  0.356593932  0.91582494
-##  [99,]  1.122956951  1.65382340
-## [100,] -1.192082469 -0.81537983
+##   [1,]  1.927817189 -0.65047002
+##   [2,]  2.706594145  1.30486605
+##   [3,]  1.995304345 -1.15694126
+##   [4,]  0.487864510 -0.89242753
+##   [5,]  0.825376768 -0.82142176
+##   [6,]  0.276961628  0.09181419
+##   [7,] -0.810570113  0.15293472
+##   [8,] -0.907551976  0.06361929
+##   [9,]  0.299114815 -0.04452674
+##  [10,] -0.029632244  0.14393688
+##  [11,]  0.405799219  0.82438947
+##  [12,]  0.838055183 -0.04650454
+##  [13,]  0.997702645 -0.91537957
+##  [14,] -0.919092414 -0.29006470
+##  [15,] -0.444341565  0.33273371
+##  [16,]  0.523904296  2.00813915
+##  [17,] -1.531480499  1.99791734
+##  [18,] -0.942547459 -3.02793367
+##  [19,]  0.381482130  0.05971648
+##  [20,]  1.504011981 -0.68947900
+##  [21,]  2.043975466 -1.64161637
+##  [22,] -0.757629180  1.38268062
+##  [23,] -0.422889410  0.91023630
+##  [24,] -0.001674685 -1.37375003
+##  [25,] -0.360292059  0.74499080
+##  [26,]  1.221336586  0.36327106
+##  [27,]  0.623060331 -0.35131046
+##  [28,] -1.831048264 -0.19066861
+##  [29,] -0.099043389  0.68460666
+##  [30,] -0.525913276 -0.94195550
+##  [31,]  0.483257541 -0.26701276
+##  [32,] -0.656015705 -0.60332051
+##  [33,] -0.126733145 -0.47192753
+##  [34,]  0.964893780  0.46438904
+##  [35,]  0.882039810 -1.03482530
+##  [36,] -1.415722107 -0.15436218
+##  [37,] -1.564732675 -0.72506005
+##  [38,] -0.121587874 -0.85007825
+##  [39,]  0.400321352 -1.40466095
+##  [40,]  0.484578363 -0.33197697
+##  [41,] -0.238150452  0.71287867
+##  [42,] -0.546687606 -0.03019598
+##  [43,] -1.193362528  0.48101331
+##  [44,]  0.108511539  0.21169605
+##  [45,] -0.546158673 -1.40804291
+##  [46,]  0.748569671  0.73739621
+##  [47,] -0.595273682 -0.03042480
+##  [48,] -0.032628303 -0.06719533
+##  [49,] -0.815600275  0.13873260
+##  [50,] -0.333844213 -0.08129736
+##  [51,]  0.046084058 -0.07229265
+##  [52,] -0.910174600 -0.47645812
+##  [53,] -0.281181833  0.72777533
+##  [54,] -0.786157066  2.56200230
+##  [55,] -1.668053017  0.42280588
+##  [56,] -0.910899062 -0.72583342
+##  [57,]  0.694292291 -0.03143866
+##  [58,]  1.510458438 -0.60623866
+##  [59,] -0.422803545 -0.37363370
+##  [60,] -1.249106413 -0.42829234
+##  [61,]  1.623728295 -0.15904028
+##  [62,]  2.417413190 -0.34503209
+##  [63,]  0.004972526 -0.94717986
+##  [64,]  1.153337272  0.38738590
+##  [65,] -1.580274069 -0.80963214
+##  [66,] -2.301264149 -0.37263685
+##  [67,]  0.823617290 -1.03831648
+##  [68,]  0.928319430 -1.30889060
+##  [69,] -1.265694317 -0.82909810
+##  [70,] -0.230903417  0.18598250
+##  [71,] -0.545883350  1.31864563
+##  [72,]  0.580709880 -0.99495749
+##  [73,] -1.962372322  0.16255005
+##  [74,] -0.035547301  1.42902510
+##  [75,] -0.232416087 -0.88796614
+##  [76,]  0.493219700 -0.11002215
+##  [77,]  0.323984586  0.25185535
+##  [78,] -0.518861428  0.44362437
+##  [79,] -2.032643499 -1.52715559
+##  [80,]  0.848732367  0.39161704
+##  [81,]  0.104412377 -1.01569367
+##  [82,]  0.102501297  0.58301607
+##  [83,]  1.811587594 -1.39558866
+##  [84,] -1.396198295 -0.25837782
+##  [85,]  0.767728247 -1.13365848
+##  [86,] -0.229056261 -0.38551807
+##  [87,]  0.340078652  2.33187551
+##  [88,]  1.382298342 -0.85677070
+##  [89,] -0.021754387  0.23655020
+##  [90,]  0.916724312  1.25948382
+##  [91,] -0.493700264 -0.23936763
+##  [92,]  0.019998758 -2.00365739
+##  [93,] -0.518196870 -0.64826075
+##  [94,] -2.175225512 -0.28439973
+##  [95,]  0.289141992  0.09947699
+##  [96,]  1.484761830  1.42873241
+##  [97,] -1.039895845  0.05415691
+##  [98,] -0.194078466  0.14888720
+##  [99,] -0.051872682 -0.83946519
+## [100,] -1.910906215  1.32368827
 \end{verbatim}
 
 Veja que, como o \texttt{rnorm} recebe o desvio padrão da distribuição e
@@ -1844,11 +2389,10 @@ muitas vezes permite que cada tarefa seja feita separadamente. Isso é
 muito frequente em simulações, que serão tratadas em mais detalhes mais
 a frente. O outro fato é que o R não aproveita 100\% da capacidade da
 maioria dos computadores atuais. Os computadores atuais vem com
-processadores com mais de um núcleo (\emph{multi core}\footnote{Alguém
-  poderia argumentar que isso sempre será possível, pois é necessário
-  muito azar para gerar uma matriz desse jeito que é singular. Mas é só
-  um exemplo.}). Cada núcleo age como um pequeno processador e o
-computador distribui as tarefas entre estes núcleos.
+processadores com mais de um núcleo (\emph{multi core}\footnote{Letras
+  em vermelho ocorrem em algumas outras situações.}). Cada núcleo age
+como um pequeno processador e o computador distribui as tarefas entre
+estes núcleos.
 
 Em um \emph{for}, poderíamos dar cada iteração do loop para núcleo do
 processador, e quando o núcleo termina a iteração ele devolve a resposta
@@ -2061,6 +2605,9 @@ se o algoritmo convergiu ou não - isso é, se encontramos um ótimo ou
 não. Em geral, se temos um 0 é que tudo ocorreu bem. Outros valores
 indicam erro e cada algoritmo dá um significado para cada valor.
 
+\subsection{Mais sobre Otimização
+Numérica}\label{mais-sobre-otimizacao-numerica}
+
 Infelizmente, o chute inicial pode ser muito importante em alguns casos.
 Pegue a função \(h(x,y)=x^3+y^2+x*y\). Vamos testar dois chutes inciais:
 \((0,0)\) e \((-10,0)\):
@@ -2125,6 +2672,476 @@ função. O optimize tem uma opção \texttt{maximum}, e basta alterar para
 solução é simples: multiplique a função por \(-1\). Por exemplo, o
 máximo de \(j(x)=- x^2\) é o mesmo ponto que o mínimo de \(f(x)=x^2\). A
 única coisa que vai mudar é o valor da função no ponto.
+
+Hands on!
+
+O estimador de Mínimos Quadrados Ordinário pode ser escrito como um
+problema de minimização (quem poderia imaginar?!). O objetivo é
+minimizar a soma do quadrado do erro. Veja que podemos então gerar duas
+amostras (\(x\) e \(e\)) e definir \$ y = x + e\$. Para estimar o
+modelo, bastaria criar uma função que calcula a soma do erro do quadrado
+dado os parametros, ou seja, para valores
+\texttt{b{[}1{]}\ e\ b{[}2{]}}, a função faz
+\texttt{y\ -\ b{[}1{]}\ +\ b{[}2{]}*x} e soma o quadrado desses valores.
+Jogue essa função no \texttt{optim}e provavelmente você obterá bons
+resultados.
+
+\section{Otimizando com restrição}\label{otimizando-com-restricao}
+
+Por enquanto só tratamos de otimização irrestrita. Mas podemos querer
+otimizar também com restrição. A melhor opção nesse caso é o pacote
+\emph{CVXR}. A sintaxe é bastante diferente da sintaxe usual. O problema
+é constrúido em blocos, e o tratamento dessa seção se deve a
+\href{https://cran.r-project.org/web/packages/CVXR/vignettes/cvxr_intro.html}{este
+documento} do pacote:
+
+\begin{itemize}
+\tightlist
+\item
+  A variável de escolha é criada com o \texttt{Variable}
+\item
+  A função objetivo não é escrita usando o \texttt{function}, mas sim
+  criado uma variável com \texttt{Minimize("expressão")} ou
+  \texttt{Maximize("expressão")}. O uso de cada um deve ser
+  auto-explicativo.
+\item
+  Crie variáveis com as restrições sobre a variável criada com o
+  variable
+\item
+  Crie mais uma variável usando \texttt{Problem}, que recebe a função
+  objetivo e as restrições em uma lista(mesmo se for apenas uma
+  restrição
+\item
+  Passe a variável acima para a função \texttt{solve}
+\end{itemize}
+
+O link acima conta com um exemplo de como fazer MQO usando o CVXR. No
+capítulo Projetinhos, eu explico como fazer o LASSO (Least Abssolute
+Shrinkage and Selection Operator) usando o CVXR.
+
+\chapter{Projetinhos}\label{projetinhos}
+
+Esse capítulo traz uma série de ideias para serem implementadas no R.
+Todos os exemplos são da estatística, por enquanto. Propositalmente, o
+código que resolve o problema está no fim de cada seção. Tente fazer sem
+olhar. Veja que as soluções propostas não miram o máximo de eficiência
+possível, mas sim serem o mais claras possíveis. E, como quase tudo na
+vida, existe mais de uma solução.
+
+\section{Lei dos Grandes Números}\label{lei-dos-grandes-numeros}
+
+Dificuldade
+
+Fácil
+
+Capítulos necessários
+
+5
+
+Vamos relembrar o que diz a lei dos grandes números. Em linhas gerais,
+se \(x\) é uma variável aletória com expectância \(\mu\), e
+\(\bar{X} = \frac{1}{n}\sum_i x_i\), a média amostral, então
+\(\text{plim}_{n \rightarrow \infty}(\bar{X}) = \mu\) . É isso que
+justifica, por exemplo, usar estimadores do método dos momentos: se você
+tem algum momento da distribuição que tem que ser estimado, então o
+equivalente amostral dele converge para o valor verdadeiro. Vamos
+colocar isso a prova. Eis aqui um passo a passo do que queremos fazer:
+
+\begin{itemize}
+\tightlist
+\item
+  Gere um vetor de variáveis aleatórias retirados de alguma
+  distribuição, com algum tamanho de amostra (por exemplo,
+  \texttt{rnorm(1000)}). Vamos chamar esse vetor de \texttt{amostra}.
+\item
+  Crie um vetor de zeros (você pode fazer isso usando
+  \texttt{rep(0,1000)}, que vai gerar um vetor de mil zeros) Chame ele
+  de alguma coisa. No caso, chamarei ele de \texttt{media}
+\item
+  Crie um loop que faz com que cada posição do vetor \texttt{media} seja
+  a média dos números em \texttt{amostra} até aquela posição. Assim, se
+  tivermos na 4ª posição de \texttt{media}, teremos a média dos números
+  da \texttt{amostra} de 1 a 4.
+\item
+  Faça o plot desses pontos para saber se há convergência de fato
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{amostra <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{media <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{1000}\NormalTok{)\{}
+\NormalTok{  media[i] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(amostra[}\DecValTok{1}\OperatorTok{:}\NormalTok{i])}
+\NormalTok{\}}
+\KeywordTok{plot}\NormalTok{(media)}
+\KeywordTok{lines}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{1000}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{), }\DataTypeTok{col =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{) }\CommentTok{#linha vermelha no valor verdadeiro do parâmetro}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um
+momento da forma \(E(xu)=0\), onde x e u são variáveis aleatórias
+univariadas?\footnote{Isso é familiar?} Se a lei dos grandes números é
+verdadeira, \(\widehat{E(xu)} = \sum_i x_i u_i\) deve convergir para
+zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que
+a nossa média vai ter que ser calculada sem a função padrão
+\texttt{mean}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{amostra.}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{amostra.}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{prod <-}\StringTok{ }\NormalTok{amostra.}\DecValTok{1}\OperatorTok{*}\NormalTok{amostra.}\DecValTok{2}
+
+\NormalTok{momento <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{1000}\NormalTok{)\{}
+\NormalTok{  momento[i] <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{i}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(prod[}\DecValTok{1}\OperatorTok{:}\NormalTok{i])}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(momento)}
+\KeywordTok{lines}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{1000}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{), }\DataTypeTok{col=} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Bookdown_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\section{Mínimos Quadrados
+Ordinários}\label{minimos-quadrados-ordinarios-1}
+
+Dificuldade
+
+Intermediário
+
+Capítulos necessários
+
+1, 6, 5 (Só a seção de if)
+
+Eu uso matrizes extensivamente nesse exemplo!
+
+O estimador de MQO é o estimador mais fundamental da econometria. Existe
+mais de uma maneira de derivar ele: podemos ver como um problema de
+minimização, como fizemos no capítulo 8; aqui, vamos derivar ele a
+partir da condição de momento \(E(xu) = 0\) para todo x, e onde \(u\)
+representa o erro. Veja que se fizermos uma matriz \(X\), que tem em
+cada linha uma observação e em cada coluna uma variável, e
+\(\mathbf{u}\) o vetor de erros \(n \times{} 1\), \(\mathbf{y}\), o
+vetor da variável dependente também \(n \times{} 1\), então a condição
+de momento se torna \(E(X^{'}\mathbf{u})=0\). Se expandirmos isso,
+usando o fato que \(\mathbf{u} = \mathbf{y}-X\beta\). Então:
+
+\[E(X^{'}\mathbf{u})=E(X^{'}(\mathbf{y}-X\beta))=E(X^{'}\mathbf{y})-E(X^{'}X)\beta = 0 \therefore E(X^{'}\mathbf{y})=E(X^{'}X)\beta \therefore \beta_{OLS} = E(X^{'}X)^{-1}E(X^{'}\mathbf{y})\]
+Vamos implementar ele no R. Vamos criar uma função que pega a matriz
+\(X\) e o vetor y e faz a conta para obter o MQO. Precisamos de:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\%*\%}, que multiplica duas matrizes, ou um vetor e uma matriz
+\item
+  \texttt{solve}que inverte a matriz
+\item
+  \texttt{t}que transpõe a matriz
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mqo <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y)\{}
+\NormalTok{  bloco_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{t}\NormalTok{(x)}\OperatorTok{%*%}\NormalTok{x}
+\NormalTok{  bloco_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{t}\NormalTok{(x)}\OperatorTok{%*%}\NormalTok{y}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{solve}\NormalTok{(bloco_}\DecValTok{1}\NormalTok{)}\OperatorTok{%*%}\NormalTok{bloco_}\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Com uma meia dúzia de manipulações (trocando o \(y\) do \(\beta_{OLS}\)
+por \(u\) e fazendo \(\beta \beta^{'}\)), obtemos a expressão para a
+variância do estimador de OLS:
+
+\[Var(\beta_{OLS}) = (X^{'}X)^{-1}X^{'}DX(X^{'}X)^{-1}\]
+
+Onde \(D\) é uma matriz diagonal cuja as entradas na diagonal são os
+elementos da diagonal de \(uu^{'}\)\footnote{Veja que fora da diagonal
+  temos apenas zeros: isso faz sentido no caso iid, onde não esperamos
+  correlação entre os erros}. Então, para obtermos a variância do OLS,
+precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma
+para calcular os resíduos, e outra que calcula a variância do
+\(\beta_{OLS}\). A função que calcula a variância vai chamar a função
+que calcula os resíduos. Veja que podemos fazer essas funções de várias
+maneiras: a função que calcula o resíduo pode recber só o X e y e chamar
+a função \texttt{mqo} para fazer a conta do coeficiente; ou a função
+pode receber X,y \emph{e} o coeficiente para calcular o resíduo. Eu vou
+escolher o segundo caminho:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuo <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y,cofs)\{}
+\NormalTok{  u <-}\StringTok{ }\NormalTok{y }\OperatorTok{-}\StringTok{ }\NormalTok{x}\OperatorTok{%*%}\NormalTok{cofs}
+  \KeywordTok{return}\NormalTok{(u)}
+\NormalTok{\}}
+
+\NormalTok{variancia_mqo <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y)\{}
+\NormalTok{  cof <-}\StringTok{ }\KeywordTok{mqo}\NormalTok{(x,y)}
+\NormalTok{  res <-}\StringTok{ }\KeywordTok{residuo}\NormalTok{(x,y,cof)}
+\NormalTok{  bloco_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x)}\OperatorTok{%*%}\NormalTok{x)}
+\NormalTok{  D <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{ncol =} \KeywordTok{nrow}\NormalTok{(x),}\DataTypeTok{nrow=}\KeywordTok{nrow}\NormalTok{(x))}
+  \KeywordTok{diag}\NormalTok{(D) <-}\StringTok{ }\KeywordTok{diag}\NormalTok{(res}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(res)) }\CommentTok{#diag acessa os elmentos da diagonal da matriz: logo, eu estou contando para o R que os elementos da diagonal de D são os elmentos da diagonal de res*res'}
+\NormalTok{  resposta <-}\StringTok{ }\NormalTok{bloco_}\DecValTok{1}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(x)}\OperatorTok{%*%}\NormalTok{D}\OperatorTok{%*%}\NormalTok{x}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(bloco_}\DecValTok{1}\NormalTok{)}
+  \KeywordTok{return}\NormalTok{(resposta)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Veja que a função \texttt{variancia\_mqo}recebe só \(X\) e y e todo o
+resto das contas são feitos por funções que criamos originalmente: o
+coeficiente é calculado pela função \texttt{mqo}, que passa isso para a
+função \texttt{residuo}, que por sua vez passa o resultado para obtermos
+a variância do estimador.
+
+Vamos construir uma função final que devolve os coeficientes e o erro
+padrão. Mais ainda, eu vou adicionar uma mopção que adiciona um
+intercepto (as funções acima não fazem isso!). Para isso, observe que um
+intercepto é somente colar uma coluna de 1s na matriz X. Então, na
+função \texttt{regressao}, eu vou adicionar uma opção
+\texttt{intercepto}, que vai ser um booleano (verdadeiro ou falso). Se
+for verdadeiro, eu adiciono uma coluna de 1s. Se você apostou que eu vou
+fazer isso usando um \texttt{if}, parabéns: é exatamente o que eu vou
+fazer. Para deixar a coisa mais completa, a função vai ter como padrão
+adicionar o intercepto:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{regressao <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y,}\DataTypeTok{intercepto =}\NormalTok{ T)\{}
+  \ControlFlowTok{if}\NormalTok{(intercepto }\OperatorTok{==}\StringTok{ }\NormalTok{T)\{}
+\NormalTok{    x <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{,x) }\CommentTok{#Veja o comentário abaixo}
+\NormalTok{  \} }\CommentTok{# como o caso else não faz nada, eu posso simplesmente não colocar nada no else}
+\NormalTok{  coefs <-}\StringTok{ }\KeywordTok{mqo}\NormalTok{(x,y)}
+\NormalTok{  vars <-}\StringTok{ }\KeywordTok{diag}\NormalTok{(}\KeywordTok{variancia_mqo}\NormalTok{(x,y)) }\CommentTok{#Diag extrai a diagonal da matriz de variância do coeficiente - e é isso que nos interessa}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(coefs,}\KeywordTok{sqrt}\NormalTok{(vars)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Veja que ao fazer \texttt{cbind(1,x)}, o R é inteligente o suficiente
+para repetir 1 o número de linhas de x, sem termos que nos preocupar em
+definir um vetor 1 do mesmo número de linhas que a matriz \(X\).Vamos
+testar a nossa função, comparado com o comando padrão do R, \texttt{lm}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{),}\DataTypeTok{ncol =} \DecValTok{5}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\NormalTok{X}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\FloatTok{0.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+
+\KeywordTok{regressao}\NormalTok{(X,y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             [,1]      [,2]
+## [1,] -0.08762789 0.1051556
+## [2,]  1.02427340 0.1109157
+## [3,] -0.73255790 0.1175446
+## [4,]  1.86708375 0.1238537
+## [5,] -1.92379372 0.1133978
+## [6,]  0.59176754 0.1074243
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{X))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ X)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.3389 -0.6190 -0.0333  0.5789  3.1919 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.08763    0.11101  -0.789    0.432    
+## X1           1.02427    0.10243   9.999  < 2e-16 ***
+## X2          -0.73256    0.11738  -6.241 1.24e-08 ***
+## X3           1.86708    0.13121  14.230  < 2e-16 ***
+## X4          -1.92379    0.12272 -15.676  < 2e-16 ***
+## X5           0.59177    0.11235   5.267 8.75e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.064 on 94 degrees of freedom
+## Multiple R-squared:  0.854,  Adjusted R-squared:  0.8463 
+## F-statistic:   110 on 5 and 94 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Veja que há uma leve diferença entre os erros padrões computados pela
+minha função e pelo \texttt{lm}. Isso se deve ao fato do R assumir erros
+homocedásticos e a matriz de variância covariância que nós implementamos
+não assume isso.
+
+\section{LASSO}\label{lasso}
+
+Dificuldade
+
+Intermediário
+
+Capítulos necessários
+
+8 e 6 (somente para o último passo)
+
+LASSO (Least Absolute Shrinkage and Selection Operator) é uma maneira de
+fazer regressão quando temos muitas variáveis e queremos selecionar só
+as que são relevantes - potencialmente, podemos ter mais variáveis que
+observações! Formalmente, o LASSO resolve:
+
+\[\beta_{LASSO} = \text{argmin}_\beta \sum_i (y_i - x_i\beta) \text{ sujeito a } \sum_k |\beta_k| < c\]
+Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o
+problema de minimização usual de mínimos quadrados, com uma restrição: a
+soma do valor \emph{absoluto} dos coeficientes não pode passar de um
+valor \(c\), que tem que ser determinado\footnote{Não vou entrar nessa
+  discussão, mas o que as implementações fazem, em geral, é colocar
+  vários valores de \(c\), desde baixos o bastante para que nenhuma
+  variável ser incluída até um valor alto suficiente que todas são
+  incluídas. Como escolher qual desses \(c\) usar não é óbvio.}. Veja
+que, por incrível que pareça, o fato de usarmos o valor absoluto é
+bastante importante: usar uma restrição com a soma dos quadrados reduz
+os coeficientes, mas não joga nenhum deles para zero. Uma explicação
+bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o
+LASSO em geral, pode ser encontrada no excelente \emph{Statistical
+Learning with Sparsity}, de Trevor Hastie, Robert Tibshirani e Martin
+Wainwright (que pode ser encontrado
+\href{https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf}{aqui})
+
+Vamos implementar o LASSO usando o CVXR. Vamos criar um conjunto de de
+variáveis \(X\), com 100 observações e 50 variáveis, e definir um \(y\)
+que depende de alguma dessas variáveis (as 10 primeiras, talvez. Mas não
+muito mais que isso!). Escolha os coeficientes que quiser, mas tente
+manter os coeficientes longe de zero. Eu escolherei, preguisosamente, 1
+para todas as variáveis relevantes. Adicione algum erro no y, exatamente
+imitando o problema usual de uma regressão. O passo seguinte é escrever
+o programa do CVXR e mandar ele resolver o nosso problema:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{5000}\NormalTok{),}\DataTypeTok{ncol =} \DecValTok{50}\NormalTok{)}
+\NormalTok{beta <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{))}
+\NormalTok{y <-}\StringTok{ }\NormalTok{X}\OperatorTok{%*%}\NormalTok{beta }\OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+
+\KeywordTok{library}\NormalTok{(CVXR)}
+
+\NormalTok{c <-}\StringTok{ }\DecValTok{10} \CommentTok{#esse é o valor que vai limitar a soma do valor dos coeficientes. Eu escolhi o valor exato que é a soma dos meus coeficientes, mas você pode (e deve) brincar com isso aqui}
+
+\NormalTok{beta_hat <-}\StringTok{ }\KeywordTok{Variable}\NormalTok{(}\DecValTok{50}\NormalTok{)}
+\NormalTok{obj <-}\StringTok{ }\KeywordTok{Minimize}\NormalTok{(}\KeywordTok{sum}\NormalTok{((y}\OperatorTok{-}\NormalTok{X}\OperatorTok{%*%}\NormalTok{beta_hat)}\OperatorTok{^}\DecValTok{2}\NormalTok{)) }\CommentTok{#essa é a função objetivo}
+\NormalTok{cons <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{abs}\NormalTok{(beta_hat)) }\OperatorTok{<}\StringTok{ }\NormalTok{c}
+\NormalTok{prob <-}\StringTok{ }\KeywordTok{Problem}\NormalTok{(obj,}\DataTypeTok{constraints =} \KeywordTok{list}\NormalTok{(cons))}
+\NormalTok{soluc <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(prob)}
+\NormalTok{est <-}\StringTok{ }\NormalTok{soluc}\OperatorTok{$}\KeywordTok{getValue}\NormalTok{(beta_hat) }\CommentTok{#para extrair os betas estimados}
+\NormalTok{est[est}\OperatorTok{<}\FloatTok{1e-9}\NormalTok{] <-}\StringTok{ }\DecValTok{0} \CommentTok{#Veja o comentário abaixo}
+\NormalTok{est}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              [,1]
+##  [1,] 0.952064880
+##  [2,] 0.927405698
+##  [3,] 0.623051947
+##  [4,] 0.833205454
+##  [5,] 0.995166633
+##  [6,] 0.914978956
+##  [7,] 0.845659633
+##  [8,] 0.795418403
+##  [9,] 0.839713717
+## [10,] 0.885603800
+## [11,] 0.067397795
+## [12,] 0.000000000
+## [13,] 0.000000000
+## [14,] 0.048155418
+## [15,] 0.000000000
+## [16,] 0.000000000
+## [17,] 0.000000000
+## [18,] 0.000000000
+## [19,] 0.206185854
+## [20,] 0.000000000
+## [21,] 0.000000000
+## [22,] 0.035731386
+## [23,] 0.000000000
+## [24,] 0.000000000
+## [25,] 0.000000000
+## [26,] 0.129196128
+## [27,] 0.014904346
+## [28,] 0.000000000
+## [29,] 0.017190332
+## [30,] 0.000000000
+## [31,] 0.000000000
+## [32,] 0.090893621
+## [33,] 0.000000000
+## [34,] 0.126430996
+## [35,] 0.015774388
+## [36,] 0.029822479
+## [37,] 0.000000000
+## [38,] 0.025583701
+## [39,] 0.000000000
+## [40,] 0.016902530
+## [41,] 0.000000000
+## [42,] 0.000000000
+## [43,] 0.197721479
+## [44,] 0.000000000
+## [45,] 0.102971074
+## [46,] 0.000000000
+## [47,] 0.003457017
+## [48,] 0.000000000
+## [49,] 0.000000000
+## [50,] 0.000000000
+\end{verbatim}
+
+Veja que, além do CVXR, eu adicionei um
+\texttt{est{[}est\textless{}1e-9{]}\ \textless{}-\ 0}. Como já dito no
+Capítulo 8, estimativas númericas nunca vão chegar exatamente em zero.
+Então, para deixar o \emph{output} mais legível, eu estou estabelecendo
+que qualquer valor abaixo de \(10^{-9}\) é zero. Veja que \(10^{-9}\) é
+arbitrário e as implementações de verdade usam padrões estabelecidos.
+
+Voltando ao LASSO: veja que o algoritmo faz um bom trabalho, zerando
+vários coeficientes. Ele não zera todos os coeficientes das variáveis
+que não deveriam ser incluídas, mas em compensação não zera nenhum
+coeficiente das variáveis que deveriam ser incluídas. Trocando em
+miúdos: ele dá falsos positivos, mas não falsos negativos. Isso é
+verdade, em geral.
+
+Obviamente, o trabalho fica bem mais limpo se escrevermos uma função que
+faz tudo isso para quaisquer X,y e c escolhidos. Aproveite o código que
+já escrevemos e escreva uma função que faça isso para qualquer X,y e c.
+Não esqueça que você vai ter que alterar o tamanho do \texttt{beta\_hat}
+(Dica: veja o comando \texttt{ncol}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lasso <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(X,y,c)\{}
+\NormalTok{  beta_hat <-}\StringTok{ }\KeywordTok{Variable}\NormalTok{(}\KeywordTok{ncol}\NormalTok{(X))}
+\NormalTok{  obj <-}\StringTok{ }\KeywordTok{Minimize}\NormalTok{(}\KeywordTok{sum}\NormalTok{((y}\OperatorTok{-}\NormalTok{X}\OperatorTok{%*%}\NormalTok{beta_hat)}\OperatorTok{^}\DecValTok{2}\NormalTok{)) }\CommentTok{#essa é a função objetivo}
+\NormalTok{  cons <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{abs}\NormalTok{(beta_hat)) }\OperatorTok{<}\StringTok{ }\NormalTok{c}
+\NormalTok{  prob <-}\StringTok{ }\KeywordTok{Problem}\NormalTok{(obj,}\DataTypeTok{constraints =} \KeywordTok{list}\NormalTok{(cons))}
+\NormalTok{  soluc <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(prob)}
+\NormalTok{  est <-}\StringTok{ }\NormalTok{soluc}\OperatorTok{$}\KeywordTok{getValue}\NormalTok{(beta_hat) }\CommentTok{#para extrair os betas estimados}
+\NormalTok{  est[est}\OperatorTok{<}\FloatTok{1e-9}\NormalTok{] <-}\StringTok{ }\DecValTok{0} \CommentTok{#Veja o comentário abaixo}
+  \KeywordTok{return}\NormalTok{(est)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Veja que eu fui tão preguiçoso ao escrever a função que nem mesmo os
+comentários mudaram!
+
+Em situações em que você queira usar o LASSO, o pacote \textbf{glmnet}
+faz o LASSO até mesmo para modelos Probit e Logit, e é infinitamente
+superior a implementação acima.
 
 \chapter{Referências}\label{referencias}
 
