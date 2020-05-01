@@ -1,0 +1,101 @@
+#Funções
+
+Nesse capítulo explicamos o que são as funções, como e porque usar. Também damos algumas dicas de como criar as funções.
+
+A primeira coisa que deve ser observada é que funções não se limitam a funções matemáticas: uma função recebe alguns inputs, faz algumas operações e devolve um output. Isso pode ser tão geral quanto necessário: de funções que recebem um valor de $x$ e retornam $x^2+x+4$ até funções que recebem matrizes e fazem operações complicadíssimas. Por exemplo, o comando `lm`, que usamos para estimar uma regressão linear, é uma função que recebe a variável dependente e a variável independente e faz uma série de operações com elas e devolve os coeficientes e seus erros padrões.
+
+Em geral, funções são criadas para tarefas que serão repetidas várias vezes. Não faz nenhum sentido escrever uma função que só será usada uma única vez.
+
+##Um exemplo simples: uma função matemática
+
+Suponha que queremos uma função $x^2+2x+4$, que iremos chamar de funcao. Nesse caso:
+
+```{r}
+funcao <- function(x){x^2+2*x+4}
+```
+
+Veja que, depois de function, entre parêntese, temos o nome da variável. Entre chaves o que a função de fato faz. Podemos criar uma função $ G = x^2 + y^2$. Nesse caso, o código é:
+
+```{r}
+G <- function(x,y){x^2+y^2}
+```
+
+Veja que podemos precisar de definir funções como essas quando queremos integrar ou derivar usando o R. Mas em geral, um exemplo mais interessante de como (e porque) usar funções são exemplos não numéricos. 
+
+##Caso geral e exemplos
+
+Em geral, funções são feitas da seguinte forma:
+
+```
+nome_da_funcao <- function(variaveis){
+comandos
+}
+```
+
+Veja que podemos ter muitas variáveis - e em geral as funções do R tem dezenas de variáveis. Os comandos podem ser absolutamente qualquer coisa que o R faz: de rodar uma regressão até operações com arquivos. O importante ao escrever funções - e provavelmente o mais difícil - é estruturar as coisas de maneira geral: os inputs são as variáveis da função e não coisas que estão neste momento no ambiente do R. 
+
+Existem duas coisas importantes sobre funções que devem ser explicitadas antes de seguirmos para o próximo exemplo:
+
+(@) Variáveis podem ter defaults quando a função é construída. Por exemplo, na função $G(x,y) = x^2+y^2$, podia ser o caso de que, exceto se o usuários especificasse ao contrário, o padrão fosse $y = 0$. Para estabelecer essa mudança, bastaria alterar o código para:
+
+```{r}
+G <- function(x,y=0){x^2+y^2}
+```
+Assim:
+
+```{r}
+G(1)
+G(1,0)
+```
+
+(@) Os exemplos de funções matemáticas foram muito simples e o R sabe exatamente qual resultado deve ser exibido. Isso nem sempre é verdade, e em funções mais complicadas usamos o comando `return`. O comando só funciona dentro de funções e diz o que a função deve retornar como resposta. No exemplo da função numérica, poderíamos ter escrito: 
+```
+g <- function(x,y){return(x^2+y^2)}
+```
+
+Vamos aplicar essas duas ideias. Suponha que queremos gerar duas amostras de normais independentes que podem ter médias e variâncias diferentes. Também queremos poder mudar o tamanho da amostra. No fim, essa função deve retornar uma matriz $n \times 2$, onde n é o tamanho da amostra. E ainda queremos que, por padrão, as duas variáveis sejam uma normal padrão (com média zero e variância 1). Podemos escrever:
+
+```{r}
+amostrador <- function(n,media_x = 0,media_y = 0,variancia_x = 1,variancia_y = 1){
+sd_x <- sqrt(variancia_x)
+sd_y <- sqrt(variancia_y)
+amostra.x <- rnorm(n,media_x,sd_x)
+amostra.y <- rnorm(n,media_y,sd_y)
+return(cbind(amostra.x,amostra.y))
+}
+amostrador(100)
+```
+
+Veja que, como o `rnorm` recebe o desvio padrão da distribuição e a minha função tem como parâmetro a variância da distribuição, criei uma variável na função que tira a raiz quadrada. 
+
+**Atenção: checando argumentos**
+É importante notar que em todos os casos, os argumentos de uma função são restritos de alguma forma: no exemplo acima, $n$ tem que ser um número inteiro; a variância não pode ser negativa. Aqui, isso não é tão importante por dois motivos: (1) eu estou assumindo que só você vai usar a função e você sabe o que cada argumento recebe, (2) o `rnorm` daria um erro caso você violasse essas duas restrições. Isso nem sempre é verdade e pode gerar muitos problemas, então em geral desenvolvedores sérios criam ifs que checam o tipo do argumento passado. Isso vai além do escopo do manual.
+
+##Por que escrever funções?
+
+Escrever funções nem sempre é fácil, especialmente para iniciantes. Uma função te força a escrever tudo em termos gerais: um n que não existe, um vetor que ainda não foi criado, etc. Como dito no inicio deste capítulo, funções são criadas para tarefas que serão repetidas várias vezes. Em geral, há uma tentação de copiar e colar o código várias vezes fazendo as alterações necessárias ``no braço''. 
+
+Não caia nesta tentação! Há dois motivos básicos para isso:
+
+
+* O seu código vai ser ilegível em pouco tempo, com milhares de linhas repetidas que você é incapaz de ver qual a diferença
+* É muito fácil esquecer de mudar uma parte do código e a coisa dar erro, ou ainda pior, rodar e te dar um resultado errado.
+
+Este autor já precisou rodar de novo várias partes de código que demoravam horas por esquecer de mudar alguma pequena coisa no código copiado e colado. Usar funções é uma maneira muito mais razoável de resolver o problema e, uma vez criada e debbugada, a dor de cabeça é muito menor. Quando o autor aprendeu R, ele foi informado de que escrever tudo em funções era o ideal e ignorou. Esta parece ser uma das muitas coisas que só se aprende cometendo o erro.
+
+##Como escrever funções
+
+Um dos principais motivos para iniciantes no R ignorarem a sugestão da seção anterior é que escrever funções pode ser desafiador. Escrever a função exige, de antemão, que você saiba o tamanho dos vetores, matrizes, como o código irá se comportar etc. Existe uma maneira simples de mitigar este desafio: comece escrevendo o caso específico e depois generalize. No exemplo das duas amostras normais, nós poderiamos ter começado escrevendo apenas:
+
+```
+amostra.x <- rnorm(100,0,1)
+amostra.y <- rnorm(100,2,2)
+```
+
+E depois ter generalizado: sabemos que 100 é o tamanho da amostra, então troque por n. Para permitir médias diferentes (como o código acima fez), colocamos duas variáveis no lugar - com nomes que evidenciam o que elas fazem. Etc. No fim, só precisamos colocar, no começo, o `nome.da.funcao <- function(argumentos){`e fechar com o `return` de maneira a amarrar as duas amostras (cbind, talvez).   
+
+Outro desafio é que o `return` só aceita um único objeto, ou seja, funções no R só retornam uma única coisa. Em alguns casos isso é um desafio. Voltando ao exemplo das duas amostras, `return(amostra.x,amostra.y)` daria um erro. A solução aqui é simples: cole os dois vetores em uma matriz. Mas nem sempre isso é possível: e se os vetores tiverem dimensão diferente? E se a função gera várias matrizes?
+
+Nesses casos, lembre que `list()` recebe qualquer coisa. Você pode ter um elemento na lista que é só um número, outro que é um vetor e até uma lista! O comando `lm` retorna, de fato, uma lista. Dentro da lista há um vetor com os coeficientes, uma matriz de variância covariância e outras coisas. 
+
+Uma terceira dica é quebrar uma função grande em funções menores. O R permite que uma função chame outra, o que facilita em muito o processo de criação de funções complicadas. Em um exemplo extremo, poderíamos imaginar que você quer fazer uma função que faz OLS para você. Poderiamos quebrar isso em vários pedaços: uma que estima os coeficientes, outra que calcula o erro padrão, uma terceira que faz a conta do $R^2$...e finalmente uma última que amarra todas essas funções e devolve uma lista com os coeficientes, erros padrões e tudo mais. 

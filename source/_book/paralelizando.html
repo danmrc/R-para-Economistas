@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R: Uma Introdução para economistas</title>
+  <meta name="description" content="R: Uma Introdução para economistas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="funcoes.html">
+<link rel="next" href="otimizacao.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
+<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="series-temporais.html"><a href="series-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a><ul>
+<li class="chapter" data-level="5.1" data-path="series-temporais.html"><a href="series-temporais.html#o-basico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
+<li class="chapter" data-level="5.2" data-path="series-temporais.html"><a href="series-temporais.html#arimas"><i class="fa fa-check"></i><b>5.2</b> ARIMAs</a></li>
+<li class="chapter" data-level="5.3" data-path="series-temporais.html"><a href="series-temporais.html#vars"><i class="fa fa-check"></i><b>5.3</b> VARs</a></li>
+<li class="chapter" data-level="5.4" data-path="series-temporais.html"><a href="series-temporais.html#raiz-unitaria"><i class="fa fa-check"></i><b>5.4</b> Raiz unitária</a></li>
+<li class="chapter" data-level="5.5" data-path="series-temporais.html"><a href="series-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.5</b> Desassonalizando</a></li>
+<li class="chapter" data-level="5.6" data-path="series-temporais.html"><a href="series-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.6</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a><ul>
+<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
+<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
+<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a><ul>
+<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
+<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
+<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>8</b> Funções</a><ul>
+<li class="chapter" data-level="8.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="8.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="8.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="8.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a><ul>
+<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>10</b> Otimização</a><ul>
+<li class="chapter" data-level="10.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="otimizacao.html"><a href="otimizacao.html#mais-sobre-otimizacao-numerica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="otimizacao.html"><a href="otimizacao.html#otimizando-com-restricao"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a><ul>
+<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-numeros"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#minimos-quadrados-ordinarios-1"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referências</a><ul>
+<li class="chapter" data-level="12.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
+<li class="chapter" data-level="12.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="paralelizando" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Paralelizando</h1>
+<p>Muitas tarefas no R consomem muito tempo. <em>Loops</em> longos são um caso particular disso. Se cada iteração do loop demora 1s e você pede para repetir a iteração mil vezes, você gasta mil segundos (16 minutos)! Infelizmente, muitas operações acabam caindo em problemas que são <em>loops</em>. Felizmente, existe uma maneira de agilizar o processo.</p>
+<p>Isso se deve a dois fatos. O primeiro é que a estrutura do <em>for</em> muitas vezes permite que cada tarefa seja feita separadamente. Isso é muito frequente em simulações, que serão tratadas em mais detalhes mais a frente. O outro fato é que o R não aproveita 100% da capacidade da maioria dos computadores atuais. Os computadores atuais vem com processadores com mais de um núcleo (<em>multi core</em><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>). Cada núcleo age como um pequeno processador e o computador distribui as tarefas entre estes núcleos.</p>
+<p>Em um <em>for</em>, poderíamos dar cada iteração do loop para núcleo do processador, e quando o núcleo termina a iteração ele devolve a resposta recebe uma nova iteração para fazer. Isso é chamado de paralelização e agiliza muito situações em que precisamos de um <em>loop</em>.</p>
+<p>Podemos pensar em uma situação equivalente bastante prática: suponha que queremos multiplicar todos os números de 1 a 10. Se sentarmos uma única pessoa para fazer a conta, esta pessoa vai demorar. Entretanto, se tivermos quatro pessoas na sala, podemos deixar a primeira pessoa multiplicar 1,2,3; a segunda 3,4,5; a terceira 6,7,8; e a quarta 9,10. No fim, pegamos o resultado e pedimos para a primeira e a quarta pessoa multiplicarem seus resultados com os resultados da segunda e da terceira, respectivamente. E por último multiplicamos o resultado que elas obtiveram. De fato, antes da existência dos computadores, contas complicadas eram feitas assim!</p>
+<p>O tratamento dessa seção deve muito a este <a href="http://michaeljkoontz.weebly.com/uploads/1/9/9/4/19940979/parallel.pdf">documento</a></p>
+<div id="desafios-computacionais-de-paralelizacao" class="section level2">
+<h2><span class="header-section-number">9.1</span> Desafios computacionais de paralelização</h2>
+<p>A primeira coisa a se observar é que paralelizar coloca um enorme peso sobre o computador. O R gera novos processos e cada um vai para um núcleo do processador. Isso deixa o computador sobre uma carga brutal de trabalho. Assim, rodar código paralelizado usualmente requer que você deixe o computador fazendo apenas o que você pediu para o R e nada mais.</p>
+<p>Outro problema é que processos paralelizados gastam muita memória RAM. Assim, é importante ficar de olho no consumo de RAM (via gerenciador de tarefas). Tratarei desse problema mais a frente, mas uma boa regra de bolso é que cada núcleo precisa de mais ou menos um 1,5GB de RAM. Mas isso vai variar de sistema para sistema.</p>
+</div>
+<div id="configurando-o-r-para-paralelizar" class="section level2">
+<h2><span class="header-section-number">9.2</span> Configurando o R para paralelizar</h2>
+<p>Vamos precisar de dois pacotes para a paralelização: o <strong>foreach</strong> e o <strong>doParallel</strong>. Carregue os dois pacotes. É sempre bom saber quantos núcleos nós temos, e isso é possível via o comando <code>detectcores()</code>. Na sequência só precisamos definir o número de núcleos, que no código a seguir foi definido pela variável <code>n.cores</code>. O resto dos comandos é padrão e não temos que entender o que cada um faz:</p>
+<pre><code>n.cores &lt;- 3
+cl &lt;- makeCluster(n.cores)
+registerDoParallel(cl)</code></pre>
+<p>Observe que até podemos definir um número de núcleos maior do que o que <code>detectcores()</code> mostra, mas isso vai ser extremamente problemático: nós teremos 30 seções do R disputando por recursos do computador. Como regra de bolso, <code>n.cores</code> deve ser, no máximo, como o número de núcleos que o <code>detectcores()</code> encontrou menos 1.</p>
+<p>Para checar se o R registrou corretamente e consegue usar os processos paralelizados, use o comando <code>getDoParWorkers()</code>. Ele irá indicar o mesmo número que você colocou no <code>n.cores</code> se tudo tiver dado certo.</p>
+</div>
+<div id="usando-a-paralelizacao" class="section level2">
+<h2><span class="header-section-number">9.3</span> Usando a paralelização</h2>
+<p>Uma vez configurado, temos mais uma etapa: o comando <code>for</code> usual do R não consegue usar as vantagens da paralelização. Por isso, precisamos usar o comando <code>foreach</code>, que é muito semelhante, mas tem diferenças importantíssimas. A primeira é que o <code>foreach</code> vai gerar um objeto, ao contrário do for. Você pode explicar qual o objeto vai ser gerado usando a opção .combine entre as opções. O default é criar uma lista. Também é importante entender que o que vai ser colocado no objeto que o R vai gerar com o <code>foreach</code> é o último comando dentro do foreach <strong>que não é a criação de um objeto</strong>.</p>
+<p>A sintaxe do foreach também é diferente: não usamos o in do for e precisamos colocar um <code>%dopar%</code> entre o parênteses e as chaves. Assim, para repetir alguma coisa n vezes:</p>
+<pre><code>objeto &lt;- foreach(i=1:n) %dopar% {
+
+comandos
+
+}</code></pre>
+<p>Um exemplo deve clarificar. Suponha que queremos tirar a raiz quadrada de todos os números de 1 a 20 e queremos paralelizar isso. Escreveríamos o código da seguinte maneira:</p>
+<pre><code>raizes &lt;- foreach(i = 1:20) %dopar%  {
+
+sqrt(i)
+
+}</code></pre>
+<p>Veja que o R vai devolver uma lista. Se quissemos que ele devolvesse um vetor (que parece mais razoável no caso), teriamos que ter alterado o parêntese para (i = 1:20, .combine = c). Veja que se tivéssemos usado <code>a &lt;- sqrt(i)</code>, ao invés de <code>sqrt(i)</code>, o R teria devolvido uma lista vazia.</p>
+<p>[^1:]Dai dual core, quad core etc.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="10">
+<li id="fn10"><p>Letras em vermelho ocorrem em algumas outras situações.<a href="paralelizando.html#fnref10">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="funcoes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otimizacao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

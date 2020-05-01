@@ -1,0 +1,147 @@
+#Ifs, Fors, Whiles
+
+Todas as linguagens de programação usam *ifs, fors* e *whiles*, que sempre fazem a mesma coisa em linhas gerais. Este capítulo trata deles. Cada seção vai tratar de cada um deles, e todas serão estruturadas da seguinte maneira: primeiramente, só apresentamos a sintaxe dos comandos no R. A seguir, temos uma discussão sobre o que cada estrutura faz. Desta maneira, aqueles que já conhecem essas estruturas de outras linguagens podem simplesmente ler a sintaxe e pular toda a discussão subsequente.
+
+Em geral, os exemplos podem não parecer ter utilidade prática, mas servem para entender as ideias. Aplicações práticas são encontradas nos capítulos subsequentes.  
+
+##If
+
+*Ifs* são estruturas condicionais: se essa condição é atendida, faça isso. Senão, faça aquilo outro. A sintaxe é:
+
+```
+if(condição){
+	ação se a condição for atendida} else {
+	ação se a condição não for atendida}
+```
+
+Por exemplo, podemos escrever um código que testa se $x$ - que deve ser um número - é igual a 18, e se sim ele nos mostra um "Sim". Caso contrário, "Não".
+
+```{r}
+x <- 18
+if(x==18){
+	print("Sim")} else {
+	print("Não")}
+x <- 21
+if(x==18){
+	print("Sim")} else {
+	print("Não")}
+
+``` 
+
+Podemos concatenar vários else e ifs e testar várias condições. Podemos querer saber se x é menor que 5 ou maior que 7:
+
+```{r}
+x <- 5
+if(x < 5){
+	print("Menor que 5")} else if(x > 7){
+	print("Maior que 7")} else {
+	print("Nenhum dos dois")}
+x <- 8
+if(x < 5){
+	print("Menor que 5")} else if(x > 7){
+	print("Maior que 7")} else {
+	print("Nenhum dos dois")}
+
+```
+
+Essa estrutura pode ser chata e requerer muitas linhas quando queremos algo simples. Pense no caso que queremos definir a variável h como 1 se x é maior que 1, e 0 caso contrário. Felizmente, o comando `ifelse` resolve isso. A sintaxe dele é simples: a condição, o valor se a condição for atendida e o valor se a condição não for atendida. Assim, no exemplo acima:
+
+```{r}
+h <- ifelse(x > 1 ,1,0)
+h
+```
+
+Entretanto, em muitas situações, usar a estrutura do if ao invés da função `ifelse()` é útil. 
+
+##For e While
+
+*For* (e *whiles*) são *loops*: eles permitem repetir a mesma operação várias vezes. Para eles serem interessantes, eles tem que permitir alguma alteração no input e no output. A sintaxe do for é:
+
+```
+for(i in 1:n){
+ações...
+}
+```
+
+Veja que podemos indexar o for por qualquer letra (e não apenas i), e que podemos usar um vetor para indexar o for, o que vai fazer o for repetir a operação pelo comprimento daquele vetor - e definir o valor de i como o valor dos elementos do vetor. Por exemplo:
+
+```{r}
+a <- c(1,2,3,4,5)
+b <- 0
+
+for(i in a){
+b <- b + i
+print(b)
+}
+```
+
+<table>
+<tr>
+<th bgcolor="#adadeb">Hands on!</th>
+</tr>
+
+<tr>
+<td bgcolor="#adadeb">
+Podemos usar o *for* para ilustrar uma ideia bastante importante de estatística: a lei dos grandes números. Para refrescar a memória: a lei dos grandes números diz que se a variável aleatória tem média $\mu$, $\bar{X}$ é a média amostral e $n$ é o tamanho da amostra, então $\text{plim}_{n \rightarrow \infty}(\bar{X}) = \mu$. O código para ilustrar isso é simples:
+	
+* Gere um vetor de variáveis aleatórias retirados de alguma distribuição (por exemplo, `rnorm(200)`). Vamos chamar esse vetor de `amostra`.
+* Crie um vetor de zeros (você pode fazer isso usando `rep(0,200)`) Chame ele de alguma coisa. No caso, chamarei ele de `media`
+* Crie um loop que faz com que cada posição do vetor `media` seja a média dos números em `amostra` até aquela posição. Assim, se tivermos na 4ª posição de `media`, teremos a média dos números da `amostra` de 1 a 4.
+
+Plot o vetor `media`: ele deve se aproximar da media verdadeira do processo conforme n cresce. Você pode testar $n$ diferente de 200 para ver o quão bom fica a aproximação, bem como diferentes distribuições e parâmetros.
+</td>
+</tr>
+</table>
+
+O *while* funciona de maneira parecida, mas ao invés de ir até o fim do contador, o while depende de alguma condição. O exemplo mais usual é um while que acaba quando uma variável alcança um certo valor. Por exemplo:
+
+```{r}
+b <- 0
+j <- 1
+
+while(j < 6){
+b <- b + j
+j <- j + 1
+}
+```
+
+Esse exemplo faz exatamente a mesma coisa que o *for* anterior. Observe que **temos que adicionar a linha** `j <- j +1`, senão j nunca irá alcançar 6, e o R nunca vai sair do while: ele vai ver $j = 1$ e continuar no while infinitamente. Também observe que temos que criar o `j <- 1`, enquanto no *for* não havia a necessidade de criar a variável i de antemão.
+
+##Diferenças e Semelhanças entre for e while
+
+O exemplo anterior de *while* deixa claro que ele é muito semelhante ao *for*: ambos permitem repetir um conjunto de operações um certo número de vezes. A inclusão do *while* parece até um desperdício: uma função quase idêntica ao for que exige duas linhas de código a mais. Mas enquanto muitas vezes o *for* é mais usado que o *while*, o *while* tem suas vantagens, como o seguinte exemplo ilustra.
+
+Suponha que queremos gerar 100 matrizes de 100 observações com 10 variáveis independentes de uma normal e queremos garantir que a matriz seja invertível[^8]. Poderíamos escrever:
+
+```{r lista de matrizes, cache=TRUE}
+matrizes <- list()
+
+for(i in 1:100){
+matrizes[[i]] <- matrix(rnorm(100*100),ncol = 100, nrow = 100)
+}
+```
+
+Veja o que o exemplo acima faz:
+
+* Cria uma lista vazia chamada matrizes
+* Para cada posição da lista, ele vai criar uma matriz com 10 colunas e 100 linhas\footnote{Nós poderíamos ter colocado só ncol = 10 ou nrow = 100: ao ver mil elementos, o R ajustaria a dimensão que não especificamos para caber os dados}
+* o conteúdo dessa matriz são 1000 números saídos de uma normal de média zero e variância 1.
+
+Não foi especificado que a matriz tem que ser invertível: em nenhum ponto nós testamos isso. Nós poderíamos construir um teste usando *if*, de forma que se a matriz não for invertível (por exemplo, tem determinante zero), a matriz é ignorada. Mas observe que isso gera um problema: se a matriz for ignorada, o for continua e vai gerar uma matriz a menos do que queríamos. É ai que o *while* entra: podemos escrever o código com while de maneira que, quando a matriz tiver determinante 0, o contador não cresce. O código seria algo como:
+
+```{r lista com if}
+ matrizes <- list()
+ 
+ i <- 1
+ while(i <= 100){
+ candidato <- matrix(rnorm(100*100),ncol = 100, nrow = 100)
+ teste <- det(candidato)
+ if(teste == 0){} else{
+ matrizes[[i]] <- candidato
+ i <- i + 1}
+ }
+```
+
+Veja que só aumentamos o contador quando o determinante é diferente de zero , ou seja, quando aceitamos a matriz.
+
+[^8]:Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.

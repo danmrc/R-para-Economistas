@@ -1,0 +1,215 @@
+#Projetinhos
+
+Esse capítulo traz uma série de ideias para serem implementadas no R. Todos os exemplos são da estatística, por enquanto. Propositalmente, o código que resolve o problema está no fim de cada seção. Tente fazer sem olhar. Veja que as soluções propostas não miram o máximo de eficiência possível, mas sim serem o mais claras possíveis. E, como quase tudo na vida, existe mais de uma solução. 
+
+##Lei dos Grandes Números
+
+<table>
+
+<tr>
+<td> Dificuldade</td> <td> Fácil </td>
+</tr>
+<tr>
+<td>Capítulos necessários </td> <td> 5 </td>
+</tr>
+
+</table>
+
+Vamos relembrar o que diz a lei dos grandes números. Em linhas gerais, se $x$ é uma variável aletória com expectância $\mu$, e $\bar{X} = \frac{1}{n}\sum_i x_i$, a média amostral, então $\text{plim}_{n \rightarrow \infty}(\bar{X}) = \mu$ . É isso que justifica, por exemplo, usar estimadores do método dos momentos: se você tem algum momento da distribuição que tem que ser estimado, então o equivalente amostral dele converge para o valor verdadeiro. Vamos colocar isso a prova. Eis aqui um passo a passo do que queremos fazer:
+
+* Gere um vetor de variáveis aleatórias retirados de alguma distribuição, com algum tamanho de amostra (por exemplo, `rnorm(1000)`). Vamos chamar esse vetor de `amostra`.
+* Crie um vetor de zeros (você pode fazer isso usando `rep(0,1000)`, que vai gerar um vetor de mil zeros) Chame ele de alguma coisa. No caso, chamarei ele de `media`
+* Crie um loop que faz com que cada posição do vetor `media` seja a média dos números em `amostra` até aquela posição. Assim, se tivermos na 4ª posição de `media`, teremos a média dos números da `amostra` de 1 a 4.
+* Faça o plot desses pontos para saber se há convergência de fato
+
+
+```{r}
+amostra <- rnorm(1000)
+media <- rep(0,1000)
+for(i in 1:1000){
+  media[i] <- mean(amostra[1:i])
+}
+plot(media)
+lines(1:1000,rep(0,1000), col = 2, lwd = 2) #linha vermelha no valor verdadeiro do parâmetro
+```
+
+Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um momento da forma $E(xu)=0$, onde x e u são variáveis aleatórias univariadas?[^9] Se a lei dos grandes números é verdadeira, $\widehat{E(xu)} = \sum_i x_i u_i$ deve convergir para zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que a nossa média vai ter que ser calculada sem a função padrão `mean`:
+
+```{r}
+
+amostra.1 <- rnorm(1000)
+amostra.2 <- rnorm(1000)
+
+prod <- amostra.1*amostra.2
+
+momento <- rep(0,1000)
+
+for(i in 1:1000){
+  momento[i] <- 1/i*sum(prod[1:i])
+}
+
+plot(momento)
+lines(1:1000,rep(0,1000), col= 2, lwd = 2)
+```
+
+##Mínimos Quadrados Ordinários
+
+<table>
+
+<tr>
+<td> Dificuldade</td> <td> Intermediário </td>
+</tr>
+<tr>
+<td>Capítulos necessários </td> <td> 1, 6, 5 (Só a seção de if) </td>
+</tr>
+<tr>
+Eu uso matrizes extensivamente nesse exemplo!
+</tr>
+
+</table>
+
+O estimador de MQO é o estimador mais fundamental da econometria. Existe mais de uma maneira de derivar ele: podemos ver como um problema de minimização, como fizemos no capítulo 8; aqui, vamos derivar ele a partir da condição de momento $E(xu) = 0$ para todo x, e onde $u$ representa o erro. Veja que se fizermos uma matriz $X$, que tem em cada linha uma observação e em cada coluna uma variável, e $\mathbf{u}$ o vetor de erros $n \times{} 1$, $\mathbf{y}$, o vetor da variável dependente também $n \times{} 1$, então a condição de momento se torna $E(X^{'}\mathbf{u})=0$. Se expandirmos isso, usando o fato que $\mathbf{u} = \mathbf{y}-X\beta$. Então:
+
+$$E(X^{'}\mathbf{u})=E(X^{'}(\mathbf{y}-X\beta))=E(X^{'}\mathbf{y})-E(X^{'}X)\beta = 0 \therefore E(X^{'}\mathbf{y})=E(X^{'}X)\beta \therefore \beta_{OLS} = E(X^{'}X)^{-1}E(X^{'}\mathbf{y})$$
+Vamos implementar ele no R. Vamos criar uma função que pega a matriz $X$ e o vetor y e faz a conta para obter o MQO. Precisamos de:
+
+* `%*%`, que multiplica duas matrizes, ou um vetor e uma matriz
+* `solve`que inverte a matriz
+* `t`que transpõe a matriz
+
+```{r}
+
+mqo <- function(x,y){
+  bloco_1 <- t(x)%*%x
+  bloco_2 <- t(x)%*%y
+  return(solve(bloco_1)%*%bloco_2)
+}
+
+```
+
+Com uma meia dúzia de manipulações (trocando o $y$ do $\beta_{OLS}$ por $u$ e fazendo $\beta \beta^{'}$), obtemos a expressão para a variância do estimador de OLS:
+
+$$Var(\beta_{OLS}) = (X^{'}X)^{-1}X^{'}DX(X^{'}X)^{-1}$$
+
+Onde $D$ é uma matriz diagonal cuja as entradas na diagonal são os elementos da diagonal de $uu^{'}$[^10]. Então, para obtermos a variância do OLS, precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma para calcular os resíduos, e outra que calcula a variância do $\beta_{OLS}$. A função que calcula a variância vai chamar a função que calcula os resíduos. Veja que podemos fazer essas funções de várias maneiras: a função que calcula o resíduo pode recber só o X e y e chamar a função `mqo` para fazer a conta do coeficiente; ou a função pode receber X,y *e* o coeficiente para calcular o resíduo. Eu vou escolher o segundo caminho:
+
+```{r}
+
+residuo <- function(x,y,cofs){
+  u <- y - x%*%cofs
+  return(u)
+}
+
+variancia_mqo <- function(x,y){
+  cof <- mqo(x,y)
+  res <- residuo(x,y,cof)
+  bloco_1 <- solve(t(x)%*%x)
+  D <- matrix(0,ncol = nrow(x),nrow=nrow(x))
+  diag(D) <- diag(res%*%t(res)) #diag acessa os elmentos da diagonal da matriz: logo, eu estou contando para o R que os elementos da diagonal de D são os elmentos da diagonal de res*res'
+  resposta <- bloco_1%*%t(x)%*%D%*%x%*%t(bloco_1)
+  return(resposta)
+}
+
+```
+
+Veja que a função `variancia_mqo`recebe só $X$ e y e todo o resto das contas são feitos por funções que criamos originalmente: o coeficiente é calculado pela função `mqo`, que passa isso para a função `residuo`, que por sua vez passa o resultado para obtermos a variância do estimador.
+
+Vamos construir uma função final que devolve os coeficientes e o erro padrão. Mais ainda, eu vou adicionar uma mopção que adiciona um intercepto (as funções acima não fazem isso!). Para isso, observe que um intercepto é somente colar uma coluna de 1s na matriz X. Então, na função `regressao`, eu vou adicionar uma opção `intercepto`, que vai ser um booleano (verdadeiro ou falso). Se for verdadeiro, eu adiciono uma coluna de 1s. Se você apostou que eu vou fazer isso usando um `if`, parabéns: é exatamente o que eu vou fazer. Para deixar a coisa mais completa, a função vai ter como padrão adicionar o intercepto:
+
+```{r}
+
+regressao <- function(x,y,intercepto = T){
+  if(intercepto == T){
+    x <- cbind(1,x) #Veja o comentário abaixo
+  } # como o caso else não faz nada, eu posso simplesmente não colocar nada no else
+  coefs <- mqo(x,y)
+  vars <- diag(variancia_mqo(x,y)) #Diag extrai a diagonal da matriz de variância do coeficiente - e é isso que nos interessa
+  return(cbind(coefs,sqrt(vars)))
+}
+
+```
+
+Veja que ao fazer `cbind(1,x)`, o R é inteligente o suficiente para repetir 1 o número de linhas de x, sem termos que nos preocupar em definir um vetor 1 do mesmo número de linhas que a matriz $X$.Vamos testar a nossa função, comparado com o comando padrão do R, `lm`:
+
+```{r}
+
+X <- matrix(rnorm(500),ncol = 5)
+y <- X%*%c(1,-1,2,-2,0.5) + rnorm(100)
+
+regressao(X,y)
+summary(lm(y ~ X))
+```
+
+Veja que há uma leve diferença entre os erros padrões computados pela minha função e pelo `lm`. Isso se deve ao fato do R assumir erros homocedásticos e a matriz de variância covariância que nós implementamos não assume isso.
+
+##LASSO
+
+<table>
+
+<tr>
+<td> Dificuldade</td> <td> Intermediário </td>
+</tr>
+<tr>
+<td>Capítulos necessários </td> <td> 8 e 6 (somente para o último passo) </td>
+</tr>
+
+</table>
+
+LASSO (Least Absolute Shrinkage and Selection Operator) é uma maneira de fazer regressão quando temos muitas variáveis e queremos selecionar só as que são relevantes - potencialmente, podemos ter mais variáveis que observações! Formalmente, o LASSO resolve: 
+
+$$\beta_{LASSO} = \text{argmin}_\beta \sum_i (y_i - x_i\beta) \text{ sujeito a } \sum_k |\beta_k| < c$$
+Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o problema de minimização usual de mínimos quadrados, com uma restrição: a soma do valor *absoluto* dos coeficientes não pode passar de um valor $c$, que tem que ser determinado[^11]. Veja que, por incrível que pareça, o fato de usarmos o valor absoluto é bastante importante: usar uma restrição com a soma dos quadrados reduz os coeficientes, mas não joga nenhum deles para zero. Uma explicação bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o LASSO em geral, pode ser encontrada no excelente *Statistical Learning with Sparsity*, de Trevor Hastie, Robert Tibshirani e Martin Wainwright (que pode ser encontrado [aqui](https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf))
+
+Vamos implementar o LASSO usando o CVXR. Vamos criar um conjunto de de variáveis $X$, com 100 observações e 50 variáveis, e definir um $y$ que depende de alguma dessas variáveis (as 10 primeiras, talvez. Mas não muito mais que isso!). Escolha os coeficientes que quiser, mas tente manter os coeficientes longe de zero. Eu escolherei, preguisosamente, 1 para todas as variáveis relevantes. Adicione algum erro no y, exatamente imitando o problema usual de uma regressão. O passo seguinte é escrever o programa do CVXR e mandar ele resolver o nosso problema:
+
+```{r}
+
+X <- matrix(rnorm(5000),ncol = 50)
+beta <- c(rep(1,10),rep(0,40))
+y <- X%*%beta + rnorm(100)
+
+library(CVXR)
+
+c <- 10 #esse é o valor que vai limitar a soma do valor dos coeficientes. Eu escolhi o valor exato que é a soma dos meus coeficientes, mas você pode (e deve) brincar com isso aqui
+
+beta_hat <- Variable(50)
+obj <- Minimize(sum((y-X%*%beta_hat)^2)) #essa é a função objetivo
+cons <- sum(abs(beta_hat)) < c
+prob <- Problem(obj,constraints = list(cons))
+soluc <- solve(prob)
+est <- soluc$getValue(beta_hat) #para extrair os betas estimados
+est[est<1e-9] <- 0 #Veja o comentário abaixo
+est
+```
+
+Veja que, além do CVXR, eu adicionei um `est[est<1e-9] <- 0`. Como já dito no Capítulo 8, estimativas númericas nunca vão chegar exatamente em zero. Então, para deixar o *output* mais legível, eu estou estabelecendo que qualquer valor abaixo de $10^{-9}$ é zero. Veja que $10^{-9}$ é arbitrário e as implementações de verdade usam padrões estabelecidos.
+
+Voltando ao LASSO: veja que o algoritmo faz um bom trabalho, zerando vários coeficientes. Ele não zera todos os coeficientes das variáveis que não deveriam ser incluídas, mas em compensação não zera nenhum coeficiente das variáveis que deveriam ser incluídas. Trocando em miúdos: ele dá falsos positivos, mas não falsos negativos. Isso é verdade, em geral. 
+
+Obviamente, o trabalho fica bem mais limpo se escrevermos uma função que faz tudo isso para quaisquer X,y e c escolhidos. Aproveite o código que já escrevemos e escreva uma função que faça isso para qualquer X,y e c. Não esqueça que você vai ter que alterar o tamanho do `beta_hat` (Dica: veja o comando `ncol`).
+
+```{r}
+
+lasso <- function(X,y,c){
+  beta_hat <- Variable(ncol(X))
+  obj <- Minimize(sum((y-X%*%beta_hat)^2)) #essa é a função objetivo
+  cons <- sum(abs(beta_hat)) < c
+  prob <- Problem(obj,constraints = list(cons))
+  soluc <- solve(prob)
+  est <- soluc$getValue(beta_hat) #para extrair os betas estimados
+  est[est<1e-9] <- 0 #Veja o comentário abaixo
+  return(est)
+}
+
+```
+
+Veja que eu fui tão preguiçoso ao escrever a função que nem mesmo os comentários mudaram!
+
+Em situações em que você queira usar o LASSO, o pacote **glmnet** faz o LASSO até mesmo para modelos Probit e Logit, e é infinitamente superior a implementação acima. 
+
+[^9]: Isso é familiar?
+
+[^10]:Veja que fora da diagonal temos apenas zeros: isso faz sentido no caso iid, onde não esperamos correlação entre os erros
+
+[^11]: Não vou entrar nessa discussão, mas o que as implementações fazem, em geral, é colocar vários valores de $c$, desde baixos o bastante para que nenhuma variável ser incluída até um valor alto suficiente que todas são incluídas. Como escolher qual desses $c$ usar não é óbvio.  
+
