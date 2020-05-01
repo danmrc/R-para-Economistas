@@ -33,7 +33,7 @@ plot(media)
 lines(1:1000,rep(0,1000), col = 2, lwd = 2) #linha vermelha no valor verdadeiro do parâmetro
 ```
 
-Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um momento da forma $E(xu)=0$, onde x e u são variáveis aleatórias univariadas?[^9] Se a lei dos grandes números é verdadeira, $\widehat{E(xu)} = \sum_i x_i u_i$ deve convergir para zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que a nossa média vai ter que ser calculada sem a função padrão `mean`:
+Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um momento da forma $E(xu)=0$, onde x e u são variáveis aleatórias univariadas?[^10] Se a lei dos grandes números é verdadeira, $\widehat{E(xu)} = \sum_i x_i u_i$ deve convergir para zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que a nossa média vai ter que ser calculada sem a função padrão `mean`:
 
 ```{r}
 
@@ -91,7 +91,7 @@ Com uma meia dúzia de manipulações (trocando o $y$ do $\beta_{OLS}$ por $u$ e
 
 $$Var(\beta_{OLS}) = (X^{'}X)^{-1}X^{'}DX(X^{'}X)^{-1}$$
 
-Onde $D$ é uma matriz diagonal cuja as entradas na diagonal são os elementos da diagonal de $uu^{'}$[^10]. Então, para obtermos a variância do OLS, precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma para calcular os resíduos, e outra que calcula a variância do $\beta_{OLS}$. A função que calcula a variância vai chamar a função que calcula os resíduos. Veja que podemos fazer essas funções de várias maneiras: a função que calcula o resíduo pode recber só o X e y e chamar a função `mqo` para fazer a conta do coeficiente; ou a função pode receber X,y *e* o coeficiente para calcular o resíduo. Eu vou escolher o segundo caminho:
+Onde $D$ é uma matriz diagonal cuja as entradas na diagonal são os elementos da diagonal de $uu^{'}$[^11]. Então, para obtermos a variância do OLS, precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma para calcular os resíduos, e outra que calcula a variância do $\beta_{OLS}$. A função que calcula a variância vai chamar a função que calcula os resíduos. Veja que podemos fazer essas funções de várias maneiras: a função que calcula o resíduo pode recber só o X e y e chamar a função `mqo` para fazer a conta do coeficiente; ou a função pode receber X,y *e* o coeficiente para calcular o resíduo. Eu vou escolher o segundo caminho:
 
 ```{r}
 
@@ -158,7 +158,7 @@ Veja que há uma leve diferença entre os erros padrões computados pela minha f
 LASSO (Least Absolute Shrinkage and Selection Operator) é uma maneira de fazer regressão quando temos muitas variáveis e queremos selecionar só as que são relevantes - potencialmente, podemos ter mais variáveis que observações! Formalmente, o LASSO resolve: 
 
 $$\beta_{LASSO} = \text{argmin}_\beta \sum_i (y_i - x_i\beta) \text{ sujeito a } \sum_k |\beta_k| < c$$
-Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o problema de minimização usual de mínimos quadrados, com uma restrição: a soma do valor *absoluto* dos coeficientes não pode passar de um valor $c$, que tem que ser determinado[^11]. Veja que, por incrível que pareça, o fato de usarmos o valor absoluto é bastante importante: usar uma restrição com a soma dos quadrados reduz os coeficientes, mas não joga nenhum deles para zero. Uma explicação bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o LASSO em geral, pode ser encontrada no excelente *Statistical Learning with Sparsity*, de Trevor Hastie, Robert Tibshirani e Martin Wainwright (que pode ser encontrado [aqui](https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf))
+Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o problema de minimização usual de mínimos quadrados, com uma restrição: a soma do valor *absoluto* dos coeficientes não pode passar de um valor $c$, que tem que ser determinado[^12]. Veja que, por incrível que pareça, o fato de usarmos o valor absoluto é bastante importante: usar uma restrição com a soma dos quadrados reduz os coeficientes, mas não joga nenhum deles para zero. Uma explicação bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o LASSO em geral, pode ser encontrada no excelente *Statistical Learning with Sparsity*, de Trevor Hastie, Robert Tibshirani e Martin Wainwright (que pode ser encontrado [aqui](https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf))
 
 Vamos implementar o LASSO usando o CVXR. Vamos criar um conjunto de de variáveis $X$, com 100 observações e 50 variáveis, e definir um $y$ que depende de alguma dessas variáveis (as 10 primeiras, talvez. Mas não muito mais que isso!). Escolha os coeficientes que quiser, mas tente manter os coeficientes longe de zero. Eu escolherei, preguisosamente, 1 para todas as variáveis relevantes. Adicione algum erro no y, exatamente imitando o problema usual de uma regressão. O passo seguinte é escrever o programa do CVXR e mandar ele resolver o nosso problema:
 
@@ -207,9 +207,9 @@ Veja que eu fui tão preguiçoso ao escrever a função que nem mesmo os coment�
 
 Em situações em que você queira usar o LASSO, o pacote **glmnet** faz o LASSO até mesmo para modelos Probit e Logit, e é infinitamente superior a implementação acima. 
 
-[^9]: Isso é familiar?
+[^10]: Isso é familiar?
 
-[^10]:Veja que fora da diagonal temos apenas zeros: isso faz sentido no caso iid, onde não esperamos correlação entre os erros
+[^11]:Veja que fora da diagonal temos apenas zeros: isso faz sentido no caso iid, onde não esperamos correlação entre os erros
 
-[^11]: Não vou entrar nessa discussão, mas o que as implementações fazem, em geral, é colocar vários valores de $c$, desde baixos o bastante para que nenhuma variável ser incluída até um valor alto suficiente que todas são incluídas. Como escolher qual desses $c$ usar não é óbvio.  
+[^12]: Não vou entrar nessa discussão, mas o que as implementações fazem, em geral, é colocar vários valores de $c$, desde baixos o bastante para que nenhuma variável ser incluída até um valor alto suficiente que todas são incluídas. Como escolher qual desses $c$ usar não é óbvio.  
 

@@ -98,16 +98,16 @@ sal.min <- w < 678
 
 Observe que o R vai gerar um vetor de Verdadeiros e Falso. É possível converter para numérico, mas não há nenhuma necessidade, uma vez que o R é capaz de interpretar o verdadeiro ou falso como uma *dummy* na regressão.
 
-O que estamos fazendo é apenas uma operação de compara cada número do vetor ao número 678. Testamos se ele é menor (<), mas poderíamos ver que números são maiores (>), iguais (==)[^2], menor ou igual (<=) ou maior ou igual (>=). Estes operadores não são apenas úteis para criar *dummies*, mas também pode servir para escrever funções, que será tratado mais a frente. 
+O que estamos fazendo é apenas uma operação de compara cada número do vetor ao número 678. Testamos se ele é menor (<), mas poderíamos ver que números são maiores (>), iguais (==)[^3], menor ou igual (<=) ou maior ou igual (>=). Estes operadores não são apenas úteis para criar *dummies*, mas também pode servir para escrever funções, que será tratado mais a frente. 
 
 Pode ocorrer de a variável vir como um vetor de palavras ou siglas. Suponha que estamos trabalhando com um painel que tem variação temporal e por estado, e o vetor de estados vem com as siglas dos estados (RJ,SP,ES,MG,DF...). Se quisermos usar efeitos fixos de uma maneira extremamente ingênua, poderíamos criar dummies para cada estado e estimar o efeito fixo de cada estado. Esta não é uma maneira inteligente de fazer, já que existem pacotes para fazer estimação usando efeitos fixos com bem menos trabalho, que serão tratados no próximo capítulo. Mas, no momento, vamos ignorar esta opção e tentar criar uma dummy para cada estado.
 
-Uma possível solução era criar um vetor para cada estado (Ou talvez uma matriz com n linha e o número de colunas sendo igual o número de estados), ler cada posição do vetor das siglas usando um loop e colocar um 1 na coluna correspondente, criando um vetor índice para o R buscar qual coluna é relacionada com cada estado... Se a explicação anterior bagunçou o seu cérebro, não se preocupe: ela é complicada, e o R não exige nada tão complicado[^3] 
+Uma possível solução era criar um vetor para cada estado (Ou talvez uma matriz com n linha e o número de colunas sendo igual o número de estados), ler cada posição do vetor das siglas usando um loop e colocar um 1 na coluna correspondente, criando um vetor índice para o R buscar qual coluna é relacionada com cada estado... Se a explicação anterior bagunçou o seu cérebro, não se preocupe: ela é complicada, e o R não exige nada tão complicado[^4] 
 
 Uma solução muito mais simples é usar o comando factors, que gera automaticamente dummies para cada categoria. Assim, RJ vira uma dummy, SP outra etc. Isso é automático, e podemos jogar direto numa regressão. Assim, suponha que temos uma base de dados chama dados e a coluna 2 é a coluna com os estados. Nesse caso: `estados <- factor(dados[,2])`. Poderíamos usar estados diretamente na regressão, que será tratada no capítulo seguinte. 
 
 Uma nota: a partir da versão 4.0 do R, o comportamento ao importar um arquivo tipo csv mudou. Antes, colunas de caracteres eram automaticamente convertidas em fatores. Agora, as colunas de caracteres permanemce sendo caracteres. Você pode mudar isso coloca no `read.csv` `stringAsFctors = T`. Você pode mudar na mão também. Isso é extremamente inconveniente se o seu plano é fazer uma regressão linear, mas extremamente conveniente pra outra parte dos usuários. 
 
-[^2]: Dois iguais seguidos
+[^3]: Dois iguais seguidos
 
-[^3]: Em geral. O autor já encontrou situações em que esse tipo de solução era estritamente necessária. 
+[^4]: Em geral. O autor já encontrou situações em que esse tipo de solução era estritamente necessária. 

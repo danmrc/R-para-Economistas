@@ -111,7 +111,7 @@ Esse exemplo faz exatamente a mesma coisa que o *for* anterior. Observe que **te
 
 O exemplo anterior de *while* deixa claro que ele é muito semelhante ao *for*: ambos permitem repetir um conjunto de operações um certo número de vezes. A inclusão do *while* parece até um desperdício: uma função quase idêntica ao for que exige duas linhas de código a mais. Mas enquanto muitas vezes o *for* é mais usado que o *while*, o *while* tem suas vantagens, como o seguinte exemplo ilustra.
 
-Suponha que queremos gerar 100 matrizes de 100 observações com 10 variáveis independentes de uma normal e queremos garantir que a matriz seja invertível[^8]. Poderíamos escrever:
+Suponha que queremos gerar 100 matrizes de 100 observações com 10 variáveis independentes de uma normal e queremos garantir que a matriz seja invertível[^9]. Poderíamos escrever:
 
 ```{r lista de matrizes, cache=TRUE}
 matrizes <- list()
@@ -144,4 +144,4 @@ Não foi especificado que a matriz tem que ser invertível: em nenhum ponto nós
 
 Veja que só aumentamos o contador quando o determinante é diferente de zero , ou seja, quando aceitamos a matriz.
 
-[^8]:Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.
+[^9]:Alguém poderia argumentar que isso sempre será possível, pois é necessário muito azar para gerar uma matriz desse jeito que é singular. Mas é só um exemplo.

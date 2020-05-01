@@ -2,7 +2,7 @@
 
 Muitas tarefas no R consomem muito tempo. *Loops* longos são um caso particular disso. Se cada iteração do loop demora 1s e você pede para repetir a iteração mil vezes, você gasta mil segundos (16 minutos)! Infelizmente, muitas operações acabam caindo em problemas que são *loops*. Felizmente, existe uma maneira de agilizar o processo.
 
-Isso se deve a dois fatos. O primeiro é que a estrutura do *for* muitas vezes permite que cada tarefa seja feita separadamente. Isso é muito frequente em simulações, que serão tratadas em mais detalhes mais a frente. O outro fato é que o R não aproveita 100% da capacidade da maioria dos computadores atuais. Os computadores atuais vem com processadores com mais de um núcleo (*multi core*[^1]). Cada núcleo age como um pequeno processador e o computador distribui as tarefas entre estes núcleos.
+Isso se deve a dois fatos. O primeiro é que a estrutura do *for* muitas vezes permite que cada tarefa seja feita separadamente. Isso é muito frequente em simulações, que serão tratadas em mais detalhes mais a frente. O outro fato é que o R não aproveita 100% da capacidade da maioria dos computadores atuais. Os computadores atuais vem com processadores com mais de um núcleo (*multi core*[^9]). Cada núcleo age como um pequeno processador e o computador distribui as tarefas entre estes núcleos.
 
 Em um *for*, poderíamos dar cada iteração do loop para núcleo do processador, e quando o núcleo termina a iteração ele devolve a resposta recebe uma nova iteração para fazer. Isso é chamado de paralelização e agiliza muito situações em que precisamos de um *loop*. 
 
@@ -56,4 +56,4 @@ sqrt(i)
 
 Veja que o R vai devolver uma lista. Se quissemos que ele devolvesse um vetor (que parece mais razoável no caso), teriamos que ter alterado o parêntese para (i = 1:20, .combine = c). Veja que se tivéssemos usado `a <- sqrt(i)`, ao invés de `sqrt(i)`, o R teria devolvido uma lista vazia. 
 
-[^1:]Dai dual core, quad core etc.
+[^9:]Dai dual core, quad core etc.

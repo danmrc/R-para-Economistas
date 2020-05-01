@@ -12,7 +12,7 @@ reg <- lm(y ~ x.1 + x.2 + x.3 + x.4, data = dados)
 
 Usamos o ~ para separar a variável explicada (à esquerda do til) das explicativas (à direita do til), e para separar as explicativas usamos o +. A opção *data* diz ao R onde buscar as variáveis.
 
-Agora, o objeto reg[^4] tem o modelo estimado. Para obter uma tabela usual de regressão, com valor do coeficiente, erro padrão, estatística t e p-valor, $R^2$ ajustado, e o teste F para os coeficientes basta usar `summary(reg)`. No contexto de regressão linear, podemos querer fazer uma série de coisas, que são explicadas a seguir.
+Agora, o objeto reg[^5] tem o modelo estimado. Para obter uma tabela usual de regressão, com valor do coeficiente, erro padrão, estatística t e p-valor, $R^2$ ajustado, e o teste F para os coeficientes basta usar `summary(reg)`. No contexto de regressão linear, podemos querer fazer uma série de coisas, que são explicadas a seguir.
 
 **Atenção: Séries Temporais e o lm**
 Objetos de série temporal são armazenados pelo R de uma maneira especial - uma vez que você transforma ele em um objeto de série temporal. Entretanto, você *não* deve passar um objeto de série temporal para o `lm()`, já que o `lm` vai ignorar o formato de série temporal. Assim, estimar um modelo AR(1) usando `lm(y ~ lag(y))` vai gerar uma regressão com coeficiente 1 para lag(y) e $R^2 = 1$. De fato, a regressão feita foi y em y - o que não é uma regressão muito emocionante.   
@@ -23,7 +23,7 @@ Suponha que queremos testar a significância conjunta de x.2 e x.3. Precisamos f
 
 Agora, para testar a significância conjunta de x.2 e x.3 basta fazer `anova(reg,reg.2)` e o R reportará os valores do teste (incluindo o p valor)
 
-Testes mais gerais também estão disponíveis, pelo pacote car[^5]. O comando é `linearHypotesis` com o primeiro argumento sendo o objeto com o modelo. O segundo comando é a hipótese que estamos testando, entre aspas, e entramos ele de maneira extremamente intuitiva: suponha que no exemplo acima queremos testar se o coeficiente de x.2 é igual ao coeficiente de x.4. Nesse caso, o comando se resumiria a `linearHypotesis(reg,"x.2 = x.4")`. Várias opções podem ser usadas, como usar estimadores de erro padrão robustos a heterocedasticidade. Recomendamos que o leitor olhe o help do comando no R.
+Testes mais gerais também estão disponíveis, pelo pacote car[^6]. O comando é `linearHypotesis` com o primeiro argumento sendo o objeto com o modelo. O segundo comando é a hipótese que estamos testando, entre aspas, e entramos ele de maneira extremamente intuitiva: suponha que no exemplo acima queremos testar se o coeficiente de x.2 é igual ao coeficiente de x.4. Nesse caso, o comando se resumiria a `linearHypotesis(reg,"x.2 = x.4")`. Várias opções podem ser usadas, como usar estimadores de erro padrão robustos a heterocedasticidade. Recomendamos que o leitor olhe o help do comando no R.
 
 ### Erros padrões robustos
 
@@ -39,7 +39,7 @@ Uma explicação: O comando coeftest chama o comando vcovHC do pacote sandwich. 
  
  Muitas vezes queremos fazer as regressões não com as variáveis em nível, mas com as variáveis em log. Nesse caso, suponha que queremos a variável dependente - y - em log. Para isso, basta fazer `log.y <- log(y)` e a variável log.y vai ser a versão em log da variável y. Você pode reescrever a regressão como `lm(log.y ~ x.1 + x.2 + x.3)`.
  
- Agora, pode ocorrer de em alguns casos o vetor y ter algum elemento zero. Mas $\log(0) = -\infty$. O R tem um elemento Inf (e - Inf) para esses casos, mas o comando lm vai acusar um erro ao receber um vetor com algum elemento Inf. A solução é trocar esse valor para alguma coisa, como um NA, que o R vai ignorar[^6]. Para fazer isso, suponha que o vetor com os Inf seja o log.y do paragrafo anterior. Precisamos explicar para o R quais casos nós queremos substituir, e isso é incrivelmente fácil: assim como podemos usar `log.y[1]` para escolher o primeiro elemento do vetor `log.y`, podemos colocar entre colchetes uma condição, por exemplo os elementos do vetor log.y que são iguais a infinito. Já tratamos disso: `log.y == -Inf` faz esse trabalho. Assim, se quisermos substituir os elementos de log.y que são iguais a -Inf por NA, basta usar o seguinte trecho de código:
+ Agora, pode ocorrer de em alguns casos o vetor y ter algum elemento zero. Mas $\log(0) = -\infty$. O R tem um elemento Inf (e - Inf) para esses casos, mas o comando lm vai acusar um erro ao receber um vetor com algum elemento Inf. A solução é trocar esse valor para alguma coisa, como um NA, que o R vai ignorar[^7]. Para fazer isso, suponha que o vetor com os Inf seja o log.y do paragrafo anterior. Precisamos explicar para o R quais casos nós queremos substituir, e isso é incrivelmente fácil: assim como podemos usar `log.y[1]` para escolher o primeiro elemento do vetor `log.y`, podemos colocar entre colchetes uma condição, por exemplo os elementos do vetor log.y que são iguais a infinito. Já tratamos disso: `log.y == -Inf` faz esse trabalho. Assim, se quisermos substituir os elementos de log.y que são iguais a -Inf por NA, basta usar o seguinte trecho de código:
  
 ```
  log.y[log.y == -Inf] <- NA
@@ -119,8 +119,8 @@ Mas mais importante:
 </tr>
 </table>
 
-[^4]: Se você leu a discussão anterior de tipos de objetos, vale observar que reg é uma lista
+[^5]: Se você leu a discussão anterior de tipos de objetos, vale observar que reg é uma lista
 
-[^5]:Nada haver com carro: é uma sigla para Companion to Applied Reggresion
+[^6]:Nada haver com carro: é uma sigla para Companion to Applied Reggresion
 
-[^6]:Nem sempre o R vai ignorar um NA. Isso depende do pacote e das configurações do R
+[^7]:Nem sempre o R vai ignorar um NA. Isso depende do pacote e das configurações do R
