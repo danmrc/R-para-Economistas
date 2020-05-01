@@ -1,4 +1,4 @@
-#Paralelizando
+# Paralelizando
 
 Muitas tarefas no R consomem muito tempo. *Loops* longos são um caso particular disso. Se cada iteração do loop demora 1s e você pede para repetir a iteração mil vezes, você gasta mil segundos (16 minutos)! Infelizmente, muitas operações acabam caindo em problemas que são *loops*. Felizmente, existe uma maneira de agilizar o processo.
 
@@ -10,13 +10,13 @@ Podemos pensar em uma situação equivalente bastante prática: suponha que quer
 
 O tratamento dessa seção deve muito a este [documento](http://michaeljkoontz.weebly.com/uploads/1/9/9/4/19940979/parallel.pdf)
 
-##Desafios computacionais de paralelização
+## Desafios computacionais de paralelização
 
 A primeira coisa a se observar é que paralelizar coloca um enorme peso sobre o computador. O R gera novos processos e cada um vai para um núcleo do processador. Isso deixa o computador sobre uma carga brutal de trabalho. Assim, rodar código paralelizado usualmente requer que você deixe o computador fazendo apenas o que você pediu para o R e nada mais. 
 
 Outro problema é que processos paralelizados gastam muita memória RAM. Assim, é importante ficar de olho no consumo de RAM (via gerenciador de tarefas). Tratarei desse problema mais a frente, mas uma boa regra de bolso é que cada núcleo precisa de mais ou menos um 1,5GB de RAM. Mas isso vai variar de sistema para sistema.
 
-##Configurando o R para paralelizar
+## Configurando o R para paralelizar
 
 Vamos precisar de dois pacotes para a paralelização: o **foreach** e o **doParallel**. Carregue os dois pacotes. É sempre bom saber quantos núcleos nós temos, e isso é possível via o comando `detectcores()`. Na sequência só precisamos definir o número de núcleos, que no código a seguir foi definido pela variável `n.cores`. O resto dos comandos é padrão e não temos que entender o que cada um faz:
 
@@ -30,7 +30,7 @@ Observe que até podemos definir um número de núcleos maior do que o que `dete
 
 Para checar se o R registrou corretamente e consegue usar os processos paralelizados, use o comando `getDoParWorkers()`. Ele irá indicar o mesmo número que você colocou no `n.cores` se tudo tiver dado certo.
 
-##Usando a paralelização
+## Usando a paralelização
 
 Uma vez configurado, temos mais uma etapa: o comando `for` usual do R não consegue usar as vantagens da paralelização. Por isso, precisamos usar o comando `foreach`, que é muito semelhante, mas tem diferenças importantíssimas. A primeira é que o `foreach` vai gerar um objeto, ao contrário do for. Você pode explicar qual o objeto vai ser gerado usando a opção .combine entre as opções. O default é criar uma lista. Também é importante entender que o que vai ser colocado no objeto que o R vai gerar com o `foreach` é o último comando dentro do foreach **que não é a criação de um objeto**.
 

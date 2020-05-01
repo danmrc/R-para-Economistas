@@ -1,8 +1,8 @@
-#Apresentando os resultados
+# Apresentando os resultados
 
 Os milhares de modelos que você rodou são tão úteis quanto a sua capacidade de apresentar eles. Sem sermos capazes de apresentar os resultados, nosso trabalho é estéril. Este capítulo apresenta algumas maneiras de usar o R para apresentar resultados. 
 
-##Tabelas
+## Tabelas
 
 Feitas as regressões, precisamos apesentar os resultados. Você sempre pode copiar e colar o sumário do R, mas convenhamos: ele é feio. Podemos digitar na mão, mas isto é trabalhoso. A boa notícia é que alguns pacotes do R ajudam ao criar tabelas. Damos atenção a dois: o **stargazer** e o **xtable**.
 
@@ -12,7 +12,7 @@ Explicar como usar o LaTeX foge do escopo deste manual. Entretanto, o autor ince
 
 O **xtable** converte tabelas do R para o formato LaTeX. Se você tem uma matriz de nome `matriz` e fizer `xtable(matriz)`, o R vai fornecer o código em LaTeX para fazer uma tabela com os elementos da `matriz`.  Já o **stargazer** apresenta o sumário da regressão em formato LaTeX (ou html) automaticamente. Suponha que você tenha um modelo chamado `modelo`. Usar `stargazer(modelo)` vai apresentar o sumário do modelo. O comando é altamente configurável, com uma infinidade de parâmetros; e funciona com vários pacotes e não só com comandos da base do R, como o `lm`. 
 
-##Markdown
+## Markdown
 
 O Rstudio já vem com uma opção para trabalhar com arquivos markdown, e para criar um novo arquivo markdown basta ir no menu, new file, R Markdown. O R Markdown também depende de comandos para fazer as alterações no texto - por exemplo, itálico são asteriscos cercando o texto. Assim, se digitarmos no markdown `*itálico*`, o resultado final seria *itálico*. Isso pode parecer esquisito a primeira vista, mas uma vez criado o hábito, o comportamento é bem mais previsível que o word.   
 
@@ -22,7 +22,7 @@ Veja que ao criar um novo arquivo, ele dá várias opções: html, pdf, word. Se
 
 A parte mais interessante do Markdown é que é possível colocar pedaços de código do R (e até mesmo de outras linguagens) no meio do texto, e o Markdown vai "dar" esse pedaço de código para o R rodar e reportar o resultado. Veja o help do Markdown sobre como fazer isso. Apesar de ser uma possibilidade interessante, ela pode ser problemática: se algum pedaço do seu código demorar muito para rodar, toda vez que ocê der Knit o código vai ser rodado. A opção `cache = TRUE` no bloco deve amenizar isso. 
 
-##Gráficos
+## Gráficos
 
 Outra ferramenta fundamental para apresentar resultados são gráficos. O R tem um pacote padrão para gráficos e um pacote extra amplamente usado chamado **ggplot2**. Neste manual não irei tratar do **ggplot2**: o R Studio tem um help excelente que introduz o uso do **ggplot2**.
 

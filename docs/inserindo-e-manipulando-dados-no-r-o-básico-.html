@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Inserindo e Manipulando Dados no R: O básico. | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 3 Inserindo e Manipulando Dados no R: O básico. | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Inserindo e Manipulando Dados no R: O básico. | R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Inserindo e Manipulando Dados no R: O básico. | R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="primeiros-passos.html"/>
+<link rel="next" href="regressão-básica.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>2.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>4.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>4.0.3</b> Logs</a></li>
+<li class="chapter" data-level="4.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>4.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.3.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
+<li class="chapter" data-level="5.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>5.2</b> VARs</a></li>
+<li class="chapter" data-level="5.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>5.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="5.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="5.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.5</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
+<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
+<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
+<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
+<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>8</b> Funções</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="8.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="8.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="8.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>10</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> Referências</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
+<li class="chapter" data-level="12.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inserindo-e-manipulando-dados-no-r-o-básico." class="section level1" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Inserindo e Manipulando Dados no R: O básico.</h1>
+<p>Só podemos fazer análise de dados se tivermos… dados. Este capítulo ensina a colocar os dados no R e a manipular eles como para criar variáveis necessárias ou limpar os dados antes de iniciarmos a análise.</p>
+<p>Esse capítulo não tenta ser enciclopédico nem detalhista: pelo contrário, ele omite muitas coisas. A omissão mais grave é, sem dúvida alguma, os pacotes do <em>Tidyverse</em>. A omissão se deve a ignorância do autor em usar estes pacotes.</p>
+<div id="arquivos-excelcsv" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Arquivos excel/csv</h2>
+<p>O R não lê diretamente arquivos excel (.xls ou .xlsx), apesar de alguns pacotes permitirem o R ler estes arquivos. Mas esta não é a melhor opção: o ideal é salvar a planilha com os dados em outro formato, como .csv. Isto não é difícil: basta, no excel, ir em salvar como, e embaixo na opção de nome do arquivo há a opção de escolher o formato. O que queremos é <strong>csv (separado por vírgula)</strong></p>
+<p>Para carregar o arquivo no R, precisamos saber algumas poucas coisas:</p>
+<ul>
+<li>O seu excel usa ponto ou vírgula como separador decimal?
+*Aonde está o arquivo</li>
+</ul>
+<p>O item 1 importa porque, se o separador decimal for vírgula, usamos o comando <code>read.csv2</code>. Caso contrário, usamos <code>read.csv</code>. O comando é bem simples: basta passar o caminho (aquele C:/Usuário/…). Por exemplo, suponha que eu tenho um csv chamado dados, e quero importar ele para o R. Ele fica no C:/Usuário/Autor/Manual. Então, eu faria:</p>
+<pre><code>read.csv2(&quot;C:/Usuário/Autor/Manual/dados.csv&quot;)</code></pre>
+<p>Observe que o caminho para o arquivo está entre aspas e que você precisa colocar a extensão do arquivo no fim - o .csv. Mais uma observação: em geral, se você copiar e colar o caminho como o Windows dá o nome de arquivo com  ao invés de /. O R só lê usando /, então você tem que alterar isto.</p>
+<p>Neste caso, o R só vai exibir os dados, e não vai salvar eles dentro do R. Você não vai poder fazer nada com os dados. Para podermos usar eles mais tarde, precisamos salvar ele no ambiente do R. Para isto, basta criar um objeto com os dados, como já fizemos no capítulo anterior. Por exemplo, podemos ser extremamente criativos e chamar o objeto de dados. Nesse caso:</p>
+<pre><code>dados &lt;- read.csv2(&quot;C:/Usuário/Autor/Manual/dados.csv&quot;)</code></pre>
+<p>Se você não está familiarizado com usar o caminho dos arquivos, isto pode parecer excessivamente complicado. Felizmente, o R permite com que você escolha o caminho do arquivo de maneira mais usual, usando um menu e o mouse. Para isto, precisamos alterar o comando acima ligeiramente:</p>
+<pre><code>dados &lt;- read.csv2(file.choose())</code></pre>
+<p>Isto vai abrir o menu e permitir que você escolha o arquivo como um menu do word. Entretanto, apesar de ser mais fácil, essa solução pode ser extremamente inconveniente: toda vez que você for rodar o programa você vai ter que escolher. Apesar de trabalhar com o caminho ser um pouco mais chato, isto poupa muito tempo.</p>
+</div>
+<div id="lendo-arquivos-do-stata-e-outros-pacotes-estatísticos" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Lendo arquivos do stata e outros pacotes estatísticos</h2>
+<p>Muitos arquivos com dados ainda são distribuídos em versão de programas estatísticos, como o stata. É fácil ler estes arquivos usando o pacote <em>foreign</em>. Normalmente este pacote já vem instalado, mas caso você não tenha, você pode instalar como qualquer outro pacote. Ele permite ler dados do SAS, SPSS, entre outros. A ideia é a mesma da seção anterior, mas com comandos diferentes para cada tipo de arquivo: o ideal é consultar o help do pacote.</p>
+<p>Por exemplo, para ler um arquivo do stata, o comando no pacote foreign é <code>read.dta</code>. Suponha que, ao invés de ser um arquivo .csv, meus dados do exemplo anterior estivessem salvos em formato do stata. Bastaria fazer:</p>
+<pre><code>dados &lt;- read.dta(&quot;C:/Usuário/Autor/Manual/dados.dta&quot;)</code></pre>
+<p><strong>Porém</strong>, o <code>read.dta</code> só lê arquivos criados pelo stata até a versão 12. Para versões posteriores do stata, existe um pacote chamado <em>readstata13</em>. Se, ao usar o <code>read.dta</code> você receber uma mensagem de erro, vale a pena checar o <em>readstata13</em>.</p>
+</div>
+<div id="lendo-arquivos-muito-grandes" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Lendo arquivos muito grandes</h2>
+<p>Algumas bases de dados podem ser muito grandes, e o R pode sofrer para abrir - mesmo em computadores com muita memória e muito processamento. Para driblar o problema, o pacote <em>data.table</em> ajuda a carregar arquivos grandes para o R. O pacote trás várias opções para trabalhar com os dados carregados, que não serão tratadas aqui.</p>
+<p>Outra opção é o pacote <em>readr</em>, que funciona de forma parecida com o comando padrão do R. Para ler um csv que usa vírgulas para separar decimais, o comando é <code>read\_csv2</code> - basicamente idêntico ao comando padrão do R, mas com uma linha no lugar do ponto. Ao carregar o arquivo, tudo funciona como o usual. Uma pequena diferença é que o nome das variáveis é preservado: assim, uma variável chamada “Nome da variável” continuará se chamando “Nome da variável”, ao invés do padrão do <code>read.csv2</code> de transformar em “Nome.da.variável”. Apesar de isso parecer bom a primeira vista, dificulta acessar as variáveis mais tarde, já que o R não entende nomes com espaço para objetos.</p>
+</div>
+<div id="o-pacote-bets-e-muitos-outros" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> O pacote BETS (e muitos outros)</h2>
+<p>Para dados do Brasil, especialmente dados macroeconômicos, o pacote <strong>BETS</strong> é uma excelente alternativa para puxar os dados via BCB/IBGE. O <strong>BETS</strong> permite com que, direto do R, você busque e salve séries disponíveis em diversas bases de dados - entre elas o BCB e o IBGE. O cerne do BETS são os comandos <code>BETSsearch()</code> e <code>BETSget()</code>. O <code>BETSsearch()</code> permite buscarmos por uma palavra chave e retorna informações da série - frequência, fonte, início e fim e um código. O <code>BETSget()</code> permite com que você recupere a série a partir do código. Para recuperarmos o IPCA, fariamos:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb33-1"></a><span class="kw">library</span>(BETS)</span>
+<span id="cb33-2"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb33-2"></a></span>
+<span id="cb33-3"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb33-3"></a>busca &lt;-<span class="st"> </span><span class="kw">BETSsearch</span>(<span class="st">&quot;IPCA&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## BETS-package: Found 51 out of 18706 time series.</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb35-1"></a><span class="co">#View(busca)</span></span>
+<span id="cb35-2"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb35-2"></a>IPCA &lt;-<span class="st"> </span><span class="kw">BETSget</span>(<span class="dv">433</span>, <span class="dt">from =</span> <span class="st">&quot;2002-01-01&quot;</span>)</span>
+<span id="cb35-3"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#cb35-3"></a><span class="kw">plot</span>(IPCA)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Veja que colocamos o <code>View(busca)</code> comentado apenas para este post: ao rodar essa linha, uma aba no RStudio abrirá e mostrará todas as séries que se encaixam neste critério.</p>
+<p>Veja que este não é o único pacote disponível para baixar dados! Existem muitos outros, e a melhor maneira é fuçar o CRAN. (Mas em breve devo adicionar mais um aqui, o <strong>Quandl</strong>)</p>
+</div>
+<div id="trabalhando-com-os-dados" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Trabalhando com os dados</h2>
+<p>Uma vez carregado os dados, pode ser necessário manipular os dados de diversas maneiras. Esta seção tratará de algumas das maneiras mais comuns.</p>
+<div id="selecionando-linhascolunaselementos" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Selecionando linhas/colunas/elementos</h3>
+<p>Selecionar uma linha ou uma coluna específica de uma base de dados é essencial. Se quisermos rodar uma regressão e cada coluna da tabela é uma variável, então temos que ser capazes de informar ao R quais colunas serão usadas como variável explicada e quais como variável explicativa. O R usa a notação de matrizes com colchetes, então para selecionar a 4ª linha da base de dados chamada dados, basta fazer <code>dados[4,]</code>. Veja que colocamos a vírgula e depois deixamos em branco, informando ao R que queremos todas as colunas. Para obter todas as linhas da quarta coluna, fazemos <code>dados[,4]</code>.</p>
+<p>E se quisermos apenas algumas linhas ou algumas colunas? Podemos passar um vetor dizendo quais são essas linhas e/ou colunas. Por exemplo, se quisermos as linhas 1 <strong>a</strong> 4, podemos passar um <code>dados[1:4,]</code>. E se quisermos as linhas 1 <strong>e</strong> 4, podemos fazer: <code>dados[c(1,4),]</code></p>
+<p>Outra maneira, bastante útil, de selecionar variáveis é pelo nome delas. Suponha que os dados vem com nomes id, renda, escolaridade. Para selecionar a variável renda, basta fazer <code>dados$renda</code>. Veja que isso exige saber como (e se) o R importou os nomes. Para isso, a função <code>names</code> permite saber quais os nomes das variáveis. Logo <code>names(dados)</code> vai retornar os nomes das variáveis. Em geral, os espaços são substituídos por pontos, logo uma variável anos de estudo se tornará <code>anos.de.estudo</code>. Veja que também podemos acessar as variáveis em um data.frame usando <code>nome do data.frame$nome da variável</code>. Assim, se temos um data.frame com nome dados e queremos acessar a variável renda, bastaria fazer <code>dados$renda</code>.</p>
+<p>Veja que podemos querer selecionar apenas um elemento. No caso de vetor, é a única coisa que faz sentido: o vetor só tem uma dimensão (uma linha ou uma coluna), então só podemos pegar um elemento dele. Suponha que temos o vetor <span class="math inline">\(\mathbf{v}\)</span> e queremos o décimo elemento: basta fazer <code>v[10]</code>. Veja que não usamos vírgulas, que são usadas apenas para separar as dimensões. Se quisermos um elemento de uma matriz, basta passar a linha e a coluna dele, respectivamente. Por exemplo, o elemento da segunda linha e quinta coluna do dataframe dados é obtido usando <code>dados[2,5]</code>.</p>
+<p>Mas o R permite você selecionar o elemento de uma matriz como se fosse um vetor! Suponha uma matriz - chamaremos ela de <span class="math inline">\(\mathbf{M}\)</span> - com 5 linha e 5 colunas. O último elemento da matriz pode ser obtido com <code>M[5,5]</code> ou, equivalentemente, <code>M[25]</code>. Veja que o 25 não é a toa, no total a matriz tem 25 elementos: logo, o último tem que ser o membro 25.</p>
+<p>As vezes, queremos transformar uma variável contínua em uma <em>dummy</em>. Pode ser o caso que queremos isolar apenas aqueles que recebem menos de um salário mínimo, e queremos que quem tiver menos de um salário mínimo tenha valor 1 e, caso contrário, 0. Suponha que o salário mínimo seja 678, e que a variável de salários se chame w. Então, bastaria fazer:</p>
+<pre><code>sal.min &lt;- w &lt; 678</code></pre>
+<p>Observe que o R vai gerar um vetor de Verdadeiros e Falso. É possível converter para numérico, mas não há nenhuma necessidade, uma vez que o R é capaz de interpretar o verdadeiro ou falso como uma <em>dummy</em> na regressão.</p>
+<p>O que estamos fazendo é apenas uma operação de compara cada número do vetor ao número 678. Testamos se ele é menor (&lt;), mas poderíamos ver que números são maiores (&gt;), iguais (==)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, menor ou igual (&lt;=) ou maior ou igual (&gt;=). Estes operadores não são apenas úteis para criar <em>dummies</em>, mas também pode servir para escrever funções, que será tratado mais a frente.</p>
+<p>Pode ocorrer de a variável vir como um vetor de palavras ou siglas. Suponha que estamos trabalhando com um painel que tem variação temporal e por estado, e o vetor de estados vem com as siglas dos estados (RJ,SP,ES,MG,DF…). Se quisermos usar efeitos fixos de uma maneira extremamente ingênua, poderíamos criar dummies para cada estado e estimar o efeito fixo de cada estado. Esta não é uma maneira inteligente de fazer, já que existem pacotes para fazer estimação usando efeitos fixos com bem menos trabalho, que serão tratados no próximo capítulo. Mas, no momento, vamos ignorar esta opção e tentar criar uma dummy para cada estado.</p>
+<p>Uma possível solução era criar um vetor para cada estado (Ou talvez uma matriz com n linha e o número de colunas sendo igual o número de estados), ler cada posição do vetor das siglas usando um loop e colocar um 1 na coluna correspondente, criando um vetor índice para o R buscar qual coluna é relacionada com cada estado… Se a explicação anterior bagunçou o seu cérebro, não se preocupe: ela é complicada, e o R não exige nada tão complicado<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>Uma solução muito mais simples é usar o comando factors, que gera automaticamente dummies para cada categoria. Assim, RJ vira uma dummy, SP outra etc. Isso é automático, e podemos jogar direto numa regressão. Assim, suponha que temos uma base de dados chama dados e a coluna 2 é a coluna com os estados. Nesse caso: <code>estados &lt;- factor(dados[,2])</code>. Poderíamos usar estados diretamente na regressão, que será tratada no capítulo seguinte.</p>
+<p>Uma nota: a partir da versão 4.0 do R, o comportamento ao importar um arquivo tipo csv mudou. Antes, colunas de caracteres eram automaticamente convertidas em fatores. Agora, as colunas de caracteres permanemce sendo caracteres. Você pode mudar isso coloca no <code>read.csv</code> <code>stringAsFctors = T</code>. Você pode mudar na mão também. Isso é extremamente inconveniente se o seu plano é fazer uma regressão linear, mas extremamente conveniente pra outra parte dos usuários.</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Dois iguais seguidos<a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Em geral. O autor já encontrou situações em que esse tipo de solução era estritamente necessária.<a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="primeiros-passos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regressão-básica.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

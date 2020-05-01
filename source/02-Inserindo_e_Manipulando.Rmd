@@ -1,10 +1,10 @@
-#Inserindo e Manipulando Dados no R: O básico. 
+# Inserindo e Manipulando Dados no R: O básico. 
 
 Só podemos fazer análise de dados se tivermos... dados. Este capítulo ensina a colocar os dados no R e a manipular eles como para criar variáveis necessárias ou limpar os dados antes de iniciarmos a análise. 
 
 Esse capítulo não tenta ser enciclopédico nem detalhista: pelo contrário, ele omite muitas coisas. A omissão mais grave é, sem dúvida alguma, os pacotes do *Tidyverse*. A omissão se deve a ignorância do autor em usar estes pacotes. 
 
-##Arquivos excel/csv
+## Arquivos excel/csv
 
 O R não lê diretamente arquivos excel (.xls ou .xlsx), apesar de alguns pacotes permitirem o R ler estes arquivos. Mas esta não é a melhor opção: o ideal é salvar a planilha com os dados em outro formato, como .csv. Isto não é difícil: basta, no excel, ir em salvar como, e embaixo na opção de nome do arquivo há a opção de escolher o formato. O que queremos é **csv (separado por vírgula)**
 
@@ -35,7 +35,7 @@ dados <- read.csv2(file.choose())
 
 Isto vai abrir o menu e permitir que você escolha o arquivo como um menu do word. Entretanto, apesar de ser mais fácil, essa solução pode ser extremamente inconveniente: toda vez que você for rodar o programa você vai ter que escolher. Apesar de trabalhar com o caminho ser um pouco mais chato, isto poupa muito tempo. 
 
-##Lendo arquivos do stata e outros pacotes estatísticos
+## Lendo arquivos do stata e outros pacotes estatísticos
 
 Muitos arquivos com dados ainda são distribuídos em versão de programas estatísticos, como o stata. É fácil ler estes arquivos usando o pacote *foreign*. Normalmente este pacote já vem instalado, mas caso você não tenha, você pode instalar como qualquer outro pacote. Ele permite ler dados do SAS, SPSS, entre outros. A ideia é a mesma da seção anterior, mas com comandos diferentes para cada tipo de arquivo: o ideal é consultar o help do pacote.
 
@@ -47,13 +47,13 @@ dados <- read.dta("C:/Usuário/Autor/Manual/dados.dta")
 
 **Porém**, o `read.dta` só lê arquivos criados pelo stata até a versão 12. Para versões posteriores do stata, existe um pacote chamado *readstata13*. Se, ao usar o `read.dta` você receber uma mensagem de erro, vale a pena checar o *readstata13*. 
 
-##Lendo arquivos muito grandes
+## Lendo arquivos muito grandes
 
 Algumas bases de dados podem ser muito grandes, e o R pode sofrer para abrir - mesmo em computadores com muita memória e muito processamento. Para driblar o problema, o pacote *data.table* ajuda a carregar arquivos grandes para o R. O pacote trás várias opções para trabalhar com os dados carregados, que não serão tratadas aqui. 
 
 Outra opção é o pacote *readr*, que funciona de forma parecida com o comando padrão do R. Para ler um csv que usa vírgulas para separar decimais, o comando é `read\_csv2` - basicamente idêntico ao comando padrão do R, mas com uma linha no lugar do ponto. Ao carregar o arquivo, tudo funciona como o usual. Uma pequena diferença é que o nome das variáveis é preservado: assim, uma variável chamada "Nome da variável" continuará se chamando "Nome da variável", ao invés do padrão do `read.csv2` de transformar em "Nome.da.variável". Apesar de isso parecer bom a primeira vista, dificulta acessar as variáveis mais tarde, já que o R não entende nomes com espaço para objetos.
 
-##O pacote BETS (e muitos outros)
+## O pacote BETS (e muitos outros)
 
 Para dados do Brasil, especialmente dados macroeconômicos, o pacote **BETS** é uma excelente alternativa para puxar os dados via BCB/IBGE. O **BETS** permite com que, direto do R, você busque e salve séries disponíveis em diversas bases de dados - entre elas o BCB e o IBGE. O cerne do BETS são os comandos `BETSsearch()` e `BETSget()`. O `BETSsearch()` permite buscarmos por uma palavra chave e retorna informações da série - frequência, fonte, início e fim e um código. O `BETSget()` permite com que você recupere a série a partir do código. Para recuperarmos o IPCA, fariamos: 
 
@@ -72,11 +72,11 @@ Veja que colocamos o `View(busca)` comentado apenas para este post: ao rodar ess
 
 Veja que este não é o único pacote disponível para baixar dados! Existem muitos outros, e a melhor maneira é fuçar o CRAN. (Mas em breve devo adicionar mais um aqui, o **Quandl**)
 
-##Trabalhando com os dados
+## Trabalhando com os dados
 
 Uma vez carregado os dados, pode ser necessário manipular os dados de diversas maneiras. Esta seção tratará de algumas das maneiras mais comuns. 
 
-###Selecionando linhas/colunas/elementos
+### Selecionando linhas/colunas/elementos
 
 Selecionar uma linha ou uma coluna específica de uma base de dados é essencial. Se quisermos rodar uma regressão e cada coluna da tabela é uma variável, então temos que ser capazes de informar ao R quais colunas serão usadas como variável explicada e quais como variável explicativa. O R usa a notação de matrizes com colchetes, então para selecionar a 4ª linha da base de dados chamada dados, basta fazer `dados[4,]`. Veja que colocamos a vírgula e depois deixamos em branco, informando ao R que queremos todas as colunas. Para obter todas as linhas da quarta coluna, fazemos `dados[,4]`.
 
@@ -105,6 +105,8 @@ Pode ocorrer de a variável vir como um vetor de palavras ou siglas. Suponha que
 Uma possível solução era criar um vetor para cada estado (Ou talvez uma matriz com n linha e o número de colunas sendo igual o número de estados), ler cada posição do vetor das siglas usando um loop e colocar um 1 na coluna correspondente, criando um vetor índice para o R buscar qual coluna é relacionada com cada estado... Se a explicação anterior bagunçou o seu cérebro, não se preocupe: ela é complicada, e o R não exige nada tão complicado[^3] 
 
 Uma solução muito mais simples é usar o comando factors, que gera automaticamente dummies para cada categoria. Assim, RJ vira uma dummy, SP outra etc. Isso é automático, e podemos jogar direto numa regressão. Assim, suponha que temos uma base de dados chama dados e a coluna 2 é a coluna com os estados. Nesse caso: `estados <- factor(dados[,2])`. Poderíamos usar estados diretamente na regressão, que será tratada no capítulo seguinte. 
+
+Uma nota: a partir da versão 4.0 do R, o comportamento ao importar um arquivo tipo csv mudou. Antes, colunas de caracteres eram automaticamente convertidas em fatores. Agora, as colunas de caracteres permanemce sendo caracteres. Você pode mudar isso coloca no `read.csv` `stringAsFctors = T`. Você pode mudar na mão também. Isso é extremamente inconveniente se o seu plano é fazer uma regressão linear, mas extremamente conveniente pra outra parte dos usuários. 
 
 [^2]: Dois iguais seguidos
 

@@ -1,10 +1,10 @@
-#Ifs, Fors, Whiles
+# Ifs, Fors, Whiles
 
 Todas as linguagens de programação usam *ifs, fors* e *whiles*, que sempre fazem a mesma coisa em linhas gerais. Este capítulo trata deles. Cada seção vai tratar de cada um deles, e todas serão estruturadas da seguinte maneira: primeiramente, só apresentamos a sintaxe dos comandos no R. A seguir, temos uma discussão sobre o que cada estrutura faz. Desta maneira, aqueles que já conhecem essas estruturas de outras linguagens podem simplesmente ler a sintaxe e pular toda a discussão subsequente.
 
 Em geral, os exemplos podem não parecer ter utilidade prática, mas servem para entender as ideias. Aplicações práticas são encontradas nos capítulos subsequentes.  
 
-##If
+## If
 
 *Ifs* são estruturas condicionais: se essa condição é atendida, faça isso. Senão, faça aquilo outro. A sintaxe é:
 
@@ -53,7 +53,7 @@ h
 
 Entretanto, em muitas situações, usar a estrutura do if ao invés da função `ifelse()` é útil. 
 
-##For e While
+## For e While
 
 *For* (e *whiles*) são *loops*: eles permitem repetir a mesma operação várias vezes. Para eles serem interessantes, eles tem que permitir alguma alteração no input e no output. A sintaxe do for é:
 
@@ -107,7 +107,7 @@ j <- j + 1
 
 Esse exemplo faz exatamente a mesma coisa que o *for* anterior. Observe que **temos que adicionar a linha** `j <- j +1`, senão j nunca irá alcançar 6, e o R nunca vai sair do while: ele vai ver $j = 1$ e continuar no while infinitamente. Também observe que temos que criar o `j <- 1`, enquanto no *for* não havia a necessidade de criar a variável i de antemão.
 
-##Diferenças e Semelhanças entre for e while
+## Diferenças e Semelhanças entre for e while
 
 O exemplo anterior de *while* deixa claro que ele é muito semelhante ao *for*: ambos permitem repetir um conjunto de operações um certo número de vezes. A inclusão do *while* parece até um desperdício: uma função quase idêntica ao for que exige duas linhas de código a mais. Mas enquanto muitas vezes o *for* é mais usado que o *while*, o *while* tem suas vantagens, como o seguinte exemplo ilustra.
 

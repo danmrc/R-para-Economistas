@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R: Uma Introdução para economistas</title>
-  <meta name="description" content="R: Uma Introdução para economistas">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 10 Projetinhos | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 10 Projetinhos | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R: Uma Introdução para economistas" />
+  <meta property="og:title" content="Capítulo 10 Projetinhos | R: Uma Introdução para economistas" />
   <meta property="og:type" content="book" />
   
   
@@ -17,28 +16,33 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R: Uma Introdução para economistas" />
+  <meta name="twitter:title" content="Capítulo 10 Projetinhos | R: Uma Introdução para economistas" />
   
   
   
 
-<meta name="author" content="Daniel Coutinho">
+<meta name="author" content="Daniel Coutinho" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="otimizacao.html">
-<link rel="next" href="referencias.html">
+<link rel="prev" href="otimização.html"/>
+<link rel="next" href="referências.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,41 +53,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -102,85 +132,97 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">R: Uma Introdução para economistas</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
-<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a><ul>
-<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalacao"><i class="fa fa-check"></i><b>2.1</b> Instalação</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
-<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
-<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+<li class="chapter" data-level="1" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>1</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>1.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="1.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>1.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="1.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>1.1.3</b> Interface</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+<li class="chapter" data-level="1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>1.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>1.2.1</b> Pacotes</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
-<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
-<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+<li class="chapter" data-level="1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>1.3</b> Ajuda</a></li>
+<li class="chapter" data-level="1.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>1.4</b> Comentando</a></li>
+<li class="chapter" data-level="1.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>1.5</b> Objetos*</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a><ul>
-<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
-<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatisticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
-<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
-<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
-<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-basico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-basico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="regressao-basica.html"><a href="regressao-basica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a><ul>
-<li class="chapter" data-level="4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#minimos-quadrados-ordinarios"><i class="fa fa-check"></i><b>4.1</b> Mínimos quadrados ordinários</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="regressao-basica.html"><a href="regressao-basica.html#testes-de-hipotese"><i class="fa fa-check"></i><b>4.1.1</b> Testes de hipótese</a></li>
-<li class="chapter" data-level="4.1.2" data-path="regressao-basica.html"><a href="regressao-basica.html#erros-padroes-robustos"><i class="fa fa-check"></i><b>4.1.2</b> Erros padrões robustos</a></li>
-<li class="chapter" data-level="4.1.3" data-path="regressao-basica.html"><a href="regressao-basica.html#logs"><i class="fa fa-check"></i><b>4.1.3</b> Logs</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="regressao-basica.html"><a href="regressao-basica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.2</b> Probits e Logits</a></li>
-<li class="chapter" data-level="4.3" data-path="regressao-basica.html"><a href="regressao-basica.html#variavel-instrumental"><i class="fa fa-check"></i><b>4.3</b> Variável instrumental</a></li>
-<li class="chapter" data-level="4.4" data-path="regressao-basica.html"><a href="regressao-basica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.4</b> Dados em painel</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="regressao-basica.html"><a href="regressao-basica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.4.1</b> Painel usando lm*</a></li>
+<li class="chapter" data-level="2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html"><i class="fa fa-check"></i><b>2</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>2.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="2.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>2.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="2.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>2.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="2.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>2.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="2.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>2.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>2.5.1</b> Selecionando linhas/colunas/elementos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="series-temporais.html"><a href="series-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a><ul>
-<li class="chapter" data-level="5.1" data-path="series-temporais.html"><a href="series-temporais.html#o-basico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
-<li class="chapter" data-level="5.2" data-path="series-temporais.html"><a href="series-temporais.html#arimas"><i class="fa fa-check"></i><b>5.2</b> ARIMAs</a></li>
-<li class="chapter" data-level="5.3" data-path="series-temporais.html"><a href="series-temporais.html#vars"><i class="fa fa-check"></i><b>5.3</b> VARs</a></li>
-<li class="chapter" data-level="5.4" data-path="series-temporais.html"><a href="series-temporais.html#raiz-unitaria"><i class="fa fa-check"></i><b>5.4</b> Raiz unitária</a></li>
-<li class="chapter" data-level="5.5" data-path="series-temporais.html"><a href="series-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.5</b> Desassonalizando</a></li>
-<li class="chapter" data-level="5.6" data-path="series-temporais.html"><a href="series-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.6</b> Filtro Hodrick-Prescott</a></li>
+<li class="chapter" data-level="3" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>3</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>3.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="3.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>3.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="3.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>3.0.3</b> Logs</a></li>
+<li class="chapter" data-level="3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>3.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="3.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>3.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="3.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>3.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>3.3.1</b> Painel usando lm*</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a><ul>
-<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
-<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
-<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#graficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a><ul>
-<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
-<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
-<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferencas-e-semelhancas-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+<li class="chapter" data-level="4" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>4</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>4.1</b> O básico</a></li>
+<li class="chapter" data-level="4.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>4.2</b> VARs</a></li>
+<li class="chapter" data-level="4.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>4.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="4.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>4.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="4.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>4.5</b> Filtro Hodrick-Prescott</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="funcoes.html"><a href="funcoes.html"><i class="fa fa-check"></i><b>8</b> Funções</a><ul>
-<li class="chapter" data-level="8.1" data-path="funcoes.html"><a href="funcoes.html#um-exemplo-simples-uma-funcao-matematica"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
-<li class="chapter" data-level="8.2" data-path="funcoes.html"><a href="funcoes.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
-<li class="chapter" data-level="8.3" data-path="funcoes.html"><a href="funcoes.html#por-que-escrever-funcoes"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
-<li class="chapter" data-level="8.4" data-path="funcoes.html"><a href="funcoes.html#como-escrever-funcoes"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+<li class="chapter" data-level="5" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>5</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>5.1</b> Tabelas</a></li>
+<li class="chapter" data-level="5.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>5.2</b> Markdown</a></li>
+<li class="chapter" data-level="5.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>5.3</b> Gráficos</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a><ul>
-<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelizacao"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
-<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
-<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelizacao"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+<li class="chapter" data-level="6" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>6</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>6.1</b> If</a></li>
+<li class="chapter" data-level="6.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>6.2</b> For e While</a></li>
+<li class="chapter" data-level="6.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>6.3</b> Diferenças e Semelhanças entre for e while</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="otimizacao.html"><a href="otimizacao.html"><i class="fa fa-check"></i><b>10</b> Otimização</a><ul>
-<li class="chapter" data-level="10.1" data-path="otimizacao.html"><a href="otimizacao.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="otimizacao.html"><a href="otimizacao.html#mais-sobre-otimizacao-numerica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+<li class="chapter" data-level="7" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>7</b> Funções</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>7.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="7.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>7.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="7.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>7.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="7.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>7.4</b> Como escrever funções</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="otimizacao.html"><a href="otimizacao.html#otimizando-com-restricao"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+<li class="chapter" data-level="8" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>8</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>8.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="8.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>8.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="8.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>8.3</b> Usando a paralelização</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a><ul>
-<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-numeros"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
-<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#minimos-quadrados-ordinarios-1"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
-<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+<li class="chapter" data-level="9" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>9</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>9.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>9.1.1</b> Mais sobre Otimização Numérica</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referências</a><ul>
-<li class="chapter" data-level="12.1" data-path="referencias.html"><a href="referencias.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
-<li class="chapter" data-level="12.2" data-path="referencias.html"><a href="referencias.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
-<li class="chapter" data-level="12.3" data-path="referencias.html"><a href="referencias.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+<li class="chapter" data-level="9.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>9.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>10</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>10.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="10.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>10.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="10.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>10.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>11</b> Referências</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>11.1</b> R</a></li>
+<li class="chapter" data-level="11.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>11.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="11.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>11.3</b> LaTeX</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -202,11 +244,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="projetinhos" class="section level1">
-<h1><span class="header-section-number">Capítulo 11</span> Projetinhos</h1>
+<div id="projetinhos" class="section level1" number="10">
+<h1><span class="header-section-number">Capítulo 10</span> Projetinhos</h1>
 <p>Esse capítulo traz uma série de ideias para serem implementadas no R. Todos os exemplos são da estatística, por enquanto. Propositalmente, o código que resolve o problema está no fim de cada seção. Tente fazer sem olhar. Veja que as soluções propostas não miram o máximo de eficiência possível, mas sim serem o mais claras possíveis. E, como quase tudo na vida, existe mais de uma solução.</p>
-<div id="lei-dos-grandes-numeros" class="section level2">
-<h2><span class="header-section-number">11.1</span> Lei dos Grandes Números</h2>
+<div id="lei-dos-grandes-números" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Lei dos Grandes Números</h2>
 <table>
 <tr>
 <td>
@@ -232,32 +274,32 @@ Capítulos necessários
 <li>Crie um loop que faz com que cada posição do vetor <code>media</code> seja a média dos números em <code>amostra</code> até aquela posição. Assim, se tivermos na 4ª posição de <code>media</code>, teremos a média dos números da <code>amostra</code> de 1 a 4.</li>
 <li>Faça o plot desses pontos para saber se há convergência de fato</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">amostra &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)
-media &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>)
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){
-  media[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(amostra[<span class="dv">1</span><span class="op">:</span>i])
-}
-<span class="kw">plot</span>(media)
-<span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>) <span class="co">#linha vermelha no valor verdadeiro do parâmetro</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="projetinhos.html#cb120-1"></a>amostra &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb120-2"><a href="projetinhos.html#cb120-2"></a>media &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>)</span>
+<span id="cb120-3"><a href="projetinhos.html#cb120-3"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){</span>
+<span id="cb120-4"><a href="projetinhos.html#cb120-4"></a>  media[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(amostra[<span class="dv">1</span><span class="op">:</span>i])</span>
+<span id="cb120-5"><a href="projetinhos.html#cb120-5"></a>}</span>
+<span id="cb120-6"><a href="projetinhos.html#cb120-6"></a><span class="kw">plot</span>(media)</span>
+<span id="cb120-7"><a href="projetinhos.html#cb120-7"></a><span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>) <span class="co">#linha vermelha no valor verdadeiro do parâmetro</span></span></code></pre></div>
 <p><img src="Bookdown_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<p>Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um momento da forma <span class="math inline">\(E(xu)=0\)</span>, onde x e u são variáveis aleatórias univariadas?<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> Se a lei dos grandes números é verdadeira, <span class="math inline">\(\widehat{E(xu)} = \sum_i x_i u_i\)</span> deve convergir para zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que a nossa média vai ter que ser calculada sem a função padrão <code>mean</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">amostra.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)
-amostra.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)
-
-prod &lt;-<span class="st"> </span>amostra.<span class="dv">1</span><span class="op">*</span>amostra.<span class="dv">2</span>
-
-momento &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>)
-
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){
-  momento[i] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>i<span class="op">*</span><span class="kw">sum</span>(prod[<span class="dv">1</span><span class="op">:</span>i])
-}
-
-<span class="kw">plot</span>(momento)
-<span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="dt">col=</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<p>Esse é um exemplo básico, mas a ideia é mais poderosa: e se tivermos um momento da forma <span class="math inline">\(E(xu)=0\)</span>, onde x e u são variáveis aleatórias univariadas?<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> Se a lei dos grandes números é verdadeira, <span class="math inline">\(\widehat{E(xu)} = \sum_i x_i u_i\)</span> deve convergir para zero. Vamos testar seguindo a mesma ideia acima. A única diferença é que a nossa média vai ter que ser calculada sem a função padrão <code>mean</code>:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="projetinhos.html#cb121-1"></a>amostra<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb121-2"><a href="projetinhos.html#cb121-2"></a>amostra<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb121-3"><a href="projetinhos.html#cb121-3"></a></span>
+<span id="cb121-4"><a href="projetinhos.html#cb121-4"></a>prod &lt;-<span class="st"> </span>amostra<span class="fl">.1</span><span class="op">*</span>amostra<span class="fl">.2</span></span>
+<span id="cb121-5"><a href="projetinhos.html#cb121-5"></a></span>
+<span id="cb121-6"><a href="projetinhos.html#cb121-6"></a>momento &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>)</span>
+<span id="cb121-7"><a href="projetinhos.html#cb121-7"></a></span>
+<span id="cb121-8"><a href="projetinhos.html#cb121-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){</span>
+<span id="cb121-9"><a href="projetinhos.html#cb121-9"></a>  momento[i] &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>i<span class="op">*</span><span class="kw">sum</span>(prod[<span class="dv">1</span><span class="op">:</span>i])</span>
+<span id="cb121-10"><a href="projetinhos.html#cb121-10"></a>}</span>
+<span id="cb121-11"><a href="projetinhos.html#cb121-11"></a></span>
+<span id="cb121-12"><a href="projetinhos.html#cb121-12"></a><span class="kw">plot</span>(momento)</span>
+<span id="cb121-13"><a href="projetinhos.html#cb121-13"></a><span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="dt">col=</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Bookdown_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
-<div id="minimos-quadrados-ordinarios-1" class="section level2">
-<h2><span class="header-section-number">11.2</span> Mínimos Quadrados Ordinários</h2>
+<div id="mínimos-quadrados-ordinários" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Mínimos Quadrados Ordinários</h2>
 <table>
 <tr>
 <td>
@@ -280,49 +322,50 @@ Eu uso matrizes extensivamente nesse exemplo!
 </tr>
 </table>
 <p>O estimador de MQO é o estimador mais fundamental da econometria. Existe mais de uma maneira de derivar ele: podemos ver como um problema de minimização, como fizemos no capítulo 8; aqui, vamos derivar ele a partir da condição de momento <span class="math inline">\(E(xu) = 0\)</span> para todo x, e onde <span class="math inline">\(u\)</span> representa o erro. Veja que se fizermos uma matriz <span class="math inline">\(X\)</span>, que tem em cada linha uma observação e em cada coluna uma variável, e <span class="math inline">\(\mathbf{u}\)</span> o vetor de erros <span class="math inline">\(n \times{} 1\)</span>, <span class="math inline">\(\mathbf{y}\)</span>, o vetor da variável dependente também <span class="math inline">\(n \times{} 1\)</span>, então a condição de momento se torna <span class="math inline">\(E(X^{&#39;}\mathbf{u})=0\)</span>. Se expandirmos isso, usando o fato que <span class="math inline">\(\mathbf{u} = \mathbf{y}-X\beta\)</span>. Então:</p>
-<p><span class="math display">\[E(X^{&#39;}\mathbf{u})=E(X^{&#39;}(\mathbf{y}-X\beta))=E(X^{&#39;}\mathbf{y})-E(X^{&#39;}X)\beta = 0 \therefore E(X^{&#39;}\mathbf{y})=E(X^{&#39;}X)\beta \therefore \beta_{OLS} = E(X^{&#39;}X)^{-1}E(X^{&#39;}\mathbf{y})\]</span> Vamos implementar ele no R. Vamos criar uma função que pega a matriz <span class="math inline">\(X\)</span> e o vetor y e faz a conta para obter o MQO. Precisamos de:</p>
+<p><span class="math display">\[E(X^{&#39;}\mathbf{u})=E(X^{&#39;}(\mathbf{y}-X\beta))=E(X^{&#39;}\mathbf{y})-E(X^{&#39;}X)\beta = 0 \therefore E(X^{&#39;}\mathbf{y})=E(X^{&#39;}X)\beta \therefore \beta_{OLS} = E(X^{&#39;}X)^{-1}E(X^{&#39;}\mathbf{y})\]</span>
+Vamos implementar ele no R. Vamos criar uma função que pega a matriz <span class="math inline">\(X\)</span> e o vetor y e faz a conta para obter o MQO. Precisamos de:</p>
 <ul>
 <li><code>%*%</code>, que multiplica duas matrizes, ou um vetor e uma matriz</li>
 <li><code>solve</code>que inverte a matriz</li>
 <li><code>t</code>que transpõe a matriz</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mqo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){
-  bloco_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">t</span>(x)<span class="op">%*%</span>x
-  bloco_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">t</span>(x)<span class="op">%*%</span>y
-  <span class="kw">return</span>(<span class="kw">solve</span>(bloco_<span class="dv">1</span>)<span class="op">%*%</span>bloco_<span class="dv">2</span>)
-}</code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="projetinhos.html#cb122-1"></a>mqo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){</span>
+<span id="cb122-2"><a href="projetinhos.html#cb122-2"></a>  bloco_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">t</span>(x)<span class="op">%*%</span>x</span>
+<span id="cb122-3"><a href="projetinhos.html#cb122-3"></a>  bloco_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">t</span>(x)<span class="op">%*%</span>y</span>
+<span id="cb122-4"><a href="projetinhos.html#cb122-4"></a>  <span class="kw">return</span>(<span class="kw">solve</span>(bloco_<span class="dv">1</span>)<span class="op">%*%</span>bloco_<span class="dv">2</span>)</span>
+<span id="cb122-5"><a href="projetinhos.html#cb122-5"></a>}</span></code></pre></div>
 <p>Com uma meia dúzia de manipulações (trocando o <span class="math inline">\(y\)</span> do <span class="math inline">\(\beta_{OLS}\)</span> por <span class="math inline">\(u\)</span> e fazendo <span class="math inline">\(\beta \beta^{&#39;}\)</span>), obtemos a expressão para a variância do estimador de OLS:</p>
 <p><span class="math display">\[Var(\beta_{OLS}) = (X^{&#39;}X)^{-1}X^{&#39;}DX(X^{&#39;}X)^{-1}\]</span></p>
-<p>Onde <span class="math inline">\(D\)</span> é uma matriz diagonal cuja as entradas na diagonal são os elementos da diagonal de <span class="math inline">\(uu^{&#39;}\)</span><a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>. Então, para obtermos a variância do OLS, precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma para calcular os resíduos, e outra que calcula a variância do <span class="math inline">\(\beta_{OLS}\)</span>. A função que calcula a variância vai chamar a função que calcula os resíduos. Veja que podemos fazer essas funções de várias maneiras: a função que calcula o resíduo pode recber só o X e y e chamar a função <code>mqo</code> para fazer a conta do coeficiente; ou a função pode receber X,y <em>e</em> o coeficiente para calcular o resíduo. Eu vou escolher o segundo caminho:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">residuo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,cofs){
-  u &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>x<span class="op">%*%</span>cofs
-  <span class="kw">return</span>(u)
-}
-
-variancia_mqo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){
-  cof &lt;-<span class="st"> </span><span class="kw">mqo</span>(x,y)
-  res &lt;-<span class="st"> </span><span class="kw">residuo</span>(x,y,cof)
-  bloco_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x)<span class="op">%*%</span>x)
-  D &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">ncol =</span> <span class="kw">nrow</span>(x),<span class="dt">nrow=</span><span class="kw">nrow</span>(x))
-  <span class="kw">diag</span>(D) &lt;-<span class="st"> </span><span class="kw">diag</span>(res<span class="op">%*%</span><span class="kw">t</span>(res)) <span class="co">#diag acessa os elmentos da diagonal da matriz: logo, eu estou contando para o R que os elementos da diagonal de D são os elmentos da diagonal de res*res&#39;</span>
-  resposta &lt;-<span class="st"> </span>bloco_<span class="dv">1</span><span class="op">%*%</span><span class="kw">t</span>(x)<span class="op">%*%</span>D<span class="op">%*%</span>x<span class="op">%*%</span><span class="kw">t</span>(bloco_<span class="dv">1</span>)
-  <span class="kw">return</span>(resposta)
-}</code></pre></div>
+<p>Onde <span class="math inline">\(D\)</span> é uma matriz diagonal cuja as entradas na diagonal são os elementos da diagonal de <span class="math inline">\(uu^{&#39;}\)</span><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>. Então, para obtermos a variância do OLS, precisamos calcular primeiro o resíduo. Vamos criar duas funções: uma para calcular os resíduos, e outra que calcula a variância do <span class="math inline">\(\beta_{OLS}\)</span>. A função que calcula a variância vai chamar a função que calcula os resíduos. Veja que podemos fazer essas funções de várias maneiras: a função que calcula o resíduo pode recber só o X e y e chamar a função <code>mqo</code> para fazer a conta do coeficiente; ou a função pode receber X,y <em>e</em> o coeficiente para calcular o resíduo. Eu vou escolher o segundo caminho:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="projetinhos.html#cb123-1"></a>residuo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,cofs){</span>
+<span id="cb123-2"><a href="projetinhos.html#cb123-2"></a>  u &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>x<span class="op">%*%</span>cofs</span>
+<span id="cb123-3"><a href="projetinhos.html#cb123-3"></a>  <span class="kw">return</span>(u)</span>
+<span id="cb123-4"><a href="projetinhos.html#cb123-4"></a>}</span>
+<span id="cb123-5"><a href="projetinhos.html#cb123-5"></a></span>
+<span id="cb123-6"><a href="projetinhos.html#cb123-6"></a>variancia_mqo &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){</span>
+<span id="cb123-7"><a href="projetinhos.html#cb123-7"></a>  cof &lt;-<span class="st"> </span><span class="kw">mqo</span>(x,y)</span>
+<span id="cb123-8"><a href="projetinhos.html#cb123-8"></a>  res &lt;-<span class="st"> </span><span class="kw">residuo</span>(x,y,cof)</span>
+<span id="cb123-9"><a href="projetinhos.html#cb123-9"></a>  bloco_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x)<span class="op">%*%</span>x)</span>
+<span id="cb123-10"><a href="projetinhos.html#cb123-10"></a>  D &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">ncol =</span> <span class="kw">nrow</span>(x),<span class="dt">nrow=</span><span class="kw">nrow</span>(x))</span>
+<span id="cb123-11"><a href="projetinhos.html#cb123-11"></a>  <span class="kw">diag</span>(D) &lt;-<span class="st"> </span><span class="kw">diag</span>(res<span class="op">%*%</span><span class="kw">t</span>(res)) <span class="co">#diag acessa os elmentos da diagonal da matriz: logo, eu estou contando para o R que os elementos da diagonal de D são os elmentos da diagonal de res*res&#39;</span></span>
+<span id="cb123-12"><a href="projetinhos.html#cb123-12"></a>  resposta &lt;-<span class="st"> </span>bloco_<span class="dv">1</span><span class="op">%*%</span><span class="kw">t</span>(x)<span class="op">%*%</span>D<span class="op">%*%</span>x<span class="op">%*%</span><span class="kw">t</span>(bloco_<span class="dv">1</span>)</span>
+<span id="cb123-13"><a href="projetinhos.html#cb123-13"></a>  <span class="kw">return</span>(resposta)</span>
+<span id="cb123-14"><a href="projetinhos.html#cb123-14"></a>}</span></code></pre></div>
 <p>Veja que a função <code>variancia_mqo</code>recebe só <span class="math inline">\(X\)</span> e y e todo o resto das contas são feitos por funções que criamos originalmente: o coeficiente é calculado pela função <code>mqo</code>, que passa isso para a função <code>residuo</code>, que por sua vez passa o resultado para obtermos a variância do estimador.</p>
 <p>Vamos construir uma função final que devolve os coeficientes e o erro padrão. Mais ainda, eu vou adicionar uma mopção que adiciona um intercepto (as funções acima não fazem isso!). Para isso, observe que um intercepto é somente colar uma coluna de 1s na matriz X. Então, na função <code>regressao</code>, eu vou adicionar uma opção <code>intercepto</code>, que vai ser um booleano (verdadeiro ou falso). Se for verdadeiro, eu adiciono uma coluna de 1s. Se você apostou que eu vou fazer isso usando um <code>if</code>, parabéns: é exatamente o que eu vou fazer. Para deixar a coisa mais completa, a função vai ter como padrão adicionar o intercepto:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressao &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,<span class="dt">intercepto =</span> T){
-  <span class="cf">if</span>(intercepto <span class="op">==</span><span class="st"> </span>T){
-    x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>,x) <span class="co">#Veja o comentário abaixo</span>
-  } <span class="co"># como o caso else não faz nada, eu posso simplesmente não colocar nada no else</span>
-  coefs &lt;-<span class="st"> </span><span class="kw">mqo</span>(x,y)
-  vars &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">variancia_mqo</span>(x,y)) <span class="co">#Diag extrai a diagonal da matriz de variância do coeficiente - e é isso que nos interessa</span>
-  <span class="kw">return</span>(<span class="kw">cbind</span>(coefs,<span class="kw">sqrt</span>(vars)))
-}</code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="projetinhos.html#cb124-1"></a>regressao &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,<span class="dt">intercepto =</span> T){</span>
+<span id="cb124-2"><a href="projetinhos.html#cb124-2"></a>  <span class="cf">if</span>(intercepto <span class="op">==</span><span class="st"> </span>T){</span>
+<span id="cb124-3"><a href="projetinhos.html#cb124-3"></a>    x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>,x) <span class="co">#Veja o comentário abaixo</span></span>
+<span id="cb124-4"><a href="projetinhos.html#cb124-4"></a>  } <span class="co"># como o caso else não faz nada, eu posso simplesmente não colocar nada no else</span></span>
+<span id="cb124-5"><a href="projetinhos.html#cb124-5"></a>  coefs &lt;-<span class="st"> </span><span class="kw">mqo</span>(x,y)</span>
+<span id="cb124-6"><a href="projetinhos.html#cb124-6"></a>  vars &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">variancia_mqo</span>(x,y)) <span class="co">#Diag extrai a diagonal da matriz de variância do coeficiente - e é isso que nos interessa</span></span>
+<span id="cb124-7"><a href="projetinhos.html#cb124-7"></a>  <span class="kw">return</span>(<span class="kw">cbind</span>(coefs,<span class="kw">sqrt</span>(vars)))</span>
+<span id="cb124-8"><a href="projetinhos.html#cb124-8"></a>}</span></code></pre></div>
 <p>Veja que ao fazer <code>cbind(1,x)</code>, o R é inteligente o suficiente para repetir 1 o número de linhas de x, sem termos que nos preocupar em definir um vetor 1 do mesmo número de linhas que a matriz <span class="math inline">\(X\)</span>.Vamos testar a nossa função, comparado com o comando padrão do R, <code>lm</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">500</span>),<span class="dt">ncol =</span> <span class="dv">5</span>)
-y &lt;-<span class="st"> </span>X<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">2</span>,<span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
-
-<span class="kw">regressao</span>(X,y)</code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="projetinhos.html#cb125-1"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">500</span>),<span class="dt">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb125-2"><a href="projetinhos.html#cb125-2"></a>y &lt;-<span class="st"> </span>X<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">2</span>,<span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb125-3"><a href="projetinhos.html#cb125-3"></a></span>
+<span id="cb125-4"><a href="projetinhos.html#cb125-4"></a><span class="kw">regressao</span>(X,y)</span></code></pre></div>
 <pre><code>##            [,1]       [,2]
 ## [1,]  0.1479876 0.10669330
 ## [2,]  1.0856303 0.08981977
@@ -330,7 +373,7 @@ y &lt;-<span class="st"> </span>X<span class="op">%*%</span><span class="kw">c</
 ## [4,]  1.9488739 0.10540215
 ## [5,] -2.0157979 0.13226224
 ## [6,]  0.5108700 0.09746306</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>X))</code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="projetinhos.html#cb127-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>X))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ X)
@@ -355,8 +398,8 @@ y &lt;-<span class="st"> </span>X<span class="op">%*%</span><span class="kw">c</
 ## F-statistic: 223.7 on 5 and 94 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Veja que há uma leve diferença entre os erros padrões computados pela minha função e pelo <code>lm</code>. Isso se deve ao fato do R assumir erros homocedásticos e a matriz de variância covariância que nós implementamos não assume isso.</p>
 </div>
-<div id="lasso" class="section level2">
-<h2><span class="header-section-number">11.3</span> LASSO</h2>
+<div id="lasso" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> LASSO</h2>
 <table>
 <tr>
 <td>
@@ -376,13 +419,14 @@ Capítulos necessários
 </tr>
 </table>
 <p>LASSO (Least Absolute Shrinkage and Selection Operator) é uma maneira de fazer regressão quando temos muitas variáveis e queremos selecionar só as que são relevantes - potencialmente, podemos ter mais variáveis que observações! Formalmente, o LASSO resolve:</p>
-<p><span class="math display">\[\beta_{LASSO} = \text{argmin}_\beta \sum_i (y_i - x_i\beta) \text{ sujeito a } \sum_k |\beta_k| &lt; c\]</span> Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o problema de minimização usual de mínimos quadrados, com uma restrição: a soma do valor <em>absoluto</em> dos coeficientes não pode passar de um valor <span class="math inline">\(c\)</span>, que tem que ser determinado<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a>. Veja que, por incrível que pareça, o fato de usarmos o valor absoluto é bastante importante: usar uma restrição com a soma dos quadrados reduz os coeficientes, mas não joga nenhum deles para zero. Uma explicação bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o LASSO em geral, pode ser encontrada no excelente <em>Statistical Learning with Sparsity</em>, de Trevor Hastie, Robert Tibshirani e Martin Wainwright (que pode ser encontrado <a href="https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf">aqui</a>)</p>
+<p><span class="math display">\[\beta_{LASSO} = \text{argmin}_\beta \sum_i (y_i - x_i\beta) \text{ sujeito a } \sum_k |\beta_k| &lt; c\]</span>
+Onde k indexa as variáveis do problema. No fundo, estamos resolvendo o problema de minimização usual de mínimos quadrados, com uma restrição: a soma do valor <em>absoluto</em> dos coeficientes não pode passar de um valor <span class="math inline">\(c\)</span>, que tem que ser determinado<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>. Veja que, por incrível que pareça, o fato de usarmos o valor absoluto é bastante importante: usar uma restrição com a soma dos quadrados reduz os coeficientes, mas não joga nenhum deles para zero. Uma explicação bastante intuitiva sobre o porque usar o valor absoluto e mais sobre o LASSO em geral, pode ser encontrada no excelente <em>Statistical Learning with Sparsity</em>, de Trevor Hastie, Robert Tibshirani e Martin Wainwright (que pode ser encontrado <a href="https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS_corrected_1.4.16.pdf">aqui</a>)</p>
 <p>Vamos implementar o LASSO usando o CVXR. Vamos criar um conjunto de de variáveis <span class="math inline">\(X\)</span>, com 100 observações e 50 variáveis, e definir um <span class="math inline">\(y\)</span> que depende de alguma dessas variáveis (as 10 primeiras, talvez. Mas não muito mais que isso!). Escolha os coeficientes que quiser, mas tente manter os coeficientes longe de zero. Eu escolherei, preguisosamente, 1 para todas as variáveis relevantes. Adicione algum erro no y, exatamente imitando o problema usual de uma regressão. O passo seguinte é escrever o programa do CVXR e mandar ele resolver o nosso problema:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">5000</span>),<span class="dt">ncol =</span> <span class="dv">50</span>)
-beta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">40</span>))
-y &lt;-<span class="st"> </span>X<span class="op">%*%</span>beta <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
-
-<span class="kw">library</span>(CVXR)</code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="projetinhos.html#cb129-1"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">5000</span>),<span class="dt">ncol =</span> <span class="dv">50</span>)</span>
+<span id="cb129-2"><a href="projetinhos.html#cb129-2"></a>beta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">40</span>))</span>
+<span id="cb129-3"><a href="projetinhos.html#cb129-3"></a>y &lt;-<span class="st"> </span>X<span class="op">%*%</span>beta <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb129-4"><a href="projetinhos.html#cb129-4"></a></span>
+<span id="cb129-5"><a href="projetinhos.html#cb129-5"></a><span class="kw">library</span>(CVXR)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;CVXR&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:MASS&#39;:
@@ -391,80 +435,80 @@ y &lt;-<span class="st"> </span>X<span class="op">%*%</span>beta <span class="op
 <pre><code>## The following object is masked from &#39;package:stats&#39;:
 ## 
 ##     power</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#esse é o valor que vai limitar a soma do valor dos coeficientes. Eu escolhi o valor exato que é a soma dos meus coeficientes, mas você pode (e deve) brincar com isso aqui</span>
-
-beta_hat &lt;-<span class="st"> </span><span class="kw">Variable</span>(<span class="dv">50</span>)
-obj &lt;-<span class="st"> </span><span class="kw">Minimize</span>(<span class="kw">sum</span>((y<span class="op">-</span>X<span class="op">%*%</span>beta_hat)<span class="op">^</span><span class="dv">2</span>)) <span class="co">#essa é a função objetivo</span>
-cons &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(beta_hat)) <span class="op">&lt;</span><span class="st"> </span>c
-prob &lt;-<span class="st"> </span><span class="kw">Problem</span>(obj,<span class="dt">constraints =</span> <span class="kw">list</span>(cons))
-soluc &lt;-<span class="st"> </span><span class="kw">solve</span>(prob)
-est &lt;-<span class="st"> </span>soluc<span class="op">$</span><span class="kw">getValue</span>(beta_hat) <span class="co">#para extrair os betas estimados</span>
-est[est<span class="op">&lt;</span><span class="fl">1e-9</span>] &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co">#Veja o comentário abaixo</span>
-est</code></pre></div>
-<pre><code>##               [,1]
-##  [1,] 1.114767e+00
-##  [2,] 9.250879e-01
-##  [3,] 8.408902e-01
-##  [4,] 8.223928e-01
-##  [5,] 9.503531e-01
-##  [6,] 7.709540e-01
-##  [7,] 9.542113e-01
-##  [8,] 9.437966e-01
-##  [9,] 8.330459e-01
-## [10,] 8.033928e-01
-## [11,] 8.089768e-09
-## [12,] 0.000000e+00
-## [13,] 0.000000e+00
-## [14,] 1.014253e-01
-## [15,] 0.000000e+00
-## [16,] 2.027292e-03
-## [17,] 0.000000e+00
-## [18,] 0.000000e+00
-## [19,] 0.000000e+00
-## [20,] 1.934122e-09
-## [21,] 0.000000e+00
-## [22,] 0.000000e+00
-## [23,] 0.000000e+00
-## [24,] 0.000000e+00
-## [25,] 0.000000e+00
-## [26,] 0.000000e+00
-## [27,] 0.000000e+00
-## [28,] 0.000000e+00
-## [29,] 4.798112e-03
-## [30,] 5.330428e-02
-## [31,] 0.000000e+00
-## [32,] 0.000000e+00
-## [33,] 0.000000e+00
-## [34,] 7.371162e-09
-## [35,] 0.000000e+00
-## [36,] 5.937644e-02
-## [37,] 1.128521e-01
-## [38,] 0.000000e+00
-## [39,] 5.377899e-02
-## [40,] 0.000000e+00
-## [41,] 2.361303e-01
-## [42,] 0.000000e+00
-## [43,] 0.000000e+00
-## [44,] 1.545904e-09
-## [45,] 8.117981e-02
-## [46,] 8.557797e-02
-## [47,] 0.000000e+00
-## [48,] 2.992706e-02
-## [49,] 0.000000e+00
-## [50,] 4.163487e-02</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="projetinhos.html#cb133-1"></a>c &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#esse é o valor que vai limitar a soma do valor dos coeficientes. Eu escolhi o valor exato que é a soma dos meus coeficientes, mas você pode (e deve) brincar com isso aqui</span></span>
+<span id="cb133-2"><a href="projetinhos.html#cb133-2"></a></span>
+<span id="cb133-3"><a href="projetinhos.html#cb133-3"></a>beta_hat &lt;-<span class="st"> </span><span class="kw">Variable</span>(<span class="dv">50</span>)</span>
+<span id="cb133-4"><a href="projetinhos.html#cb133-4"></a>obj &lt;-<span class="st"> </span><span class="kw">Minimize</span>(<span class="kw">sum</span>((y<span class="op">-</span>X<span class="op">%*%</span>beta_hat)<span class="op">^</span><span class="dv">2</span>)) <span class="co">#essa é a função objetivo</span></span>
+<span id="cb133-5"><a href="projetinhos.html#cb133-5"></a>cons &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(beta_hat)) <span class="op">&lt;=</span><span class="st"> </span>c</span>
+<span id="cb133-6"><a href="projetinhos.html#cb133-6"></a>prob &lt;-<span class="st"> </span><span class="kw">Problem</span>(obj,<span class="dt">constraints =</span> <span class="kw">list</span>(cons))</span>
+<span id="cb133-7"><a href="projetinhos.html#cb133-7"></a>soluc &lt;-<span class="st"> </span><span class="kw">solve</span>(prob)</span>
+<span id="cb133-8"><a href="projetinhos.html#cb133-8"></a>est &lt;-<span class="st"> </span>soluc<span class="op">$</span><span class="kw">getValue</span>(beta_hat) <span class="co">#para extrair os betas estimados</span></span>
+<span id="cb133-9"><a href="projetinhos.html#cb133-9"></a>est[est<span class="op">&lt;</span><span class="fl">1e-9</span>] &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co">#Veja o comentário abaixo</span></span>
+<span id="cb133-10"><a href="projetinhos.html#cb133-10"></a>est</span></code></pre></div>
+<pre><code>##              [,1]
+##  [1,] 1.114767661
+##  [2,] 0.925086427
+##  [3,] 0.840888221
+##  [4,] 0.822393215
+##  [5,] 0.950351379
+##  [6,] 0.770954833
+##  [7,] 0.954209258
+##  [8,] 0.943797513
+##  [9,] 0.833047121
+## [10,] 0.803394150
+## [11,] 0.000000000
+## [12,] 0.000000000
+## [13,] 0.000000000
+## [14,] 0.101425883
+## [15,] 0.000000000
+## [16,] 0.002027388
+## [17,] 0.000000000
+## [18,] 0.000000000
+## [19,] 0.000000000
+## [20,] 0.000000000
+## [21,] 0.000000000
+## [22,] 0.000000000
+## [23,] 0.000000000
+## [24,] 0.000000000
+## [25,] 0.000000000
+## [26,] 0.000000000
+## [27,] 0.000000000
+## [28,] 0.000000000
+## [29,] 0.004798918
+## [30,] 0.053302837
+## [31,] 0.000000000
+## [32,] 0.000000000
+## [33,] 0.000000000
+## [34,] 0.000000000
+## [35,] 0.000000000
+## [36,] 0.059377076
+## [37,] 0.112852557
+## [38,] 0.000000000
+## [39,] 0.053778779
+## [40,] 0.000000000
+## [41,] 0.236131556
+## [42,] 0.000000000
+## [43,] 0.000000000
+## [44,] 0.000000000
+## [45,] 0.081179623
+## [46,] 0.085582381
+## [47,] 0.000000000
+## [48,] 0.029926644
+## [49,] 0.000000000
+## [50,] 0.041631793</code></pre>
 <p>Veja que, além do CVXR, eu adicionei um <code>est[est&lt;1e-9] &lt;- 0</code>. Como já dito no Capítulo 8, estimativas númericas nunca vão chegar exatamente em zero. Então, para deixar o <em>output</em> mais legível, eu estou estabelecendo que qualquer valor abaixo de <span class="math inline">\(10^{-9}\)</span> é zero. Veja que <span class="math inline">\(10^{-9}\)</span> é arbitrário e as implementações de verdade usam padrões estabelecidos.</p>
 <p>Voltando ao LASSO: veja que o algoritmo faz um bom trabalho, zerando vários coeficientes. Ele não zera todos os coeficientes das variáveis que não deveriam ser incluídas, mas em compensação não zera nenhum coeficiente das variáveis que deveriam ser incluídas. Trocando em miúdos: ele dá falsos positivos, mas não falsos negativos. Isso é verdade, em geral.</p>
-<p>Obviamente, o trabalho fica bem mais limpo se escrevermos uma função que faz tudo isso para quaisquer X,y e c escolhidos. Aproveite o código que já escrevemos e escreva uma função que faça isso para qualquer X,y e c. Não esqueça que você vai ter que alterar o tamanho do <code>beta_hat</code> (Dica: veja o comando <code>ncol</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lasso &lt;-<span class="st"> </span><span class="cf">function</span>(X,y,c){
-  beta_hat &lt;-<span class="st"> </span><span class="kw">Variable</span>(<span class="kw">ncol</span>(X))
-  obj &lt;-<span class="st"> </span><span class="kw">Minimize</span>(<span class="kw">sum</span>((y<span class="op">-</span>X<span class="op">%*%</span>beta_hat)<span class="op">^</span><span class="dv">2</span>)) <span class="co">#essa é a função objetivo</span>
-  cons &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(beta_hat)) <span class="op">&lt;</span><span class="st"> </span>c
-  prob &lt;-<span class="st"> </span><span class="kw">Problem</span>(obj,<span class="dt">constraints =</span> <span class="kw">list</span>(cons))
-  soluc &lt;-<span class="st"> </span><span class="kw">solve</span>(prob)
-  est &lt;-<span class="st"> </span>soluc<span class="op">$</span><span class="kw">getValue</span>(beta_hat) <span class="co">#para extrair os betas estimados</span>
-  est[est<span class="op">&lt;</span><span class="fl">1e-9</span>] &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co">#Veja o comentário abaixo</span>
-  <span class="kw">return</span>(est)
-}</code></pre></div>
+<p>Obviamente, o trabalho fica bem mais limpo se escrevermos uma função que faz tudo isso para quaisquer X,y e c escolhidos. Aproveite o código que já escrevemos e escreva uma função que faça isso para qualquer X,y e c. Não esqueça que você vai ter que alterar o tamanho do <code>beta_hat</code> (Dica: veja o comando <code>ncol</code>).</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="projetinhos.html#cb135-1"></a>lasso &lt;-<span class="st"> </span><span class="cf">function</span>(X,y,c){</span>
+<span id="cb135-2"><a href="projetinhos.html#cb135-2"></a>  beta_hat &lt;-<span class="st"> </span><span class="kw">Variable</span>(<span class="kw">ncol</span>(X))</span>
+<span id="cb135-3"><a href="projetinhos.html#cb135-3"></a>  obj &lt;-<span class="st"> </span><span class="kw">Minimize</span>(<span class="kw">sum</span>((y<span class="op">-</span>X<span class="op">%*%</span>beta_hat)<span class="op">^</span><span class="dv">2</span>)) <span class="co">#essa é a função objetivo</span></span>
+<span id="cb135-4"><a href="projetinhos.html#cb135-4"></a>  cons &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">abs</span>(beta_hat)) <span class="op">&lt;=</span><span class="st"> </span>c</span>
+<span id="cb135-5"><a href="projetinhos.html#cb135-5"></a>  prob &lt;-<span class="st"> </span><span class="kw">Problem</span>(obj,<span class="dt">constraints =</span> <span class="kw">list</span>(cons))</span>
+<span id="cb135-6"><a href="projetinhos.html#cb135-6"></a>  soluc &lt;-<span class="st"> </span><span class="kw">solve</span>(prob)</span>
+<span id="cb135-7"><a href="projetinhos.html#cb135-7"></a>  est &lt;-<span class="st"> </span>soluc<span class="op">$</span><span class="kw">getValue</span>(beta_hat) <span class="co">#para extrair os betas estimados</span></span>
+<span id="cb135-8"><a href="projetinhos.html#cb135-8"></a>  est[est<span class="op">&lt;</span><span class="fl">1e-9</span>] &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co">#Veja o comentário abaixo</span></span>
+<span id="cb135-9"><a href="projetinhos.html#cb135-9"></a>  <span class="kw">return</span>(est)</span>
+<span id="cb135-10"><a href="projetinhos.html#cb135-10"></a>}</span></code></pre></div>
 <p>Veja que eu fui tão preguiçoso ao escrever a função que nem mesmo os comentários mudaram!</p>
 <p>Em situações em que você queira usar o LASSO, o pacote <strong>glmnet</strong> faz o LASSO até mesmo para modelos Probit e Logit, e é infinitamente superior a implementação acima.</p>
 
@@ -473,9 +517,9 @@ est</code></pre></div>
 <div class="footnotes">
 <hr />
 <ol start="11">
-<li id="fn11"><p>Isso é familiar?<a href="projetinhos.html#fnref11">↩</a></p></li>
-<li id="fn12"><p>Veja que fora da diagonal temos apenas zeros: isso faz sentido no caso iid, onde não esperamos correlação entre os erros<a href="projetinhos.html#fnref12">↩</a></p></li>
-<li id="fn13"><p>Não vou entrar nessa discussão, mas o que as implementações fazem, em geral, é colocar vários valores de <span class="math inline">\(c\)</span>, desde baixos o bastante para que nenhuma variável ser incluída até um valor alto suficiente que todas são incluídas. Como escolher qual desses <span class="math inline">\(c\)</span> usar não é óbvio.<a href="projetinhos.html#fnref13">↩</a></p></li>
+<li id="fn11"><p>Isso é familiar?<a href="projetinhos.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Veja que fora da diagonal temos apenas zeros: isso faz sentido no caso iid, onde não esperamos correlação entre os erros<a href="projetinhos.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Não vou entrar nessa discussão, mas o que as implementações fazem, em geral, é colocar vários valores de <span class="math inline">\(c\)</span>, desde baixos o bastante para que nenhuma variável ser incluída até um valor alto suficiente que todas são incluídas. Como escolher qual desses <span class="math inline">\(c\)</span> usar não é óbvio.<a href="projetinhos.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -483,17 +527,19 @@ est</code></pre></div>
           </div>
         </div>
       </div>
-<a href="otimizacao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="otimização.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referências.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -501,12 +547,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -514,6 +559,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -530,10 +583,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

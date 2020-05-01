@@ -1,8 +1,8 @@
-#Séries Temporais
+# Séries Temporais
 
 Métodos de séries temporais são suficientemente extensos e únicos para terem seu próprio capítulo. Este capítulo trata dos principais métodos de séries temporais de interesse dos economistas: ARIMAs, VARs, testes de raiz unitária e cointegração. Séries temporais são únicas o suficiente a ponto de terem um classe própria - sem nenhuma surpresa, ela se chama _time series_.
 
-##O básico
+## O básico
 
 Suponha que você, usando os métodos do capítulo 2, inseriu uma série temporal no R. O R não sabe, _a priori_, que os dados são uma série temporal. Você precisa contar isso a ele, e o comando que faz isso é o `ts()`. O `ts` recebe a série, a data de ínicio e a frequência. A frequência é como você dividiu o ano: 4 se o dado for trimestral, 12 se for mensal...
 
@@ -71,7 +71,7 @@ auto.arima(x,ic = "bic")
 
 Nesse caso o `auto.arima` acertou, mas nem sempre isso ocorre. 
 
-##VARs
+## VARs
 
 Um VAR, teoricamente, é apenas uma generalização do AR. Ainda assim, do ponto de vista computacional, eles são distintos, e o VAR tem seu próprio conjunto de pacotes no R. O mais importante deles é o `vars`. 
 
@@ -111,7 +111,7 @@ plot(irf(modelo, impulse = "x", response = c("x","y")))
 
 Eu só pedi o plot do choque da primeira variável sobre as duas variáveis por que isso é uma ilustração. Fazer `plot(irf(modelo))` em uma seção do R, ele vai plotar os choques de todas as variáveis sobre todas as variáveis. 
 
-##Raiz unitária
+## Raiz unitária
 
 O pacote **urca** nos trás testes de raiz unitária. O teste Dickey-Fuller, um dos mais populares, é chamado pelo `ur.df()`. Vamos gerar um passeio aleatório para mostrar:
 
@@ -138,7 +138,7 @@ summary(ur.df(y))
 
 ```
 
-##Desassonalizando 
+## Desassonalizando 
 
 Dados de séries temporais, não raramente, apresentam sazonalidade. Por exemplo, gasto de energia elétrica tende a ser maior nos meses de dezembro a fevereiro, devido ao verão. Retirar sazonalidade é importante em muitas análises. 
 
@@ -170,7 +170,7 @@ lines(final(modelo2), col = 2)
 legend("topleft", legend = c("C/Sazonalidade", "Sem Sazonalidade"), lty = c(1,1), col = c(1,2))
 ```
 
-##Filtro Hodrick-Prescott
+## Filtro Hodrick-Prescott
 
 O filtro Hodrick-Prescott (HP) é utilizado em séries não estacionárias quando queremos separar a tendência do componente ciclíco. Ele é polêmico, mas ainda é amplamente usado. No R, o pacote **mFilter** implementa ele e alguns outros. Vamos aplicar na série de energia: 
 

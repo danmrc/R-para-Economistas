@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Funções | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 8 Funções | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Funções | R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Funções | R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ifs-fors-whiles.html"/>
+<link rel="next" href="paralelizando.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>2.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>4.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>4.0.3</b> Logs</a></li>
+<li class="chapter" data-level="4.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>4.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.3.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
+<li class="chapter" data-level="5.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>5.2</b> VARs</a></li>
+<li class="chapter" data-level="5.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>5.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="5.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="5.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.5</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
+<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
+<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
+<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
+<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>8</b> Funções</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="8.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="8.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="8.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>10</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> Referências</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
+<li class="chapter" data-level="12.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="funções" class="section level1" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Funções</h1>
+<p>Nesse capítulo explicamos o que são as funções, como e porque usar. Também damos algumas dicas de como criar as funções.</p>
+<p>A primeira coisa que deve ser observada é que funções não se limitam a funções matemáticas: uma função recebe alguns inputs, faz algumas operações e devolve um output. Isso pode ser tão geral quanto necessário: de funções que recebem um valor de <span class="math inline">\(x\)</span> e retornam <span class="math inline">\(x^2+x+4\)</span> até funções que recebem matrizes e fazem operações complicadíssimas. Por exemplo, o comando <code>lm</code>, que usamos para estimar uma regressão linear, é uma função que recebe a variável dependente e a variável independente e faz uma série de operações com elas e devolve os coeficientes e seus erros padrões.</p>
+<p>Em geral, funções são criadas para tarefas que serão repetidas várias vezes. Não faz nenhum sentido escrever uma função que só será usada uma única vez.</p>
+<div id="um-exemplo-simples-uma-função-matemática" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Um exemplo simples: uma função matemática</h2>
+<p>Suponha que queremos uma função <span class="math inline">\(x^2+2x+4\)</span>, que iremos chamar de funcao. Nesse caso:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="funções.html#cb85-1"></a>funcao &lt;-<span class="st"> </span><span class="cf">function</span>(x){x<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="dv">4</span>}</span></code></pre></div>
+<p>Veja que, depois de function, entre parêntese, temos o nome da variável. Entre chaves o que a função de fato faz. Podemos criar uma função $ G = x^2 + y^2$. Nesse caso, o código é:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="funções.html#cb86-1"></a>G &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){x<span class="op">^</span><span class="dv">2</span><span class="op">+</span>y<span class="op">^</span><span class="dv">2</span>}</span></code></pre></div>
+<p>Veja que podemos precisar de definir funções como essas quando queremos integrar ou derivar usando o R. Mas em geral, um exemplo mais interessante de como (e porque) usar funções são exemplos não numéricos.</p>
+</div>
+<div id="caso-geral-e-exemplos" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Caso geral e exemplos</h2>
+<p>Em geral, funções são feitas da seguinte forma:</p>
+<pre><code>nome_da_funcao &lt;- function(variaveis){
+comandos
+}</code></pre>
+<p>Veja que podemos ter muitas variáveis - e em geral as funções do R tem dezenas de variáveis. Os comandos podem ser absolutamente qualquer coisa que o R faz: de rodar uma regressão até operações com arquivos. O importante ao escrever funções - e provavelmente o mais difícil - é estruturar as coisas de maneira geral: os inputs são as variáveis da função e não coisas que estão neste momento no ambiente do R.</p>
+<p>Existem duas coisas importantes sobre funções que devem ser explicitadas antes de seguirmos para o próximo exemplo:</p>
+<ol start="3" class="example" style="list-style-type: decimal">
+<li>Variáveis podem ter defaults quando a função é construída. Por exemplo, na função <span class="math inline">\(G(x,y) = x^2+y^2\)</span>, podia ser o caso de que, exceto se o usuários especificasse ao contrário, o padrão fosse <span class="math inline">\(y = 0\)</span>. Para estabelecer essa mudança, bastaria alterar o código para:</li>
+</ol>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="funções.html#cb88-1"></a>G &lt;-<span class="st"> </span><span class="cf">function</span>(x,<span class="dt">y=</span><span class="dv">0</span>){x<span class="op">^</span><span class="dv">2</span><span class="op">+</span>y<span class="op">^</span><span class="dv">2</span>}</span></code></pre></div>
+<p>Assim:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="funções.html#cb89-1"></a><span class="kw">G</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="funções.html#cb91-1"></a><span class="kw">G</span>(<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<ol start="4" class="example" style="list-style-type: decimal">
+<li>Os exemplos de funções matemáticas foram muito simples e o R sabe exatamente qual resultado deve ser exibido. Isso nem sempre é verdade, e em funções mais complicadas usamos o comando <code>return</code>. O comando só funciona dentro de funções e diz o que a função deve retornar como resposta. No exemplo da função numérica, poderíamos ter escrito:</li>
+</ol>
+<pre><code>g &lt;- function(x,y){return(x^2+y^2)}</code></pre>
+<p>Vamos aplicar essas duas ideias. Suponha que queremos gerar duas amostras de normais independentes que podem ter médias e variâncias diferentes. Também queremos poder mudar o tamanho da amostra. No fim, essa função deve retornar uma matriz <span class="math inline">\(n \times 2\)</span>, onde n é o tamanho da amostra. E ainda queremos que, por padrão, as duas variáveis sejam uma normal padrão (com média zero e variância 1). Podemos escrever:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="funções.html#cb94-1"></a>amostrador &lt;-<span class="st"> </span><span class="cf">function</span>(n,<span class="dt">media_x =</span> <span class="dv">0</span>,<span class="dt">media_y =</span> <span class="dv">0</span>,<span class="dt">variancia_x =</span> <span class="dv">1</span>,<span class="dt">variancia_y =</span> <span class="dv">1</span>){</span>
+<span id="cb94-2"><a href="funções.html#cb94-2"></a>sd_x &lt;-<span class="st"> </span><span class="kw">sqrt</span>(variancia_x)</span>
+<span id="cb94-3"><a href="funções.html#cb94-3"></a>sd_y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(variancia_y)</span>
+<span id="cb94-4"><a href="funções.html#cb94-4"></a>amostra.x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n,media_x,sd_x)</span>
+<span id="cb94-5"><a href="funções.html#cb94-5"></a>amostra.y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n,media_y,sd_y)</span>
+<span id="cb94-6"><a href="funções.html#cb94-6"></a><span class="kw">return</span>(<span class="kw">cbind</span>(amostra.x,amostra.y))</span>
+<span id="cb94-7"><a href="funções.html#cb94-7"></a>}</span>
+<span id="cb94-8"><a href="funções.html#cb94-8"></a><span class="kw">amostrador</span>(<span class="dv">100</span>)</span></code></pre></div>
+<pre><code>##           amostra.x     amostra.y
+##   [1,]  0.718293633  0.8600844047
+##   [2,]  0.335490839 -0.6635724390
+##   [3,]  0.075343566 -0.0347763790
+##   [4,] -0.176943345 -0.6273394950
+##   [5,] -1.399367025  0.0685600449
+##   [6,]  0.824329709  2.3781543355
+##   [7,] -0.825091214 -2.1556493943
+##   [8,]  1.127722302 -1.1029162042
+##   [9,] -0.554740916 -0.4661599986
+##  [10,] -1.244439780 -1.0006704603
+##  [11,] -0.138147415  0.5064026291
+##  [12,]  1.479458744 -0.5979431848
+##  [13,] -0.399006457 -0.5678099122
+##  [14,] -0.298111446  0.5977321127
+##  [15,] -0.460745195 -1.0826113473
+##  [16,]  0.213153398 -0.8901032945
+##  [17,]  0.421186752  0.1060644426
+##  [18,]  0.123760415 -1.2325415929
+##  [19,] -0.414138818  0.1624707549
+##  [20,] -0.005033633 -0.0092806873
+##  [21,] -0.897773702  1.2750918238
+##  [22,] -0.447641572  0.7263910524
+##  [23,] -0.789351119  0.8028114959
+##  [24,]  0.840028977 -1.0008340604
+##  [25,]  0.333345310  0.8115257895
+##  [26,]  1.155416496  1.0275551784
+##  [27,] -1.558740363  0.2122541549
+##  [28,]  0.402093862  0.3342644371
+##  [29,] -0.199965083  1.3114180333
+##  [30,]  0.611341071 -1.4002469437
+##  [31,] -0.199792406 -1.3343064007
+##  [32,] -1.240993238  0.3327949851
+##  [33,] -0.260099772 -2.0509916193
+##  [34,]  0.502905052  0.2436862171
+##  [35,]  0.513583267  0.8256682003
+##  [36,]  0.002368356  1.1068085957
+##  [37,]  0.081781460  0.9155825468
+##  [38,]  0.893233840  2.0988221508
+##  [39,] -0.299933476 -0.3790194478
+##  [40,]  1.584847797  1.7640485807
+##  [41,] -0.323163550  0.4117237831
+##  [42,]  0.387489985 -0.7852152744
+##  [43,]  0.593746646 -0.0253192137
+##  [44,] -1.143210475 -1.4664721334
+##  [45,] -0.699134922  0.8255766770
+##  [46,] -0.563157663 -0.3015198950
+##  [47,] -0.361755194  0.1428712879
+##  [48,] -0.653561737  0.1107993982
+##  [49,] -1.401316927 -1.1725290692
+##  [50,]  0.060215438  0.1113076746
+##  [51,]  0.269842008  0.1253386577
+##  [52,]  1.082226553  0.6139166447
+##  [53,]  1.739625645  0.6517269830
+##  [54,] -1.195713070  1.8574078587
+##  [55,]  0.017556296 -0.2771270834
+##  [56,]  0.348467439 -1.1719939039
+##  [57,] -0.442743053 -0.6028888749
+##  [58,]  3.514987716 -1.9474615939
+##  [59,]  0.268012018  0.0804247766
+##  [60,] -0.533351024  1.0777988315
+##  [61,]  0.100036351 -1.2256136083
+##  [62,]  0.566710062  0.6093026921
+##  [63,]  1.244379105  0.2619515119
+##  [64,] -0.486077795 -2.1120820058
+##  [65,] -0.882803939 -1.4624106153
+##  [66,] -0.044538809  1.0629601542
+##  [67,]  0.217141987 -0.9362078957
+##  [68,]  0.082830345 -0.0009904007
+##  [69,]  0.569970979  1.3052634445
+##  [70,]  1.132305312  0.3289079820
+##  [71,] -1.002768739 -0.3067718459
+##  [72,]  1.787110564  1.6125236822
+##  [73,]  0.114321186 -0.1428698182
+##  [74,] -0.339733905  0.3457300380
+##  [75,]  1.405884945  0.4963447043
+##  [76,]  0.862362952  0.6118068059
+##  [77,]  0.289956879 -0.7188252473
+##  [78,]  0.372402586 -0.5769010422
+##  [79,]  1.379126387  1.2464906871
+##  [80,]  0.480186944  2.4390593987
+##  [81,] -1.135746773 -0.1380849325
+##  [82,]  0.866156568 -1.2708188670
+##  [83,] -0.253460661  0.7887372997
+##  [84,]  1.458718311 -0.3444853735
+##  [85,] -1.218927165  0.2389165249
+##  [86,]  1.075248398  1.5627028348
+##  [87,] -1.441709195  1.7651224708
+##  [88,] -1.063758528  0.2834147918
+##  [89,] -1.168627898 -0.9832919370
+##  [90,]  2.581455827 -0.6917566099
+##  [91,] -0.162559882 -0.4689404239
+##  [92,]  1.752839346  0.7502401100
+##  [93,]  0.279718930  0.0669117622
+##  [94,]  0.893623404 -0.3089511493
+##  [95,]  0.647039934 -0.4952645078
+##  [96,]  0.114351976 -1.7746561672
+##  [97,]  0.574657439  0.4421593193
+##  [98,]  1.469561653 -2.0933514087
+##  [99,] -1.348346843 -0.0415687559
+## [100,] -0.426303663  0.7376097284</code></pre>
+<p>Veja que, como o <code>rnorm</code> recebe o desvio padrão da distribuição e a minha função tem como parâmetro a variância da distribuição, criei uma variável na função que tira a raiz quadrada.</p>
+<p><strong>Atenção: checando argumentos</strong>
+É importante notar que em todos os casos, os argumentos de uma função são restritos de alguma forma: no exemplo acima, <span class="math inline">\(n\)</span> tem que ser um número inteiro; a variância não pode ser negativa. Aqui, isso não é tão importante por dois motivos: (1) eu estou assumindo que só você vai usar a função e você sabe o que cada argumento recebe, (2) o <code>rnorm</code> daria um erro caso você violasse essas duas restrições. Isso nem sempre é verdade e pode gerar muitos problemas, então em geral desenvolvedores sérios criam ifs que checam o tipo do argumento passado. Isso vai além do escopo do manual.</p>
+</div>
+<div id="por-que-escrever-funções" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Por que escrever funções?</h2>
+<p>Escrever funções nem sempre é fácil, especialmente para iniciantes. Uma função te força a escrever tudo em termos gerais: um n que não existe, um vetor que ainda não foi criado, etc. Como dito no inicio deste capítulo, funções são criadas para tarefas que serão repetidas várias vezes. Em geral, há uma tentação de copiar e colar o código várias vezes fazendo as alterações necessárias ``no braço’’.</p>
+<p>Não caia nesta tentação! Há dois motivos básicos para isso:</p>
+<ul>
+<li>O seu código vai ser ilegível em pouco tempo, com milhares de linhas repetidas que você é incapaz de ver qual a diferença</li>
+<li>É muito fácil esquecer de mudar uma parte do código e a coisa dar erro, ou ainda pior, rodar e te dar um resultado errado.</li>
+</ul>
+<p>Este autor já precisou rodar de novo várias partes de código que demoravam horas por esquecer de mudar alguma pequena coisa no código copiado e colado. Usar funções é uma maneira muito mais razoável de resolver o problema e, uma vez criada e debbugada, a dor de cabeça é muito menor. Quando o autor aprendeu R, ele foi informado de que escrever tudo em funções era o ideal e ignorou. Esta parece ser uma das muitas coisas que só se aprende cometendo o erro.</p>
+</div>
+<div id="como-escrever-funções" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Como escrever funções</h2>
+<p>Um dos principais motivos para iniciantes no R ignorarem a sugestão da seção anterior é que escrever funções pode ser desafiador. Escrever a função exige, de antemão, que você saiba o tamanho dos vetores, matrizes, como o código irá se comportar etc. Existe uma maneira simples de mitigar este desafio: comece escrevendo o caso específico e depois generalize. No exemplo das duas amostras normais, nós poderiamos ter começado escrevendo apenas:</p>
+<pre><code>amostra.x &lt;- rnorm(100,0,1)
+amostra.y &lt;- rnorm(100,2,2)</code></pre>
+<p>E depois ter generalizado: sabemos que 100 é o tamanho da amostra, então troque por n. Para permitir médias diferentes (como o código acima fez), colocamos duas variáveis no lugar - com nomes que evidenciam o que elas fazem. Etc. No fim, só precisamos colocar, no começo, o <code>nome.da.funcao &lt;- function(argumentos){</code>e fechar com o <code>return</code> de maneira a amarrar as duas amostras (cbind, talvez).</p>
+<p>Outro desafio é que o <code>return</code> só aceita um único objeto, ou seja, funções no R só retornam uma única coisa. Em alguns casos isso é um desafio. Voltando ao exemplo das duas amostras, <code>return(amostra.x,amostra.y)</code> daria um erro. A solução aqui é simples: cole os dois vetores em uma matriz. Mas nem sempre isso é possível: e se os vetores tiverem dimensão diferente? E se a função gera várias matrizes?</p>
+<p>Nesses casos, lembre que <code>list()</code> recebe qualquer coisa. Você pode ter um elemento na lista que é só um número, outro que é um vetor e até uma lista! O comando <code>lm</code> retorna, de fato, uma lista. Dentro da lista há um vetor com os coeficientes, uma matriz de variância covariância e outras coisas.</p>
+<p>Uma terceira dica é quebrar uma função grande em funções menores. O R permite que uma função chame outra, o que facilita em muito o processo de criação de funções complicadas. Em um exemplo extremo, poderíamos imaginar que você quer fazer uma função que faz OLS para você. Poderiamos quebrar isso em vários pedaços: uma que estima os coeficientes, outra que calcula o erro padrão, uma terceira que faz a conta do <span class="math inline">\(R^2\)</span>…e finalmente uma última que amarra todas essas funções e devolve uma lista com os coeficientes, erros padrões e tudo mais.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ifs-fors-whiles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paralelizando.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

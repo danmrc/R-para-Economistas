@@ -1,4 +1,4 @@
-#Regressão Básica
+# Regressão Básica
 
 O coração de econometria é o modelo de regressão linear, estimado por Mínimos Quadrados Ordinários. Mas muitos outros métodos são úteis, como modelos logit, probit, variáveis instrumentais e modelos para painel. Este capítulo trata - finalmente! - de modelos de regressão no R. 
 
@@ -17,7 +17,7 @@ Agora, o objeto reg[^4] tem o modelo estimado. Para obter uma tabela usual de re
 **Atenção: Séries Temporais e o lm**
 Objetos de série temporal são armazenados pelo R de uma maneira especial - uma vez que você transforma ele em um objeto de série temporal. Entretanto, você *não* deve passar um objeto de série temporal para o `lm()`, já que o `lm` vai ignorar o formato de série temporal. Assim, estimar um modelo AR(1) usando `lm(y ~ lag(y))` vai gerar uma regressão com coeficiente 1 para lag(y) e $R^2 = 1$. De fato, a regressão feita foi y em y - o que não é uma regressão muito emocionante.   
 
-###Testes de hipótese
+### Testes de hipótese
 
 Suponha que queremos testar a significância conjunta de x.2 e x.3. Precisamos fazer um teste F. Uma maneira é estimar um novo modelo, que chamaremos de reg.2, só com o x.1: `reg.2 <- lm(y ~ x.1)`
 
@@ -25,7 +25,7 @@ Agora, para testar a significância conjunta de x.2 e x.3 basta fazer `anova(reg
 
 Testes mais gerais também estão disponíveis, pelo pacote car[^5]. O comando é `linearHypotesis` com o primeiro argumento sendo o objeto com o modelo. O segundo comando é a hipótese que estamos testando, entre aspas, e entramos ele de maneira extremamente intuitiva: suponha que no exemplo acima queremos testar se o coeficiente de x.2 é igual ao coeficiente de x.4. Nesse caso, o comando se resumiria a `linearHypotesis(reg,"x.2 = x.4")`. Várias opções podem ser usadas, como usar estimadores de erro padrão robustos a heterocedasticidade. Recomendamos que o leitor olhe o help do comando no R.
 
-###Erros padrões robustos
+### Erros padrões robustos
 
 Na presença de heterocedasticidade ou autocorrelação, os erros padrões usuais não são confiáveis. Infelizmente, o comando `summary` não exibe erros robustos por default e nem permite alterar os erros padrões exibidos. Felizmente, o pacote lmtest traz uma opção para o sumário padrão do R. A primeira coisa a fazer é carregar o pacote sandwich (`library(sandwich)`). O comando é coeftest e a sintaxe é curiosa. No caso do nosso exemplo, se quisermos obter erros robustos a heterocedasticidade:
 
@@ -35,7 +35,7 @@ coeftest(reg, vcov. = vcovHC(reg))
 
 Uma explicação: O comando coeftest chama o comando vcovHC do pacote sandwich. Por sua vez, o comando vcovHC precisa saber qual o modelo que vai ter erros robustos. Por isso uma função que recebe uma função. Veja que se quisermos erros robustos a heterocedasticidade e autocorrelação, o comando vira vcovHAC.  
 
-###Logs
+### Logs
  
  Muitas vezes queremos fazer as regressões não com as variáveis em nível, mas com as variáveis em log. Nesse caso, suponha que queremos a variável dependente - y - em log. Para isso, basta fazer `log.y <- log(y)` e a variável log.y vai ser a versão em log da variável y. Você pode reescrever a regressão como `lm(log.y ~ x.1 + x.2 + x.3)`.
  
@@ -45,7 +45,7 @@ Uma explicação: O comando coeftest chama o comando vcovHC do pacote sandwich. 
  log.y[log.y == -Inf] <- NA
 ```
 
-##Probits e Logits
+## Probits e Logits
  
  Probits e logits também são úteis quando nossa variável dependente é uma dummy. Sempre podemos usar um modelo de probabilidade linear, e nesse caso o comando a ser utilizado é o `lm`. Mas em casos que queremos usar um probit ou logit, precisamos recorrer ao `glm`, que tem sintaxe muito parecida com o `lm`. Mas além de especificar as variáveis dependentes e independentes, também precisamos especificar o tipo de regressão, basicamente a distribuição da variável dependente. No caso de probits e logits, a variável dependente tem distribuição binomial. Depois, temos que especificar se a função de probabilidade da variável dependente é probit ou logit. Os comandos para estimar probits e logits são ilustrados abaixo:
  
@@ -56,7 +56,7 @@ mod.2 <- glm(y ~x.1 + x.2 + x.3, family = binomial(link = 'logit'))
  
 E como de praxe, podemos usar o comando `summary` para obter os coeficientes, desvios padrões e estatísticas t. 
  
-##Variável instrumental
+## Variável instrumental
  
 Métodos de variável instrumental são muito úteis e populares, especialmente em casos de endogenidade. Existem várias implementações, mas para o mínimos quadrados de dois estágios usual, o pacote *AER* oferece um comando `ivreg`. A sintaxe é similar ao `lm`, mas com uma alteração na formula para inserir os instrumentos, que são separados dos regressores por |.
  
@@ -68,7 +68,7 @@ modelo <- ivreg(y ~x.1 + x.2 + x.3|z.1+z.2+x.3)
 
 E podemos usar o `summary` para ver o valor dos coeficientes, erros padrão e estatísticas t. Observe que o pacote não mostra o valor do teste F para o primeiro estágio nem de teste de sobre identificação.   
 
-##Dados em painel
+## Dados em painel
 
 Em muitas aplicações usamos dados em painel - i.e., com dimensão temporal e cross section. Em geral, esse tipo de aplicação acaba envolvendo o uso de efeitos fixos. Existem duas maneiras de fazer: usando o pacote *plm* ou "na mão", usando o lm. Não há nenhuma vantagem de usar o lm "na mão", em geral, exceto em casos que temos mais de duas dimensões ou por algum motivo o *plm* não funciona. Exploraremos primeiro o uso do plm, que deve satisfazer a maioria dos usuários. A solução na mão vem depois e pode ser ignorada sem perda de continuidade.
 
@@ -88,7 +88,7 @@ mod.3 <- plm(y ~x.1 + x.2,data = dd, effect = 'twoways')
 
 Como de praxe, podemos usar o comando `summary` para obter um sumário da regressão. 
 
-###Painel usando lm*
+### Painel usando lm*
 
 Suponha que não conseguimos usar o *plm* por alguma razão. Por exemplo, podemos querer três efeitos fixos: se tivermos microdados de escola, podemos querer ter efeito fixo de aluno, escola e tempo. Podemos implementar isso no braço usando o `lm`. Lembre-se que, no fundo, efeitos fixos são mera *dummies*, então se fizermos um modelo linear com dummies, devemos obter resultados parecidos.
 

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Séries Temporais | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 5 Séries Temporais | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Séries Temporais | R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Séries Temporais | R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regressão-básica.html"/>
+<link rel="next" href="apresentando-os-resultados.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>2.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>4.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>4.0.3</b> Logs</a></li>
+<li class="chapter" data-level="4.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>4.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.3.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
+<li class="chapter" data-level="5.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>5.2</b> VARs</a></li>
+<li class="chapter" data-level="5.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>5.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="5.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="5.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.5</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
+<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
+<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
+<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
+<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>8</b> Funções</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="8.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="8.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="8.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>10</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> Referências</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
+<li class="chapter" data-level="12.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="séries-temporais" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Séries Temporais</h1>
+<p>Métodos de séries temporais são suficientemente extensos e únicos para terem seu próprio capítulo. Este capítulo trata dos principais métodos de séries temporais de interesse dos economistas: ARIMAs, VARs, testes de raiz unitária e cointegração. Séries temporais são únicas o suficiente a ponto de terem um classe própria - sem nenhuma surpresa, ela se chama <em>time series</em>.</p>
+<div id="o-básico" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> O básico</h2>
+<p>Suponha que você, usando os métodos do capítulo 2, inseriu uma série temporal no R. O R não sabe, <em>a priori</em>, que os dados são uma série temporal. Você precisa contar isso a ele, e o comando que faz isso é o <code>ts()</code>. O <code>ts</code> recebe a série, a data de ínicio e a frequência. A frequência é como você dividiu o ano: 4 se o dado for trimestral, 12 se for mensal…</p>
+<p>Por exemplo, podemos gerar uma série de variáveis aleatórias da normal (um ruído branco) e transformar em série temporal mensal começando em janeiro de 2000:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="séries-temporais.html#cb45-1"></a>serie &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb45-2"><a href="séries-temporais.html#cb45-2"></a>serie &lt;-<span class="st"> </span><span class="kw">ts</span>(serie,<span class="dt">start =</span><span class="kw">c</span>(<span class="dv">2000</span>,<span class="dv">01</span>), <span class="dt">freq =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p>Veja que o comando ts() é excessivamente engessado: os dados tem que ter uma frequência fixa, expressa como uma fração do ano. O pacote <strong>zoo</strong> extende bastante as capacidades do R em lidar com séries temporais, inclusive com séries irregulares.</p>
+<p><strong>Atenção: Séries Temporais e o lm</strong>
+Você <em>não</em> deve passar um objeto de série temporal para o <code>lm()</code>, já que o <code>lm</code> vai ignorar o formato de série temporal. Assim, estimar um modelo AR(1) usando <code>lm(y ~ lag(y))</code> vai gerar uma regressão com coeficiente 1 para lag(y) e <span class="math inline">\(R^2 = 1\)</span>. De fato, a regressão feita foi y em y - o que não é uma regressão muito emocionante.</p>
+<p>##ARIMAs</p>
+<p>Com uma série devidamente construída para ser um objeto ts - como nós fizemos acima- podemos tentar estimar algum modelo. O modelo base de séries temporais é o ARIMA. O R base já vem com muitas funções para lidar com isso, mas o pacote <strong>forecast</strong> extende bastante as capacidades do R em lidar com esse tipo de série. O primeiro passo para estimar um modelo Arima é obter a função de autocorrelação (FAC) e a função de autocorrelação parcial (FACP): elas são <code>Acf</code> e <code>Pacf</code>. Veja que existem versões na base do R que se chamam <code>acf</code> e <code>pacf</code> (notem que lá é com maiúscula e aqui com minúscula). A diferença <em>fundamental</em> entre os dois é que a <code>Acf</code> e a <code>acf</code> (e também a <code>Pacf</code> e a <code>pacf</code>) é que a primeira exclui a autocorrelação no momento 0 - que é trivialmente 1.</p>
+<p>Uma vez conhecendo o formato da FAC e da FACP, podemos estimar o ARIMA. O comando para estimar um modelo ARIMA é <code>Arima</code> - e novamente, existe um <code>arima</code> com minúscula que é da base do R. O <code>Arima</code> basicamente recebe duas coisas, a série e a ordem do modelo(isso é, se o modelo é um ARMA(1,1), AR(1), MA(1) etc). Vamos gerar um exemplo de um AR(1) com dados simulados e obter a FAC e FACP e estimar o modelo Arma sugerido:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="séries-temporais.html#cb46-1"></a><span class="kw">library</span>(forecast)</span>
+<span id="cb46-2"><a href="séries-temporais.html#cb46-2"></a></span>
+<span id="cb46-3"><a href="séries-temporais.html#cb46-3"></a>u &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>)</span>
+<span id="cb46-4"><a href="séries-temporais.html#cb46-4"></a>y &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">500</span>) <span class="co">#nossa futura série</span></span>
+<span id="cb46-5"><a href="séries-temporais.html#cb46-5"></a></span>
+<span id="cb46-6"><a href="séries-temporais.html#cb46-6"></a>y[<span class="dv">1</span>] &lt;-<span class="st"> </span>u[<span class="dv">1</span>]</span>
+<span id="cb46-7"><a href="séries-temporais.html#cb46-7"></a></span>
+<span id="cb46-8"><a href="séries-temporais.html#cb46-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">500</span>){</span>
+<span id="cb46-9"><a href="séries-temporais.html#cb46-9"></a>  y[i] &lt;-<span class="st"> </span><span class="fl">0.6</span><span class="op">*</span>y[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>u[i] <span class="co">#um AR(1) com coeficiente 0.6</span></span>
+<span id="cb46-10"><a href="séries-temporais.html#cb46-10"></a>}</span>
+<span id="cb46-11"><a href="séries-temporais.html#cb46-11"></a></span>
+<span id="cb46-12"><a href="séries-temporais.html#cb46-12"></a><span class="kw">Acf</span>(y)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="séries-temporais.html#cb47-1"></a><span class="kw">Pacf</span>(y)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="séries-temporais.html#cb48-1"></a>modelo &lt;-<span class="st"> </span><span class="kw">Arima</span>(serie,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb48-2"><a href="séries-temporais.html#cb48-2"></a><span class="kw">summary</span>(modelo)</span></code></pre></div>
+<pre><code>## Series: serie 
+## ARIMA(1,0,0) with non-zero mean 
+## 
+## Coefficients:
+##           ar1     mean
+##       -0.0312  -0.0157
+## s.e.   0.0316   0.0315
+## 
+## sigma^2 estimated as 1.06:  log likelihood=-1447.14
+## AIC=2900.28   AICc=2900.31   BIC=2915
+## 
+## Training set error measures:
+##                        ME     RMSE       MAE    MPE     MAPE      MASE          ACF1
+## Training set 1.500234e-05 1.028603 0.8091188 98.585 111.1065 0.7103052 -0.0002764195</code></pre>
+<p>Veja que o objeto <code>modelo</code> trás os coeficientes estimados, o erro padrão e alguns diagnósticos úteis como critérios de informação.</p>
+<p>Em algumas situações pode ser muito difícil inferir o modelo certo a partir da FAC e da FACP. O comando <code>auto.arima</code>, do pacote <strong>forecast</strong>, seleciona um modelo a partir de algum critério de informação. Vamos ilustrar o ponto gerando uma série <code>x</code> que é um ARMA(1,2):</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="séries-temporais.html#cb50-1"></a>e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb50-2"><a href="séries-temporais.html#cb50-2"></a></span>
+<span id="cb50-3"><a href="séries-temporais.html#cb50-3"></a>x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">1000</span>)</span>
+<span id="cb50-4"><a href="séries-temporais.html#cb50-4"></a></span>
+<span id="cb50-5"><a href="séries-temporais.html#cb50-5"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">998</span>){</span>
+<span id="cb50-6"><a href="séries-temporais.html#cb50-6"></a>  x[j<span class="op">+</span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">*</span>x[j<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>e[j<span class="op">+</span><span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="fl">0.3</span><span class="op">*</span>e[j<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="fl">0.4</span><span class="op">*</span>e[j]</span>
+<span id="cb50-7"><a href="séries-temporais.html#cb50-7"></a>}</span>
+<span id="cb50-8"><a href="séries-temporais.html#cb50-8"></a></span>
+<span id="cb50-9"><a href="séries-temporais.html#cb50-9"></a>x &lt;-<span class="st"> </span>x[<span class="dv">500</span><span class="op">:</span><span class="dv">1000</span>]</span>
+<span id="cb50-10"><a href="séries-temporais.html#cb50-10"></a>x &lt;-<span class="st"> </span><span class="kw">ts</span>(x, <span class="dt">start =</span> <span class="kw">c</span>(<span class="dv">1999</span>,<span class="dv">05</span>), <span class="dt">freq =</span> <span class="dv">12</span>)</span>
+<span id="cb50-11"><a href="séries-temporais.html#cb50-11"></a></span>
+<span id="cb50-12"><a href="séries-temporais.html#cb50-12"></a><span class="kw">Acf</span>(x)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="séries-temporais.html#cb51-1"></a><span class="kw">Pacf</span>(x)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="séries-temporais.html#cb52-1"></a><span class="kw">auto.arima</span>(x,<span class="dt">ic =</span> <span class="st">&quot;bic&quot;</span>)</span></code></pre></div>
+<pre><code>## Series: x 
+## ARIMA(1,0,2)(1,0,0)[12] with zero mean 
+## 
+## Coefficients:
+##          ar1      ma1     ma2     sar1
+##       0.4648  -0.2850  0.4401  -0.0243
+## s.e.  0.0766   0.0738  0.0418   0.0455
+## 
+## sigma^2 estimated as 0.8746:  log likelihood=-675.65
+## AIC=1361.29   AICc=1361.41   BIC=1382.37</code></pre>
+<p>Nesse caso o <code>auto.arima</code> acertou, mas nem sempre isso ocorre.</p>
+</div>
+<div id="vars" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> VARs</h2>
+<p>Um VAR, teoricamente, é apenas uma generalização do AR. Ainda assim, do ponto de vista computacional, eles são distintos, e o VAR tem seu próprio conjunto de pacotes no R. O mais importante deles é o <code>vars</code>.</p>
+<p>Começamos juntando todas as séries que queremos estimar o VAR em uma matriz (use o cbind() para isso). O passo seguinte é escolher a ordem do VAR - geralmente usando algum critério de informação. O comando <code>VARselect</code> faz isso e apresenta alguns critérios de informação e a quantidade de lags que minimizam cada um.</p>
+<p>O comando que faz a estimativa per se é o <code>VAR</code>. Ele recebe a matriz com as séries e quantos lags você quer que sejam usados - ou o critério de informação a ser usado na hora de fazer a estimativa.</p>
+<p>Por último, queremos recuperar a resposta dinâmica de cada uma das variáveis a um choque (não só um choque na própria variável, como o efeito cruzado de um choque em outra variável).</p>
+<p>Vamos gerar um VAR(1) com duas variáveis apenas para ilustrar o uso do pacote:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="séries-temporais.html#cb54-1"></a><span class="kw">library</span>(vars)</span>
+<span id="cb54-2"><a href="séries-temporais.html#cb54-2"></a></span>
+<span id="cb54-3"><a href="séries-temporais.html#cb54-3"></a>T &lt;-<span class="st"> </span><span class="dv">500</span> <span class="co">#número de períodos</span></span>
+<span id="cb54-4"><a href="séries-temporais.html#cb54-4"></a>N &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co">#número de variáveis</span></span>
+<span id="cb54-5"><a href="séries-temporais.html#cb54-5"></a></span>
+<span id="cb54-6"><a href="séries-temporais.html#cb54-6"></a>u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(T<span class="op">*</span>N),<span class="dt">nrow =</span> N,<span class="dt">ncol =</span> T)</span>
+<span id="cb54-7"><a href="séries-temporais.html#cb54-7"></a></span>
+<span id="cb54-8"><a href="séries-temporais.html#cb54-8"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow =</span> N, <span class="dt">ncol =</span> T)</span>
+<span id="cb54-9"><a href="séries-temporais.html#cb54-9"></a></span>
+<span id="cb54-10"><a href="séries-temporais.html#cb54-10"></a>A &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="fl">0.3</span>,<span class="op">-</span><span class="fl">0.2</span>),<span class="kw">c</span>(<span class="fl">0.6</span>,<span class="fl">0.2</span>))</span>
+<span id="cb54-11"><a href="séries-temporais.html#cb54-11"></a></span>
+<span id="cb54-12"><a href="séries-temporais.html#cb54-12"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>T){</span>
+<span id="cb54-13"><a href="séries-temporais.html#cb54-13"></a>  x[,j] &lt;-<span class="st"> </span>A<span class="op">%*%</span>x[,j<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>u[,j]</span>
+<span id="cb54-14"><a href="séries-temporais.html#cb54-14"></a>}</span>
+<span id="cb54-15"><a href="séries-temporais.html#cb54-15"></a></span>
+<span id="cb54-16"><a href="séries-temporais.html#cb54-16"></a>x &lt;-<span class="st"> </span>x[,<span class="dv">400</span><span class="op">:</span><span class="dv">500</span>]</span>
+<span id="cb54-17"><a href="séries-temporais.html#cb54-17"></a>x &lt;-<span class="st"> </span><span class="kw">t</span>(x)</span>
+<span id="cb54-18"><a href="séries-temporais.html#cb54-18"></a><span class="kw">colnames</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)</span>
+<span id="cb54-19"><a href="séries-temporais.html#cb54-19"></a></span>
+<span id="cb54-20"><a href="séries-temporais.html#cb54-20"></a><span class="kw">VARselect</span>(x) </span></code></pre></div>
+<pre><code>## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      1      1      1      1 
+## 
+## $criteria
+##                1         2         3         4         5        6         7         8         9        10
+## AIC(n) 0.5073838 0.5664775 0.6364448 0.7148971 0.8004834 0.804686 0.8853781 0.9301667 0.9188877 0.9939262
+## HQ(n)  0.5741733 0.6777934 0.7922872 0.9152658 1.0453785 1.094108 1.2193260 1.3086411 1.3418885 1.4614533
+## SC(n)  0.6729349 0.8423961 1.0227309 1.2115506 1.4075043 1.522074 1.7131339 1.8682901 1.9673785 2.1527844
+## FPE(n) 1.6610195 1.7624397 1.8909018 2.0466301 2.2319134 2.244812 2.4386605 2.5575410 2.5379366 2.7479537</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="séries-temporais.html#cb56-1"></a>modelo &lt;-<span class="st"> </span><span class="kw">VAR</span>(x,<span class="dt">p =</span> <span class="dv">1</span>)</span>
+<span id="cb56-2"><a href="séries-temporais.html#cb56-2"></a><span class="kw">plot</span>(<span class="kw">irf</span>(modelo, <span class="dt">impulse =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">response =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)))</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Eu só pedi o plot do choque da primeira variável sobre as duas variáveis por que isso é uma ilustração. Fazer <code>plot(irf(modelo))</code> em uma seção do R, ele vai plotar os choques de todas as variáveis sobre todas as variáveis.</p>
+</div>
+<div id="raiz-unitária" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Raiz unitária</h2>
+<p>O pacote <strong>urca</strong> nos trás testes de raiz unitária. O teste Dickey-Fuller, um dos mais populares, é chamado pelo <code>ur.df()</code>. Vamos gerar um passeio aleatório para mostrar:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="séries-temporais.html#cb57-1"></a> x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>))</span>
+<span id="cb57-2"><a href="séries-temporais.html#cb57-2"></a><span class="kw">summary</span>(<span class="kw">ur.df</span>(x))</span></code></pre></div>
+<pre><code>## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0769 -0.7404 -0.0143  0.6389  3.4537 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## z.lag.1    -2.254e-05  7.896e-04  -0.029    0.977
+## z.diff.lag -1.212e-02  3.169e-02  -0.383    0.702
+## 
+## Residual standard error: 1.001 on 996 degrees of freedom
+## Multiple R-squared:  0.0001483,  Adjusted R-squared:  -0.001859 
+## F-statistic: 0.07388 on 2 and 996 DF,  p-value: 0.9288
+## 
+## 
+## Value of test-statistic is: -0.0285 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62</code></pre>
+<p>Veja que o valor crítico para o teste Dick Fuller não é o valor usual da estatística t, mas sim o valor exibido na parte debaixo da tabela do sumário do teste. Nesse caso, a qualquer nível de significância, nós não rejeitamos a hipótese de raiz unitária. Vamos testar para um caso estacionário:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="séries-temporais.html#cb59-1"></a>u &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2000</span>)</span>
+<span id="cb59-2"><a href="séries-temporais.html#cb59-2"></a>y &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">2000</span>)</span>
+<span id="cb59-3"><a href="séries-temporais.html#cb59-3"></a></span>
+<span id="cb59-4"><a href="séries-temporais.html#cb59-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">2000</span>){</span>
+<span id="cb59-5"><a href="séries-temporais.html#cb59-5"></a>  y[i] &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">*</span>y[i<span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>u[i]</span>
+<span id="cb59-6"><a href="séries-temporais.html#cb59-6"></a>}</span>
+<span id="cb59-7"><a href="séries-temporais.html#cb59-7"></a></span>
+<span id="cb59-8"><a href="séries-temporais.html#cb59-8"></a>y &lt;-<span class="st"> </span>y[<span class="dv">1000</span><span class="op">:</span><span class="dv">2000</span>]</span>
+<span id="cb59-9"><a href="séries-temporais.html#cb59-9"></a></span>
+<span id="cb59-10"><a href="séries-temporais.html#cb59-10"></a><span class="kw">summary</span>(<span class="kw">ur.df</span>(y))</span></code></pre></div>
+<pre><code>## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.7812 -0.6434  0.0092  0.6571  3.2324 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## z.lag.1    -0.501212   0.031742 -15.790   &lt;2e-16 ***
+## z.diff.lag -0.002658   0.031612  -0.084    0.933    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9926 on 997 degrees of freedom
+## Multiple R-squared:  0.2511, Adjusted R-squared:  0.2496 
+## F-statistic: 167.1 on 2 and 997 DF,  p-value: &lt; 2.2e-16
+## 
+## 
+## Value of test-statistic is: -15.7901 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62</code></pre>
+</div>
+<div id="desassonalizando" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Desassonalizando</h2>
+<p>Dados de séries temporais, não raramente, apresentam sazonalidade. Por exemplo, gasto de energia elétrica tende a ser maior nos meses de dezembro a fevereiro, devido ao verão. Retirar sazonalidade é importante em muitas análises.</p>
+<p>Um método padrão é colocar <em>dummies</em> para as unidades de tempo (uma para cada mês se o dado for mensal, uma para cada trimestre se for trimestral etc) e usar o <em>resíduo</em> dessa regressão somado a média da série (já que o resíduo tem média zero, por construção). Criar as <em>dummies</em> “no braço” pode ser tedioso, mas felizmente o pacote <strong>forecast</strong> trás o comando <code>seasonaldummy()</code> que cria as <em>dummies</em> automaticamente para a série.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="séries-temporais.html#cb61-1"></a>energia &lt;-<span class="st"> </span><span class="kw">BETSget</span>(<span class="dv">1406</span>, <span class="dt">from =</span> <span class="st">&quot;2002-01-01&quot;</span>)</span>
+<span id="cb61-2"><a href="séries-temporais.html#cb61-2"></a>dum &lt;-<span class="st"> </span><span class="kw">seasonaldummy</span>(energia)</span>
+<span id="cb61-3"><a href="séries-temporais.html#cb61-3"></a>mod &lt;-<span class="st"> </span><span class="kw">Arima</span>(energia, <span class="dt">xreg =</span> dum)</span>
+<span id="cb61-4"><a href="séries-temporais.html#cb61-4"></a>des &lt;-<span class="st"> </span><span class="kw">resid</span>(mod) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(energia)</span>
+<span id="cb61-5"><a href="séries-temporais.html#cb61-5"></a><span class="kw">plot</span>(energia)</span>
+<span id="cb61-6"><a href="séries-temporais.html#cb61-6"></a><span class="kw">lines</span>(des, <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb61-7"><a href="séries-temporais.html#cb61-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;C/Sazonalidade&quot;</span>, <span class="st">&quot;Sem Sazonalidade&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/desazonalizando-1.png" width="672" /></p>
+<p>Outra maneira comum de dessazonalizar é usando o X13, um programa do governo americano. O X13 pode ser acessado direto do R usando o pacote <strong>seasonal</strong>. O comando que acessa o X13 é o <code>seas</code>. O X13 são, na verdade, <em>dois</em> programas: um que é o X13 e o outro que é o SEATS. Ambos tem a mesma função: dessazonalizar. O X13 vem com todo tipo de método automático para detectar outliers, fazer transformações nas séries e uma infinidade de outras coisas. Nesse caso, nós vamos desligar todas essa opções:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="séries-temporais.html#cb62-1"></a><span class="kw">library</span>(seasonal)</span>
+<span id="cb62-2"><a href="séries-temporais.html#cb62-2"></a>modelo2 &lt;-<span class="st"> </span><span class="kw">seas</span>(energia, <span class="dt">transform.function =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">regression.aictest =</span> <span class="ot">NULL</span>, <span class="dt">outlier =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p>O comando <code>final</code> obtém a série dessazonalizada:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="séries-temporais.html#cb63-1"></a><span class="kw">plot</span>(energia)</span>
+<span id="cb63-2"><a href="séries-temporais.html#cb63-2"></a><span class="kw">lines</span>(<span class="kw">final</span>(modelo2), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb63-3"><a href="séries-temporais.html#cb63-3"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;C/Sazonalidade&quot;</span>, <span class="st">&quot;Sem Sazonalidade&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="filtro-hodrick-prescott" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Filtro Hodrick-Prescott</h2>
+<p>O filtro Hodrick-Prescott (HP) é utilizado em séries não estacionárias quando queremos separar a tendência do componente ciclíco. Ele é polêmico, mas ainda é amplamente usado. No R, o pacote <strong>mFilter</strong> implementa ele e alguns outros. Vamos aplicar na série de energia:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="séries-temporais.html#cb64-1"></a><span class="kw">library</span>(mFilter)</span>
+<span id="cb64-2"><a href="séries-temporais.html#cb64-2"></a>filtrado &lt;-<span class="st"> </span><span class="kw">mFilter</span>(energia, <span class="st">&quot;HP&quot;</span>)</span>
+<span id="cb64-3"><a href="séries-temporais.html#cb64-3"></a><span class="kw">plot</span>(filtrado)</span></code></pre></div>
+<p><img src="Bookdown_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Eu posso acessar a tendência e o componente cíclico usando o <code>filtrado$trend</code> e <code>filtrado$cycle</code>, no exemplo acima - que seria particularmente útil se eu quisesse utilizar os dados de cíclo para alguma estimação.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regressão-básica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="apresentando-os-resultados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

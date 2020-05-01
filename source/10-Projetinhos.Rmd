@@ -1,8 +1,8 @@
-#Projetinhos
+# Projetinhos
 
 Esse capítulo traz uma série de ideias para serem implementadas no R. Todos os exemplos são da estatística, por enquanto. Propositalmente, o código que resolve o problema está no fim de cada seção. Tente fazer sem olhar. Veja que as soluções propostas não miram o máximo de eficiência possível, mas sim serem o mais claras possíveis. E, como quase tudo na vida, existe mais de uma solução. 
 
-##Lei dos Grandes Números
+## Lei dos Grandes Números
 
 <table>
 
@@ -52,7 +52,7 @@ plot(momento)
 lines(1:1000,rep(0,1000), col= 2, lwd = 2)
 ```
 
-##Mínimos Quadrados Ordinários
+## Mínimos Quadrados Ordinários
 
 <table>
 
@@ -142,7 +142,7 @@ summary(lm(y ~ X))
 
 Veja que há uma leve diferença entre os erros padrões computados pela minha função e pelo `lm`. Isso se deve ao fato do R assumir erros homocedásticos e a matriz de variância covariância que nós implementamos não assume isso.
 
-##LASSO
+## LASSO
 
 <table>
 
@@ -174,7 +174,7 @@ c <- 10 #esse é o valor que vai limitar a soma do valor dos coeficientes. Eu es
 
 beta_hat <- Variable(50)
 obj <- Minimize(sum((y-X%*%beta_hat)^2)) #essa é a função objetivo
-cons <- sum(abs(beta_hat)) < c
+cons <- sum(abs(beta_hat)) <= c
 prob <- Problem(obj,constraints = list(cons))
 soluc <- solve(prob)
 est <- soluc$getValue(beta_hat) #para extrair os betas estimados
@@ -193,7 +193,7 @@ Obviamente, o trabalho fica bem mais limpo se escrevermos uma função que faz t
 lasso <- function(X,y,c){
   beta_hat <- Variable(ncol(X))
   obj <- Minimize(sum((y-X%*%beta_hat)^2)) #essa é a função objetivo
-  cons <- sum(abs(beta_hat)) < c
+  cons <- sum(abs(beta_hat)) <= c
   prob <- Problem(obj,constraints = list(cons))
   soluc <- solve(prob)
   est <- soluc$getValue(beta_hat) #para extrair os betas estimados

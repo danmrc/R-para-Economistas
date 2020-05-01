@@ -1,16 +1,16 @@
-#Primeiros Passos
+# Primeiros Passos
 
-##Instalação
+## Instalação
 
-###Instalando o R e o RStudio
+### Instalando o R e o RStudio
 
 Instalar o R é trivial: basta ir no http://cran.r-project.org/ e baixar a versão para o seu computador. Exceto se você usar alguma distribuição de Linux (Ubuntu, por exemplo): ai é mais difícil, mas o próprio CRAN dá instruções de como fazer. Depois, recomenda-se baixar o R Studio, disponível em https://www.rstudio.org/. O R Studio é uma IDE (Integrated Development Enviroment), que facilita muito a vida na hora de programar - especialmente dando sugestões de comandos e mostrando quais variáveis estão salvas no ambiente do R. Assim, sugiro instalar o R Studio, que é bem tranquilo. Para usar o R Studio, você precisa ter o R. 
 
-###Uma alternativa
+### Uma alternativa
 
 Se o seu computador tem um processador multi-core, pode ser interessante instalar o Microsoft R, disponível em http://mran.microsoft.com/. Ele é idêntico ao R, mas vem com uma biblioteca que tira vantagem dos vários núcleos do processador, o que o R padrão não faz. A principal desvantagem é que ele é atualizado com menos frequência, e a biblioteca que usa mais de um núcleo não está disponível para o Mac. Ele funciona com o R Studio. 
 
-###Interface
+### Interface
 
 A interface do R Studio mostra 4 espaços diferentes: no canto esquerdo superior, existe uma tela chamada source (se ela não estiver lá, tente usar ctrl + shift + n para abrir); a direita dela, o ambiente; no canto inferior esquerdo, está o console; e no canto inferior direito está uma tela multiuso, que deve vir com as abas plot, files. Cada uma dessas será explicada, por alto, nesta seção
 
@@ -18,7 +18,7 @@ A que mais nos interessa, em um primeiro momento, é o console. Nele, você pode
 
 A tela do canto direito inferior é uma "geleia geral": a aba plots é onde os gráficos que faremos vão aparecer; a aba files permite você ver arquivos em diferentes pastas do computador. Estas são as abas mais importantes e que mais serão usadas. Em cima desta tela, há a tela *environment*, que mostra as variáveis que foram criadas e estão disponíveis para o R usar
 
-##Erros, Warnings e letras vermelhas
+## Erros, Warnings e letras vermelhas
 
 Tão importante quanto saber fazer a coisa certa é saber quando temos um problema. Existem dois tipos de erro:
 
@@ -39,7 +39,7 @@ Outros são mais misteriosos, e quando encontramos um erro impossível de entend
 
 Veja que essas mensagens não são as únicas que aparecem em vermelho no R: quando o R instala ou carrega um pacote ele exibe algumas coisas em vermelho[^1]. Não se preocupe: isso não quer dizer que o R encontrou algum erro ou warning ao instalar o pacote, é apenas o comportamento padrão do R. 
 
-###Pacotes
+### Pacotes
 
 O grande atrativo do R são os pacotes. Para instalar um pacote, basta digitar no console: 
 
@@ -76,7 +76,7 @@ install.views("Econometrics")
 </table>
 
  
-##Ajuda
+## Ajuda
 
 Em 90% do tempo você vai precisar de olhar o help: seja para lembrar que opções estão disponíveis em um comando, ou lembrar exatamente o que o comando faz, ou descobrir qual o comando para fazer alguma coisa específica que você só tem uma palavra chave: ``Como gera números saídos de uma distribuição normal mesmo?''[^2] 
 
@@ -84,7 +84,7 @@ Se você sabe o comando e quer ler o help deste comando, basta fazer `?comando`.
 
 Você também pode estar interessado em todos os comandos de um pacote. Neste caso, a melhor solução é é usar `help(package=``nome-do-pacote'')`. 
 
-##Comentando 
+## Comentando 
 
 Em geral, quando se escreve um código, é importante explicar o que algumas partes do código fazem. Isso não é exclusivo para o caso em que o código vai ser distribuído: pelo contrário, o você do futuro vai agradecer muito o você do passado se você comentar o seu código. Para comentar o código no R, usa-se o #. Tudo depois do # vira um comentário é ignorado pelo R. Assim, suponha que queremos explicar o que o parâmetro a abaixo é: suponha que ele vem de um outro estudo, de Cleese et. al. (1975). Então:
 
@@ -94,7 +94,7 @@ Em geral, quando se escreve um código, é importante explicar o que algumas par
 
 A regra geral para comentários é: eles não devem ser óbvios (ex.: `1 + 1 # somando dois números`) mas devem ajudar o leitor - que eventualmente será você mesmo - a entender o que está sendo feito - especialmente em momentos mais obscuros.  
 
-##Objetos*
+## Objetos*
 
 Como muitas linguagens de programação, existem vários tipos de objetos no R. Objetos são maneiras diferentes de guardar os dados. Os mais usados e mais comuns são: 
 

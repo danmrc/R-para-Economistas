@@ -1,4 +1,4 @@
-#Funções
+# Funções
 
 Nesse capítulo explicamos o que são as funções, como e porque usar. Também damos algumas dicas de como criar as funções.
 
@@ -6,7 +6,7 @@ A primeira coisa que deve ser observada é que funções não se limitam a funç
 
 Em geral, funções são criadas para tarefas que serão repetidas várias vezes. Não faz nenhum sentido escrever uma função que só será usada uma única vez.
 
-##Um exemplo simples: uma função matemática
+## Um exemplo simples: uma função matemática
 
 Suponha que queremos uma função $x^2+2x+4$, que iremos chamar de funcao. Nesse caso:
 
@@ -22,7 +22,7 @@ G <- function(x,y){x^2+y^2}
 
 Veja que podemos precisar de definir funções como essas quando queremos integrar ou derivar usando o R. Mas em geral, um exemplo mais interessante de como (e porque) usar funções são exemplos não numéricos. 
 
-##Caso geral e exemplos
+## Caso geral e exemplos
 
 Em geral, funções são feitas da seguinte forma:
 
@@ -71,7 +71,7 @@ Veja que, como o `rnorm` recebe o desvio padrão da distribuição e a minha fun
 **Atenção: checando argumentos**
 É importante notar que em todos os casos, os argumentos de uma função são restritos de alguma forma: no exemplo acima, $n$ tem que ser um número inteiro; a variância não pode ser negativa. Aqui, isso não é tão importante por dois motivos: (1) eu estou assumindo que só você vai usar a função e você sabe o que cada argumento recebe, (2) o `rnorm` daria um erro caso você violasse essas duas restrições. Isso nem sempre é verdade e pode gerar muitos problemas, então em geral desenvolvedores sérios criam ifs que checam o tipo do argumento passado. Isso vai além do escopo do manual.
 
-##Por que escrever funções?
+## Por que escrever funções?
 
 Escrever funções nem sempre é fácil, especialmente para iniciantes. Uma função te força a escrever tudo em termos gerais: um n que não existe, um vetor que ainda não foi criado, etc. Como dito no inicio deste capítulo, funções são criadas para tarefas que serão repetidas várias vezes. Em geral, há uma tentação de copiar e colar o código várias vezes fazendo as alterações necessárias ``no braço''. 
 
@@ -83,7 +83,7 @@ Não caia nesta tentação! Há dois motivos básicos para isso:
 
 Este autor já precisou rodar de novo várias partes de código que demoravam horas por esquecer de mudar alguma pequena coisa no código copiado e colado. Usar funções é uma maneira muito mais razoável de resolver o problema e, uma vez criada e debbugada, a dor de cabeça é muito menor. Quando o autor aprendeu R, ele foi informado de que escrever tudo em funções era o ideal e ignorou. Esta parece ser uma das muitas coisas que só se aprende cometendo o erro.
 
-##Como escrever funções
+## Como escrever funções
 
 Um dos principais motivos para iniciantes no R ignorarem a sugestão da seção anterior é que escrever funções pode ser desafiador. Escrever a função exige, de antemão, que você saiba o tamanho dos vetores, matrizes, como o código irá se comportar etc. Existe uma maneira simples de mitigar este desafio: comece escrevendo o caso específico e depois generalize. No exemplo das duas amostras normais, nós poderiamos ter começado escrevendo apenas:
 

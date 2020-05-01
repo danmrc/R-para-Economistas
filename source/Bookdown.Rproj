@@ -13,4 +13,4 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: ~/Documentos/GitHub/R-para-Economistas/docs
+WebsitePath: ~/Documentos/GitHub/R-para-Economistas/source

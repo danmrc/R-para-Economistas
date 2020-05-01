@@ -9,7 +9,7 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-#Introdução
+# Introdução
 
 Existem muitos softwares de estatística, mas o R é um dos mais populares. O R é um software gratuito, o que justifica a sua escolha. Mas além disso, a comunidade é muito ativa, desenvolvendo muitos pacotes - inclusive para econometria. O R não é tão amigável quanto o gretl: não existem menus para escolher como estimar. Entretanto, ele é muito mais flexível. Assim, o R tem ganho cada vez mais espaço entre aqueles que fazem econometria.
 

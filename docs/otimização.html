@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 10 Otimização | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 10 Otimização | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 10 Otimização | R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 10 Otimização | R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="paralelizando.html"/>
+<link rel="next" href="projetinhos.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>2.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico-.html"><a href="inserindo-e-manipulando-dados-no-r-o-básico-.html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>4</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>4.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="4.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>4.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="4.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>4.0.3</b> Logs</a></li>
+<li class="chapter" data-level="4.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>4.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="4.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>4.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="4.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>4.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>4.3.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>5</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>5.1</b> O básico</a></li>
+<li class="chapter" data-level="5.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>5.2</b> VARs</a></li>
+<li class="chapter" data-level="5.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>5.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="5.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>5.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="5.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.5</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>6</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>6.1</b> Tabelas</a></li>
+<li class="chapter" data-level="6.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Markdown</a></li>
+<li class="chapter" data-level="6.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>6.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>7</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>7.1</b> If</a></li>
+<li class="chapter" data-level="7.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>7.2</b> For e While</a></li>
+<li class="chapter" data-level="7.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>7.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>8</b> Funções</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>8.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="8.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>8.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="8.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>8.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="8.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>8.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>9</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>9.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="9.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>9.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="9.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>9.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>10</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>10.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>10.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>10.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>11</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>11.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="11.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>11.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="11.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>11.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> Referências</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>12.1</b> R</a></li>
+<li class="chapter" data-level="12.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>12.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="otimização" class="section level1" number="10">
+<h1><span class="header-section-number">Capítulo 10</span> Otimização</h1>
+<p>Muitas vezes precisamos resolver problemas que são problemas de maximização ou minimização. Por exemplo, o problema de uma regressão por MQO pode ser escrito como minimizar a soma do quadrado dos erros. O problema de máxima verossimelhança envolve escolher paramêtros que maximizam uma função de densidade conjunta. Esse capítulo explica algumas ideias básicas de como fazer otimização no R.</p>
+<p>Antes de começarmos, é necessário um aviso importante: otimização no computador raramente é feita tirando a primeira derivada e igualando a zero. Existe uma variedade de algoritmos que fazem otimização e o tema é excessivamente amplo para ser coberto com calma. O <em>Numerical Methods in Economics</em>, de Kenneth Judd, trata de alguns desses métodos - mas saiba que o tema não é simples. Esse capítulo foi escrito de maneira que você pode pular a seção <em>Mais sobre otimização númerica</em>. Mas eu recomendo fortemente a leitura.</p>
+<div id="optimize-e-optim" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Optimize e Optim</h2>
+<p>O R vem, por padrão, com duas funções básicas para otimização: o <code>optimize</code> e o <code>optim</code>. A diferença entre eles é que o primeiro é para quando se tem uma variável para ser otimizada, e o segundo para mais de uma variável. Em ambos os casos, entretanto, temos que escrever uma função antes, então começaremos por ai. Vamos trablhar com duas funções para entender como usar os comandos: <span class="math inline">\(f(x)=x^2\)</span> e <span class="math inline">\(g(x,y)=x^2+y^2\)</span>. Veja que sabemos que o mínimo em ambas é colocar todos os argumentos igual a zero. Já aprendemos a escrever funções. <strong>Uma idiosincrasia importante para o caso de mais de uma variável</strong> é que precisamos ter apenas um argumento para as variáveis a serem otimizadas, que deve ter a forma de um vetor. Assim, se tivermos dois argumentos na função matemática, teremos um argumento na função do R que vai ser um vetor com duas posições. Escrevemos as funções <span class="math inline">\(f(x)\)</span> e <span class="math inline">\(g(x,y)\)</span>:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="otimização.html#cb100-1"></a>f &lt;-<span class="st"> </span><span class="cf">function</span>(x){x<span class="op">^</span><span class="dv">2</span>}</span>
+<span id="cb100-2"><a href="otimização.html#cb100-2"></a>g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {x[<span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span><span class="op">+</span>x[<span class="dv">2</span>]<span class="op">^</span><span class="dv">2</span>}</span></code></pre></div>
+<p>Vamos começar com o <code>optimize</code>: o primeiro argumento é a função e o segundo é o intervalo da busca. Sabemos que o mínimo é igual a zero, então vamos colocar o intervalo entre -2 e 2:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="otimização.html#cb101-1"></a><span class="kw">optimize</span>(f,<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## $minimum
+## [1] -5.551115e-17
+## 
+## $objective
+## [1] 3.081488e-33</code></pre>
+<p>Observe que, apesar de normalmente usarmos a função no R como <code>f(x)</code>, o comando recebe apenas <code>f</code>. A resposta tem dois componentes: o valor da variável que minimiza a função (<code>$minimum</code>) e o valor da função nesse ponto ( <code>$objective</code>). Veja que o R não nos devolveu 0 como o valor que minimiza: a minimização é numérica e vai ser sempre um valor aproximado. Mas <span class="math inline">\(-5.55 10^{-17}\)</span> é, para todos os efeitos, zero.</p>
+<p>Vamos trabalhar agora com a nossa função com duas variáveis. Usamos o comando optimize que recebe primeiro um chute inicial e depois a função. O chute incial deve ser um vetor. Sabemos que o ótimo é o vetor <span class="math inline">\((0,0)\)</span>, então para dar algum trabalho para o computador vamos chutar <span class="math inline">\((-1,1)\)</span>:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="otimização.html#cb103-1"></a><span class="kw">optim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),g)</span></code></pre></div>
+<pre><code>## $par
+## [1]  0.0001134426 -0.0001503306
+## 
+## $value
+## [1] 3.546849e-08
+## 
+## $counts
+## function gradient 
+##       55       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<p>Veja que a resposta nos trás os valores que minimizam( <code>$par</code>), o valor da função nesse ponto( <code>$value</code>) e algumas outras informações: a mais importante é o <code>$convergence</code>, que nos diz se o algoritmo convergiu ou não - isso é, se encontramos um ótimo ou não. Em geral, se temos um 0 é que tudo ocorreu bem. Outros valores indicam erro e cada algoritmo dá um significado para cada valor.</p>
+<div id="mais-sobre-otimização-numérica" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Mais sobre Otimização Numérica</h3>
+<p>Infelizmente, o chute inicial pode ser muito importante em alguns casos. Pegue a função <span class="math inline">\(h(x,y)=x^3+y^2+x*y\)</span>. Vamos testar dois chutes inciais: <span class="math inline">\((0,0)\)</span> e <span class="math inline">\((-10,0)\)</span>:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="otimização.html#cb105-1"></a>h &lt;-<span class="st"> </span><span class="cf">function</span>(x){x[<span class="dv">1</span>]<span class="op">^</span><span class="dv">3</span><span class="op">+</span>x[<span class="dv">2</span>]<span class="op">^</span><span class="dv">2</span><span class="op">+</span>x[<span class="dv">1</span>]<span class="op">*</span>x[<span class="dv">2</span>]}</span>
+<span id="cb105-2"><a href="otimização.html#cb105-2"></a></span>
+<span id="cb105-3"><a href="otimização.html#cb105-3"></a><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),h)</span></code></pre></div>
+<pre><code>## $par
+## [1]  0.16666670 -0.08333335
+## 
+## $value
+## [1] -0.002314815
+## 
+## $counts
+## function gradient 
+##       99       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="otimização.html#cb107-1"></a><span class="kw">optim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>,<span class="dv">0</span>),h)  </span></code></pre></div>
+<pre><code>## $par
+## [1] -3.183805e+56  2.684172e+56
+## 
+## $value
+## [1] -3.2273e+169
+## 
+## $counts
+## function gradient 
+##      501       NA 
+## 
+## $convergence
+## [1] 1
+## 
+## $message
+## NULL</code></pre>
+<p>Veja que, no primeiro caso, temos convergência; no segundo, a coisa dá totalmente errada e não há convergência (por isso o código 1 ali no <code>$convergence</code>).</p>
+<p>Veja que pode ser o caso de que queremos encontrar o máximo de uma função. O optimize tem uma opção <code>maximum</code>, e basta alterar para <code>TRUE</code>. Entretanto, o <code>optim</code> não tem essa opção. A solução é simples: multiplique a função por <span class="math inline">\(-1\)</span>. Por exemplo, o máximo de <span class="math inline">\(j(x)=- x^2\)</span> é o mesmo ponto que o mínimo de <span class="math inline">\(f(x)=x^2\)</span>. A única coisa que vai mudar é o valor da função no ponto.</p>
+<table>
+<tr>
+<th bgcolor="#adadeb">
+Hands on!
+</th>
+</tr>
+<tr>
+<td bgcolor="#adadeb">
+O estimador de Mínimos Quadrados Ordinário pode ser escrito como um problema de minimização (quem poderia imaginar?!). O objetivo é minimizar a soma do quadrado do erro. Veja que podemos então gerar duas amostras (<span class="math inline">\(x\)</span> e <span class="math inline">\(e\)</span>) e definir $ y = x + e$. Para estimar o modelo, bastaria criar uma função que calcula a soma do erro do quadrado dado os parametros, ou seja, para valores <code>b[1] e b[2]</code>, a função faz <code>y - b[1] + b[2]*x</code> e soma o quadrado desses valores. Jogue essa função no <code>optim</code>e provavelmente você obterá bons resultados.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="otimizando-com-restrição" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Otimizando com restrição</h2>
+<p>Por enquanto só tratamos de otimização irrestrita. Mas podemos querer otimizar também com restrição. A melhor opção nesse caso é o pacote <em>CVXR</em>. A sintaxe é bastante diferente da sintaxe usual. O problema é constrúido em blocos, e o tratamento dessa seção se deve a <a href="https://cran.r-project.org/web/packages/CVXR/vignettes/cvxr_intro.html">este documento</a> do pacote:</p>
+<ul>
+<li>A variável de escolha é criada com o <code>Variable</code></li>
+<li>A função objetivo não é escrita usando o <code>function</code>, mas sim criado uma variável com <code>Minimize("expressão")</code> ou <code>Maximize("expressão")</code>. O uso de cada um deve ser auto-explicativo.</li>
+<li>Crie variáveis com as restrições sobre a variável criada com o variable</li>
+<li>Crie mais uma variável usando <code>Problem</code>, que recebe a função objetivo e as restrições em uma lista(mesmo se for apenas uma restrição</li>
+<li>Passe a variável acima para a função <code>solve</code></li>
+</ul>
+<p>O link acima conta com um exemplo de como fazer MQO usando o CVXR. No capítulo Projetinhos, eu explico como fazer o LASSO (Least Abssolute Shrinkage and Selection Operator) usando o CVXR.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="paralelizando.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="projetinhos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
