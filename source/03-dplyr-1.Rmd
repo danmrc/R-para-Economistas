@@ -1,0 +1,273 @@
+# Dplyr: manipulando dados
+
+Além da base do R, existem outros pacotes para manipulação de dados. O **dplyr** e o **tidyr** são dois deles, que facilitam certas operações e são muito usados. Nós vamos usar este pacote para manipular os dados (em painel) de acidentes de carro nos EUA. Este dados estão no livro do Stock & Watson e estão disponíveis no pacote AER. Vamos dar uma olhada no nome das variáveis:
+
+```{r,message=FALSE}
+
+library(AER)
+data("Fatalities")
+names(Fatalities)
+
+```
+
+Cada linha varia conforme duas variáveis, o estado (dos EUA) e o ano. O **dplyr** é particularmente adequado para trabalhar com este tipo de dados. Cada seção a seguir vai explorar um comando ou dois
+
+Eu também vou carregar o dplyr:
+
+```{r,message=FALSE}
+
+library(dplyr)
+
+```
+
+
+## Pipes
+
+Frequentemente, as pessoas usam pipes ao usar o **dplyr**. O pipe não é parte do **dplyr** e pode ser usado em outras aplicações, mas a frequência em que os dois aparecem associados é tão alta que vale a pena discutir o pipe. O pipe é `%>%` e significa "e então". Por exemplo, os códigos abaixos fazem a mesma coisa - somam todos os números inteiros de 1 a 50:
+
+```{r}
+
+obj1 <- sum(1:50)
+obj2 <- 1:50 %>% sum()
+
+obj1 == obj2
+
+```
+
+Nós listamos todos os elementos de 1 a 50 e então somamos eles. Nós podemos ter quantas expressões nós queremos concatenadas. Veja que a função `sum` é chamada sem nenhum argumento, porque ela recebe o argumento antes do pipe. Se a função recebe mais de um argumento, o pipe vai sempre substituir o primeiro argumento da função. Por exemplo, se eu quisesse usar a opção da função `sum` de eliminar `NA` do vetor, eu faria:
+
+```{r}
+
+obj2 <- 1:50 %>% sum(na.rm = TRUE)
+
+```
+
+
+Na próxima seção, eu vou apresentar uma função do dplyr usando e não usando pipe.
+
+## Filter
+
+A primeira função que nós vamos tratar do **dply** é o `filter`. Ele permite a gente filtrar os dados (as linhas), eliminando linhas que não atendem a uma condição. Um exemplo muito básico é eliminar todos os anos menores que 1982 da base de fatalidades:
+
+```{r}
+
+fatal_1 <- Fatalities %>% filter(as.numeric(year) > 1982)
+fatal_2 <- filter(Fatalities,as.numeric(year) > 1982)
+
+```
+
+(O `as.numeric(year)` é uma ligeira gambiarra, porque a variável `year` é um fator, e fatores não tem uma definição natural de ordem)
+
+Os dataframes `fatal_1` e `fatal_2` são idênticos, mas o `fatal_1` foi criado com o uso do pipe. De agora por diante
+
+Nós podemos combinar condições. Por exemplo, nós podemos querer todos os acidentes que acontecem apenas depois de 1982 **e** não acontecem no Alaska:
+
+```{r}
+
+fatal_3 <- Fatalities %>% filter(as.numeric(year) > 1982 & state != "al")
+
+```
+
+## mutate
+
+O `mutate` é outra função do **dplyr** que permite você alterar ou criar novas variáveis. Por exemplo, a variável `mormon` no dataframe nos dá a porcentagem de mormons no estado. Mas o número está com base 100 - um estado com 63% de mormons terá uma entrada 63 nesta coluna - o que eu acho inconveniente. Vamos alterar para a base ser 1 - nesse caso, um estado com 63% de mormons terá uma entrada 0.63:
+
+```{r}
+
+fatal_1 <- Fatalities %>% mutate(mormon = mormon/100)
+
+```
+
+Nós podemos usar o mutate para criar novas variáveis. Por exemplo, a base tem as variáveis `fatal1517` e `fatal1820`, com o número de fatalidades com pessoas entre 15 e 17 anos e 18 e 20 anos, respectivamente. Nós podemos querer criar uma nova variável que é a soma das duas variáveis:
+
+```{r}
+
+fatal_2 <- fatal_1 %>% mutate(fatalities_young = fatal1517 + fatal1820)
+
+```
+
+Nós podemos criar duas variáveis no mesmo `mutate` e operar com uma variável que acabamos de definir. Por exemplo, nós podemos criar a variável de fatalidade de jovens, como no bloco de código anterior **e** criar uma nova variável que é a proporção de fatalidades de jovens dado o total de fatalidades (o total de fatalidades é a variável `fatal`): 
+
+```{r}
+
+fatal_3 <- fatal_1 %>% mutate(fatalities_young = fatal1517 + fatal1820, fatalities_young_prop = fatalities_young/fatal)
+
+```
+
+## group_by
+
+O `group_by` é talvez a função mais importante do dplyr: ele permite agrupar linhas que pertencem ao mesmo grupo com base em uma variável. A estrutura de painel se presta muito a isso: as linhas podem ser agrupdas por pertencer ao mesmo ano ou a mesma unidade. Ao usar `group_by`, nós podemos realizar operações sobre unidades que pertencem ao mesmo grupo sem nenhum esforço. 
+
+Veja que o `group_by` sozinho não altera nada do dataframe, ele só permite que outras funções do **dplyr** valham para o mesmo grupo.
+
+### group_by e mutate
+
+Vamos ilustrar o uso do `group_by` e do `mutate` com o painel `Fatalities`. Eu vou criar uma variável que é a proporção de fatalidades de cada estado no mesmo ano. O grupo é a variável ano, e a proporção de fatalidades de cada estado é $fatal_i/ \left(\sum_{i} fatal_i \right)$, onde fatal é a variável de fatalidades e $i$ indexa os estados: 
+
+```{r}
+
+fatal_df <- Fatalities %>% group_by(year) %>% mutate(prop_fatal = fatal/sum(fatal))
+
+```
+
+Por exemplo, vamos ver a situação de 1985. Se nós somarmos `prop_fatal` dentro de um ano e tudo tiver dado certo, a variável deve somar 1:
+
+```{r}
+
+fatal_df <- fatal_df %>% filter(year==1985)
+prop_teste <- fatal_df$prop_fatal
+
+sum(prop_teste)
+
+```
+
+## rename
+
+O `rename` permite mudar o nome de uma coluna. Por exemplo, nós podemos querer mudar o nome da variável de mortes de _fatal_ para _fatalities_:
+
+```{r}
+
+fatal_4 <- Fatalities %>% rename("fatalities" = fatal)
+
+```
+
+É meio curioso, na minhca cabeça, que do lado esquerdo venha o nome novo e do lado direito venha o nome antigo.
+
+### rename_with*
+
+Nós às vezes queremos renomear _várias_ colunas, e o `rename_with` faz exatamente isso. Eu vou renomear todas as colunas que começam com fatal para fatalities. Isso vai exigir uns três truques novos e o pacote **stringr**, e eu vou colocar o código e explicar o que cada parte faz:
+
+```{r}
+
+library(stringr)
+
+fatal_4 <- Fatalities %>% rename_with(.cols=starts_with("fatal"),.fn = ~str_replace(.,"fatal","fatalities"))
+
+names(fatal_4)
+
+```
+
+O `rename_with` precisa saber quais colunas alterar - o argumento `.cols` - e como alterar - o argumento `.fn`. No `.cols`, nós escolhemos todas as variáveis que começam com (isso é a função `start_with`) a palavra "fatal". O argumento `.fn` recebe uma **f**u**n**ção que vai ser usada para mudar o nome da variável. Eu usei uma função do pacote **stringr**, `str_replace`. A `str_replace` recebe um vetor, um termo para procurar e o termo que substitui. Nesse caso, o `str_replace` procurar por "fatal" e substitui por "fatalities". 
+
+Mas o código não acabou ai, porque eu usei `~str_replace(.,"fatal","fatalities")`: eu não expliquei o til e o ponto. O til e o ponto são uma maneira de definir uma função dentro do `dplyr`. O primeiro argumento do `str_replace` (o vetor com os nomes) pelo que a função `rename_with` passa (o nome das variáveis). Essa construção vai aparecer na próxima seção. 
+
+## select
+
+O `select` permite selecionar colunas ao invés de linhas. Isso permite jogar fora ou manter apenas algumas colunas. Por exemplo, nós podemos selecionar apenas os estados, ano, fatalidades e a idade mínima para beber para criar um dataframe menor - que pode ser bem útil para fazer gráficos, por exemplo:
+
+```{r}
+
+df_menor <- Fatalities %>% select(state,year,fatal,drinkage)
+
+```
+
+Note que não colocamos aspas no nome das variáveis. É bem mais frequente eu querer jogar algumas variáveis fora, e você pode fazer isso usando o `select` colocando um menos na frente do nome da variável. Por exemplo, eu vou jogar fora a variável `gsp` (que eu não faço ideia do que seja):
+
+```{r}
+
+fatal_5 <- Fatalities %>% select(-gsp)
+
+```
+
+
+## joins
+
+Frequentemente nós queremos juntar duas bases de dados. Nem sempre as duas bases de dados estão "alinhadas". Por exemplo, imagine uma base de dados que tem o nome dos estados em alguma ordem e nós queremos juntar com a base de `Fatalities`. Nós poderíamos alinhar as duas bases e ai usar algum comando do R. Os comandos de `_join` permitem juntar bases com colunas em comum pela variável.
+
+Nós vamos precisar de uma segunda base de dados para fazer isso, e eu vou usar a base de adoção de cinto de segurança nos EUA:
+
+```{r}
+
+data("USSeatBelts")
+names(USSeatBelts)
+
+```
+
+Veja que a base tem tanto uma coluna estados como uma coluna ano. É sempre bom checar que as variáveis são compátiveis. Por exemplo, uma base pode ter nomes de estados e a outra sigla de estados; pode não existir nenhum ano em comum entre as duas bases:
+
+```{r}
+
+head(USSeatBelts$state)
+head(USSeatBelts$year)
+
+```
+
+(a função `head()` mostra apenas o começo do vetor ou de um dataframe, o que permite a gente inspecionar como são os dados em geral.)
+
+A sigla do estado em `USSeatBelts` em maiúscula, enquanto na `Fatalities` é em minúscula. Para não gerar nenhum problema, eu vou transformar tudo em minúscula. Mais ainda, eu vou usar o `select`. para manter apenas as variáveis que me interessam (o estado, o ano e se há _enforcement_ de cinto de segurança):
+
+```{r}
+
+seatbelt <- USSeatBelts %>% select(state,year,enforce) %>% mutate(state = tolower(state))
+
+```
+
+Agora vamos voltar a discussão do join. Existem vários tipos de join:
+
+* `left_join`, que toma o primeiro dataframe como referência e joga fora linhas do segundo dataframe que não tem um correspondente no primeiro dataframe
+* `right_join`, que toma o segundo dataframe como referência e joga fora as linhas do primeiro dataframe que não tem um correspondente no segundo dataframe (o caso oposto de `left_join`)
+* `inner_join` que só mantém os casos em comum dos dois dataframes
+* `full_join` que mantém todas as linhas dos dois dataframes (e preenchem as colunas que só estão disponível para alguns casos com `NA`)
+
+Talvez isso seja um pouco difícil de imaginar, mas visualmente é bem simples. Considere as duas tabelas a seguir:
+
+Tabela 1:
+
+id | var 1 | var 2 
+---|-------|-----
+1  |   1   |  9
+2  |   2   |  8
+
+Tabela 2:
+
+id | var 3 | var 4 
+---|-------|-----
+1  |  "aa" |  "zz"
+3  |  "bb" |  "vv"
+
+A coluna `id` é a coluna em comum, e será usada para juntar as duas tabelas. Um `left_join(tabela 1, tabela 2)` produziria:
+
+id | var 1 | var 2 | var 3 | var 4 
+---|-------|-------|-------|------
+1  |   1   |   9   |  "aa" | "zz"
+2  |   2   |   8   |   NA  |  NA
+
+Um `right_join(tabela 1, tabela 2)` produziria:
+
+id | var 3 | var 4 | var 1 | var 2
+---|-------|-------|-------|------
+1  |  "aa" |  "zz" |   1   |  9
+3  |  "bb" |  "vv" |   NA  |  NA
+
+Um inner join manteria apenas a linha 1, enquanto um full_join geraria:
+
+id | var 3 | var 4 | var 1 | var 2
+---|-------|-------|-------|------
+1  |  "aa" |  "zz" |   1   |  9
+2  |   NA  |   NA   |   2  |  8
+3  |  "bb" |  "vv" |   NA  |  NA
+
+Voltando ao código, eu vou fazer um `left_join` entre as duas bases, com a base de fatalidades como o primeiro argumento:
+
+```{r}
+
+novo_df <- left_join(Fatalities,seatbelt)
+
+head(novo_df)
+
+```
+
+## summarise
+
+Depois de manipular os dados, nós vamos olhar para algumas funções que resumem os dados. Quando nós fizermos o resumo, nós temos que escolher em qual nível nós vamos agregar os dados. No nosso exemplo, nós podemos querer saber a média de fatalidades por estado ou por ano. Nós usamos a função `summarise` para criar agregações e definimos o nível das agregações usando a função `group_by`.
+
+Eu vou tirar a média de fatalidades por ano:
+
+```{r}
+
+resumo <- Fatalities %>% group_by(year) %>% summarise(mean(fatal))
+
+resumo
+
+```
+

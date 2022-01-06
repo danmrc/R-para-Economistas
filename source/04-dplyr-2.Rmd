@@ -1,0 +1,73 @@
+# dplyr e tidyr
+
+Este capítulo trata de algumas manipulações mais avançadas usando o **dplyr** e algumas funções do **tidyr** que ajudam a organizar os dados. O tidyverse que inclui o **dplyr** e o **ggplot** - espera que os dados venham organizados de uma certa maneira. Nem sempre os dados estão organizados da maneira que o tidyverse exige, e felizmente o **tidyr** provê as funções necessárias para arrumar os dados
+
+```{r,message=FALSE}
+
+library(dplyr)
+library(tidyr)
+
+```
+
+
+## `pivot_longer` e `pivot_wider`
+
+O `pivot_wider` e o `pivot_longer` são talvez as duas funções mais úteis do **tidyr**. O tidyverse espera que cada linha corresponda a uma entrada de dados, mas não é infrequente que os dados venham de maneira que as colunas também variem com diferentes casos. 
+
+Uma situação que frequentemente gera uma estrutura de dados fora dos padrões do tidyverse são simulações. O código abaixo vai fazer uma simulação na qual eu sorteio mil números da distribuição de Cauchy e tiro a média e a mediana. Eu faço isso cem vezes. No fim, teremos gerar uma matriz com cem linhas e duas colunas. Cada linha corresponde a uma das simulações e uma coluna é a média e outra a mediana:
+
+```{r}
+
+result <- matrix(0,nrow=100,ncol=2)
+
+for(i in 1:100){
+  
+  amostra <- rt(100,df=1)
+  result[i,] <- c(mean(amostra),median(amostra))
+  
+}
+
+head(result)
+
+```
+
+(O `for` é tratado no capítulo 8. Ele só é usado para repetir a mesma operação cem vezes)
+
+No tidyverse, a maneira de representar esse dado é gerar duas colunas e duzentas linhas: a primeira coluna representa a qual grupo de dados a linha pertence - nesse caso, os grupos seriam média e mediana - e o valor da variável naquele grupo. O `pivot_longer` vai permitir transformar nesse formato. Veja que ele irá pegar cem linhas e transformar em duzentas linhas, o que justifica ele se chamar _longer_.
+
+Para começar, vamos nomear as colunas usando o `colnames`:
+
+```{r}
+
+colnames(result) <- c("Mean","Median")
+
+```
+
+O `pivot_longer` precisa dos dados e de quais colunas você quer esticar. O `pivot_longer` (e o `pivot_wider`) só aceitam trabalhar com dataframes ou tibbles, então eu vou converter ele em um dataframe dentro da função:
+
+```{r}
+
+dados <- pivot_longer(as.data.frame(result),c("Mean","Median"))
+head(dados)
+
+```
+
+Veja que o `pivot_longer` transformou as duas colunas em uma coluna chamada `names`, que tem um identificador do que era a coluna, e outra chamada `values`, com os valores de cada coluna. Nós podemos trocar os nomes dessas colunas usando as opções `name_to` e `values_to`, respectivamente:
+
+```{r}
+
+dados <- pivot_longer(as.data.frame(result),c("Mean","Median"), names_to = "Estimador", values_to = "Valor")
+head(dados)
+
+```
+
+Veja que, com os dados organizados dessa maneira, nós podemos usar todos os truques da seção anterior do dplyr. Por exemplo, nós podemos tirar a média do estimador e a variância:
+
+```{r}
+
+sum <- dados %>% group_by(Estimador) %>% summarise(media = mean(Valor), se = sd(Valor))
+
+sum
+
+```
+

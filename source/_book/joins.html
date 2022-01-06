@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 7 joins | R: Uma Introdução para economistas</title>
+  <meta name="description" content="Capítulo 7 joins | R: Uma Introdução para economistas" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 7 joins | R: Uma Introdução para economistas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 7 joins | R: Uma Introdução para economistas" />
+  
+  
+  
+
+<meta name="author" content="Daniel Coutinho" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="select.html"/>
+<link rel="next" href="regressão-básica.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R: Uma Introdução para economistas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="primeiros-passos.html"><a href="primeiros-passos.html"><i class="fa fa-check"></i><b>2</b> Primeiros Passos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalação"><i class="fa fa-check"></i><b>2.1</b> Instalação</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#uma-alternativa"><i class="fa fa-check"></i><b>2.1.2</b> Uma alternativa</a></li>
+<li class="chapter" data-level="2.1.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#interface"><i class="fa fa-check"></i><b>2.1.3</b> Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeiros-passos.html"><a href="primeiros-passos.html#erros-warnings-e-letras-vermelhas"><i class="fa fa-check"></i><b>2.2</b> Erros, Warnings e letras vermelhas</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeiros-passos.html"><a href="primeiros-passos.html#pacotes"><i class="fa fa-check"></i><b>2.2.1</b> Pacotes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeiros-passos.html"><a href="primeiros-passos.html#ajuda"><i class="fa fa-check"></i><b>2.3</b> Ajuda</a></li>
+<li class="chapter" data-level="2.4" data-path="primeiros-passos.html"><a href="primeiros-passos.html#comentando"><i class="fa fa-check"></i><b>2.4</b> Comentando</a></li>
+<li class="chapter" data-level="2.5" data-path="primeiros-passos.html"><a href="primeiros-passos.html#objetos"><i class="fa fa-check"></i><b>2.5</b> Objetos*</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html"><i class="fa fa-check"></i><b>3</b> Inserindo e Manipulando Dados no R: O básico.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#arquivos-excelcsv"><i class="fa fa-check"></i><b>3.1</b> Arquivos excel/csv</a></li>
+<li class="chapter" data-level="3.2" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#lendo-arquivos-do-stata-e-outros-pacotes-estatísticos"><i class="fa fa-check"></i><b>3.2</b> Lendo arquivos do stata e outros pacotes estatísticos</a></li>
+<li class="chapter" data-level="3.3" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#lendo-arquivos-muito-grandes"><i class="fa fa-check"></i><b>3.3</b> Lendo arquivos muito grandes</a></li>
+<li class="chapter" data-level="3.4" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#o-pacote-bets-e-muitos-outros"><i class="fa fa-check"></i><b>3.4</b> O pacote BETS (e muitos outros)</a></li>
+<li class="chapter" data-level="3.5" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#trabalhando-com-os-dados"><i class="fa fa-check"></i><b>3.5</b> Trabalhando com os dados</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="inserindo-e-manipulando-dados-no-r-o-básico..html"><a href="inserindo-e-manipulando-dados-no-r-o-básico..html#selecionando-linhascolunaselementos"><i class="fa fa-check"></i><b>3.5.1</b> Selecionando linhas/colunas/elementos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html"><i class="fa fa-check"></i><b>4</b> Dplyr: manipulando dados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html#pipes"><i class="fa fa-check"></i><b>4.1</b> Pipes</a></li>
+<li class="chapter" data-level="4.2" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html#filter"><i class="fa fa-check"></i><b>4.2</b> Filter</a></li>
+<li class="chapter" data-level="4.3" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html#mutate"><i class="fa fa-check"></i><b>4.3</b> mutate</a></li>
+<li class="chapter" data-level="4.4" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html#group_by"><i class="fa fa-check"></i><b>4.4</b> group_by</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="dplyr-manipulando-dados.html"><a href="dplyr-manipulando-dados.html#group_by-e-mutate"><i class="fa fa-check"></i><b>4.4.1</b> group_by e mutate</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rename.html"><a href="rename.html"><i class="fa fa-check"></i><b>5</b> rename</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rename.html"><a href="rename.html#rename_with"><i class="fa fa-check"></i><b>5.1</b> rename_with*</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>6</b> select</a></li>
+<li class="chapter" data-level="7" data-path="joins.html"><a href="joins.html"><i class="fa fa-check"></i><b>7</b> joins</a></li>
+<li class="chapter" data-level="8" data-path="regressão-básica.html"><a href="regressão-básica.html"><i class="fa fa-check"></i><b>8</b> Regressão Básica</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="regressão-básica.html"><a href="regressão-básica.html#testes-de-hipótese"><i class="fa fa-check"></i><b>8.0.1</b> Testes de hipótese</a></li>
+<li class="chapter" data-level="8.0.2" data-path="regressão-básica.html"><a href="regressão-básica.html#erros-padrões-robustos"><i class="fa fa-check"></i><b>8.0.2</b> Erros padrões robustos</a></li>
+<li class="chapter" data-level="8.0.3" data-path="regressão-básica.html"><a href="regressão-básica.html#logs"><i class="fa fa-check"></i><b>8.0.3</b> Logs</a></li>
+<li class="chapter" data-level="8.1" data-path="regressão-básica.html"><a href="regressão-básica.html#probits-e-logits"><i class="fa fa-check"></i><b>8.1</b> Probits e Logits</a></li>
+<li class="chapter" data-level="8.2" data-path="regressão-básica.html"><a href="regressão-básica.html#variável-instrumental"><i class="fa fa-check"></i><b>8.2</b> Variável instrumental</a></li>
+<li class="chapter" data-level="8.3" data-path="regressão-básica.html"><a href="regressão-básica.html#dados-em-painel"><i class="fa fa-check"></i><b>8.3</b> Dados em painel</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="regressão-básica.html"><a href="regressão-básica.html#painel-usando-lm"><i class="fa fa-check"></i><b>8.3.1</b> Painel usando lm*</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="séries-temporais.html"><a href="séries-temporais.html"><i class="fa fa-check"></i><b>9</b> Séries Temporais</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="séries-temporais.html"><a href="séries-temporais.html#o-básico"><i class="fa fa-check"></i><b>9.1</b> O básico</a></li>
+<li class="chapter" data-level="9.2" data-path="séries-temporais.html"><a href="séries-temporais.html#vars"><i class="fa fa-check"></i><b>9.2</b> VARs</a></li>
+<li class="chapter" data-level="9.3" data-path="séries-temporais.html"><a href="séries-temporais.html#raiz-unitária"><i class="fa fa-check"></i><b>9.3</b> Raiz unitária</a></li>
+<li class="chapter" data-level="9.4" data-path="séries-temporais.html"><a href="séries-temporais.html#desassonalizando"><i class="fa fa-check"></i><b>9.4</b> Desassonalizando</a></li>
+<li class="chapter" data-level="9.5" data-path="séries-temporais.html"><a href="séries-temporais.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>9.5</b> Filtro Hodrick-Prescott</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html"><i class="fa fa-check"></i><b>10</b> Apresentando os resultados</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#tabelas"><i class="fa fa-check"></i><b>10.1</b> Tabelas</a></li>
+<li class="chapter" data-level="10.2" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#markdown"><i class="fa fa-check"></i><b>10.2</b> Markdown</a></li>
+<li class="chapter" data-level="10.3" data-path="apresentando-os-resultados.html"><a href="apresentando-os-resultados.html#gráficos"><i class="fa fa-check"></i><b>10.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html"><i class="fa fa-check"></i><b>11</b> Ifs, Fors, Whiles</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#if"><i class="fa fa-check"></i><b>11.1</b> If</a></li>
+<li class="chapter" data-level="11.2" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#for-e-while"><i class="fa fa-check"></i><b>11.2</b> For e While</a></li>
+<li class="chapter" data-level="11.3" data-path="ifs-fors-whiles.html"><a href="ifs-fors-whiles.html#diferenças-e-semelhanças-entre-for-e-while"><i class="fa fa-check"></i><b>11.3</b> Diferenças e Semelhanças entre for e while</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>12</b> Funções</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="funções.html"><a href="funções.html#um-exemplo-simples-uma-função-matemática"><i class="fa fa-check"></i><b>12.1</b> Um exemplo simples: uma função matemática</a></li>
+<li class="chapter" data-level="12.2" data-path="funções.html"><a href="funções.html#caso-geral-e-exemplos"><i class="fa fa-check"></i><b>12.2</b> Caso geral e exemplos</a></li>
+<li class="chapter" data-level="12.3" data-path="funções.html"><a href="funções.html#por-que-escrever-funções"><i class="fa fa-check"></i><b>12.3</b> Por que escrever funções?</a></li>
+<li class="chapter" data-level="12.4" data-path="funções.html"><a href="funções.html#como-escrever-funções"><i class="fa fa-check"></i><b>12.4</b> Como escrever funções</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="paralelizando.html"><a href="paralelizando.html"><i class="fa fa-check"></i><b>13</b> Paralelizando</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="paralelizando.html"><a href="paralelizando.html#desafios-computacionais-de-paralelização"><i class="fa fa-check"></i><b>13.1</b> Desafios computacionais de paralelização</a></li>
+<li class="chapter" data-level="13.2" data-path="paralelizando.html"><a href="paralelizando.html#configurando-o-r-para-paralelizar"><i class="fa fa-check"></i><b>13.2</b> Configurando o R para paralelizar</a></li>
+<li class="chapter" data-level="13.3" data-path="paralelizando.html"><a href="paralelizando.html#usando-a-paralelização"><i class="fa fa-check"></i><b>13.3</b> Usando a paralelização</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="otimização.html"><a href="otimização.html"><i class="fa fa-check"></i><b>14</b> Otimização</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="otimização.html"><a href="otimização.html#optimize-e-optim"><i class="fa fa-check"></i><b>14.1</b> Optimize e Optim</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="otimização.html"><a href="otimização.html#mais-sobre-otimização-numérica"><i class="fa fa-check"></i><b>14.1.1</b> Mais sobre Otimização Numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="otimização.html"><a href="otimização.html#otimizando-com-restrição"><i class="fa fa-check"></i><b>14.2</b> Otimizando com restrição</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="projetinhos.html"><a href="projetinhos.html"><i class="fa fa-check"></i><b>15</b> Projetinhos</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="projetinhos.html"><a href="projetinhos.html#lei-dos-grandes-números"><i class="fa fa-check"></i><b>15.1</b> Lei dos Grandes Números</a></li>
+<li class="chapter" data-level="15.2" data-path="projetinhos.html"><a href="projetinhos.html#mínimos-quadrados-ordinários"><i class="fa fa-check"></i><b>15.2</b> Mínimos Quadrados Ordinários</a></li>
+<li class="chapter" data-level="15.3" data-path="projetinhos.html"><a href="projetinhos.html#lasso"><i class="fa fa-check"></i><b>15.3</b> LASSO</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>16</b> Referências</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="referências.html"><a href="referências.html#r"><i class="fa fa-check"></i><b>16.1</b> R</a></li>
+<li class="chapter" data-level="16.2" data-path="referências.html"><a href="referências.html#tidyverse"><i class="fa fa-check"></i><b>16.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="16.3" data-path="referências.html"><a href="referências.html#latex"><i class="fa fa-check"></i><b>16.3</b> LaTeX</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R: Uma Introdução para economistas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="joins" class="section level1" number="7">
+<h1><span class="header-section-number">Capítulo 7</span> joins</h1>
+<p>Frequentemente nós queremos juntar duas bases de dados. Nem sempre as duas bases de dados estão “alinhadas”. Por exemplo, imagine uma base de dados que tem o nome dos estados em alguma ordem e nós queremos juntar com a base de <code>Fatalities</code>. Nós poderíamos alinhar as duas bases e ai usar algum comando do R. Os comandos de <code>_join</code> permitem juntar bases com colunas em comum pela variável.</p>
+<p>Nós vamos precisar de uma segunda base de dados para fazer isso, e eu vou usar a base de adoção de cinto de segurança nos EUA:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="joins.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USSeatBelts&quot;</span>)</span>
+<span id="cb20-2"><a href="joins.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(USSeatBelts)</span></code></pre></div>
+<pre><code>##  [1] &quot;state&quot;      &quot;year&quot;       &quot;miles&quot;      &quot;fatalities&quot; &quot;seatbelt&quot;  
+##  [6] &quot;speed65&quot;    &quot;speed70&quot;    &quot;drinkage&quot;   &quot;alcohol&quot;    &quot;income&quot;    
+## [11] &quot;age&quot;        &quot;enforce&quot;</code></pre>
+<p>Veja que a base tem tanto uma coluna estados como uma coluna ano. É sempre bom checar que as variáveis são compátiveis. Por exemplo, uma base pode ter nomes de estados e a outra sigla de estados; pode não existir nenhum ano em comum entre as duas bases:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="joins.html#cb22-1" aria-hidden="true" tabindex="-1"></a>USSeatBelts<span class="sc">$</span>state</span></code></pre></div>
+<pre><code>##   [1] AK AK AK AK AK AK AK AK AK AK AK AK AK AK AK AL AL AL AL AL AL AL AL AL AL
+##  [26] AL AL AL AL AL AR AR AR AR AR AR AR AR AR AR AR AR AR AR AR AZ AZ AZ AZ AZ
+##  [51] AZ AZ AZ AZ AZ AZ AZ AZ AZ AZ CA CA CA CA CA CA CA CA CA CA CA CA CA CA CA
+##  [76] CO CO CO CO CO CO CO CO CO CO CO CO CO CO CO CT CT CT CT CT CT CT CT CT CT
+## [101] CT CT CT CT CT DC DC DC DC DC DC DC DC DC DC DC DC DC DC DC DE DE DE DE DE
+## [126] DE DE DE DE DE DE DE DE DE DE FL FL FL FL FL FL FL FL FL FL FL FL FL FL FL
+## [151] GA GA GA GA GA GA GA GA GA GA GA GA GA GA GA HI HI HI HI HI HI HI HI HI HI
+## [176] HI HI HI HI HI IA IA IA IA IA IA IA IA IA IA IA IA IA IA IA ID ID ID ID ID
+## [201] ID ID ID ID ID ID ID ID ID ID IL IL IL IL IL IL IL IL IL IL IL IL IL IL IL
+## [226] IN IN IN IN IN IN IN IN IN IN IN IN IN IN IN KS KS KS KS KS KS KS KS KS KS
+## [251] KS KS KS KS KS KY KY KY KY KY KY KY KY KY KY KY KY KY KY KY LA LA LA LA LA
+## [276] LA LA LA LA LA LA LA LA LA LA MA MA MA MA MA MA MA MA MA MA MA MA MA MA MA
+## [301] MD MD MD MD MD MD MD MD MD MD MD MD MD MD MD ME ME ME ME ME ME ME ME ME ME
+## [326] ME ME ME ME ME MI MI MI MI MI MI MI MI MI MI MI MI MI MI MI MN MN MN MN MN
+## [351] MN MN MN MN MN MN MN MN MN MN MO MO MO MO MO MO MO MO MO MO MO MO MO MO MO
+## [376] MS MS MS MS MS MS MS MS MS MS MS MS MS MS MS MT MT MT MT MT MT MT MT MT MT
+## [401] MT MT MT MT MT NC NC NC NC NC NC NC NC NC NC NC NC NC NC NC ND ND ND ND ND
+## [426] ND ND ND ND ND ND ND ND ND ND NE NE NE NE NE NE NE NE NE NE NE NE NE NE NE
+## [451] NH NH NH NH NH NH NH NH NH NH NH NH NH NH NH NJ NJ NJ NJ NJ NJ NJ NJ NJ NJ
+## [476] NJ NJ NJ NJ NJ NM NM NM NM NM NM NM NM NM NM NM NM NM NM NM NV NV NV NV NV
+## [501] NV NV NV NV NV NV NV NV NV NV NY NY NY NY NY NY NY NY NY NY NY NY NY NY NY
+## [526] OH OH OH OH OH OH OH OH OH OH OH OH OH OH OH OK OK OK OK OK OK OK OK OK OK
+## [551] OK OK OK OK OK OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR PA PA PA PA PA
+## [576] PA PA PA PA PA PA PA PA PA PA RI RI RI RI RI RI RI RI RI RI RI RI RI RI RI
+## [601] SC SC SC SC SC SC SC SC SC SC SC SC SC SC SC SD SD SD SD SD SD SD SD SD SD
+## [626] SD SD SD SD SD TN TN TN TN TN TN TN TN TN TN TN TN TN TN TN TX TX TX TX TX
+## [651] TX TX TX TX TX TX TX TX TX TX UT UT UT UT UT UT UT UT UT UT UT UT UT UT UT
+## [676] VA VA VA VA VA VA VA VA VA VA VA VA VA VA VA VT VT VT VT VT VT VT VT VT VT
+## [701] VT VT VT VT VT WA WA WA WA WA WA WA WA WA WA WA WA WA WA WA WI WI WI WI WI
+## [726] WI WI WI WI WI WI WI WI WI WI WV WV WV WV WV WV WV WV WV WV WV WV WV WV WV
+## [751] WY WY WY WY WY WY WY WY WY WY WY WY WY WY WY
+## 51 Levels: AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA ... WY</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="joins.html#cb24-1" aria-hidden="true" tabindex="-1"></a>USSeatBelts<span class="sc">$</span>year</span></code></pre></div>
+<pre><code>##   [1] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [16] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [31] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [46] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [61] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [76] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+##  [91] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [106] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [121] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [136] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [151] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [166] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [181] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [196] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [211] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [226] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [241] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [256] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [271] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [286] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [301] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [316] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [331] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [346] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [361] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [376] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [391] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [406] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [421] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [436] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [451] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [466] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [481] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [496] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [511] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [526] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [541] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [556] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [571] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [586] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [601] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [616] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [631] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [646] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [661] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [676] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [691] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [706] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [721] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [736] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## [751] 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997
+## 15 Levels: 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 ... 1997</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="select.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regressão-básica.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bookdown.pdf", "Bookdown.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
